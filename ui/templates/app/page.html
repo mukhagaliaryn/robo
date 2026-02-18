@@ -1,11 +1,16 @@
 {% extends "layouts/base_layout.html" %}
-
+{% load static %}
 
 {% block title %}ROBO baldyrgan - {% endblock %}
 
 
 {% block base_layout %}
 <div class="flex items-center justify-center h-screen">
-    <h1 class="text-5xl">ROBO baldyrgan</h1>
+    <div class="grid max-w-96 text-center gap-4">
+        <img src="{% static 'images/vertical-logo.svg' %}" class="w-64 mx-auto" alt="">
+        <span class="block text-muted">
+            Robo-Baldyrgan — робототехникаға арналған онлайн платформа.
+        </span>
+    </div>
 </div>
 {% endblock base_layout %}
