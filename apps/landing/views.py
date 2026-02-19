@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+
 # Landing page
 # ----------------------------------------------------------------------------------------------------------------------
 def landing_view(request):

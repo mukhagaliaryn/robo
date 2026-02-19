@@ -4,62 +4,105 @@
 {% block base %}
 <div class="min-h-screen flex flex-col">
     <div class="flex-1">
-        <header class="sticky top-0 z-10 bg-white border-b border-border-200">
-            <div class="max-w-7xl flex justify-between gap-4 mx-auto p-4">
-                <a href="{% url 'landing:index' %}" class="flex w-28 mx-auto lg:mx-0">
-                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-full" alt="Robo Logo" />
+        <nav class="bg-neutral-primary sticky z-10 top-0 start-0 border-b border-default">
+            <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="{% url 'landing:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-28" alt="Robo Logo">
                 </a>
-                
-                <nav class="hidden lg:flex items-center">
-                    <a 
-                        href="#" 
-                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                <div class="md:order-2 rtl:space-x-reverse">
+                    <div class="hidden lg:flex gap-2">
+                        <a
+                            href="#"
+                            class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                        >
+                            Жүйеге кіру
+                        </a>
+                        <a
+                            href="#"
+                            class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                        >
+                            Тіркелу
+                        </a>
+                    </div>
+                    <button 
+                        data-collapse-toggle="navbar-sticky" 
+                        type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-body rounded-base lg:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
+                        aria-controls="navbar-sticky" 
+                        aria-expanded="false"
                     >
-                        Басты бет
-                    </a>
-                    <a 
-                        href="#" 
-                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
-                    >
-                        Курстар
-                    </a>
-                    <a 
-                        href="#" 
-                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
-                    >
-                        Кітаптар
-                    </a>
-                    <a 
-                        href="#" 
-                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
-                    >
-                        Онлайн симулятор
-                    </a>
-                    <a 
-                        href="#" 
-                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
-                    >
-                        Біз жайлы
-                    </a>
-                </nav>
-                
-                <div class="hidden lg:flex gap-2 items-center">
-                    <a 
-                        href="#"
-                        class="flex px-6 py-3 rounded-2xl bg-primary-500 text-white font-medium whitespace-nowrap transition hover:bg-primary-600 active:scale-95 focus:ring-2 focus:ring-primary-300"    
-                    >
-                        Жүйеге кіру
-                    </a>
-
-                    <a 
-                        href="#"
-                        class="flex px-6 py-3 rounded-2xl bg-white font-medium whitespace-nowrap transition border border-border-200 hover:bg-secondary-100 active:scale-95 focus:ring-2 focus:ring-secondary-300"    
-                    >
-                        Тіркелу
-                    </a>
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+                    <ul class="flex flex-col mt-4 mb-4 font-medium lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 md:bg-neutral-primary">
+                        <li>
+                            <a href="#"
+                                class="block py-2 px-3 text-white bg-brand rounded-2xl lg:bg-transparent lg:text-brand lg:p-0"
+                                aria-current="page">Басты бет</a>
+                        </li>
+                        <li>
+                            <a  
+                                href="#"
+                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            >
+                                Курстар
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#"
+                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            >
+                                Кітаптар
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#"
+                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            >
+                                Онлайн симулятор
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#"
+                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            >
+                                Біз жайлы
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#"
+                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            >
+                                Байланыс
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="grid gap-2 lg:hidden text-center">
+                        <a
+                            href="#"
+                            class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                        >
+                            Жүйеге кіру
+                        </a>
+                        <a
+                            href="#"
+                            class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                        >
+                            Тіркелу
+                        </a>
+                    </div>
                 </div>
             </div>
-        </header>
+        </nav>
 
         <main>
             {% block base_layout %}
@@ -67,17 +110,13 @@
         </main>
     </div>
 
-
-
-
-    <footer class="bg-white border-t border-border-200">
+    <footer class="bg-neutral-primary-soft border-t border-default">
         <div class="w-full max-w-7xl mx-auto p-4 md:py-8">
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="{% url 'landing:index' %}" class="flex w-28">
-                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-full" alt="Robo Logo" />
+            <div class="grid gap-4 sm:flex sm:items-center sm:justify-between">
+                <a href="{% url 'landing:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-28" alt="Robo Logo">
                 </a>
-
-                <ul class="flex flex-wrap items-center font-medium text-muted sm:mb-0">
+                <ul class="flex flex-wrap items-center mb-6 text-body sm:mb-0">
                     <li>
                         <a href="#" class="hover:underline me-4 md:me-6">Біз жайлы</a>
                     </li>
@@ -92,10 +131,9 @@
                     </li>
                 </ul>
             </div>
-            <hr class="my-6 border-border-200 sm:mx-auto lg:my-8" />
-            <span class="block text-muted sm:text-center">
-                © 2026 
-                <a href="{% url 'landing:index' %}" class="hover:underline">Robo-Baldyrgan™</a>. Барлық құқықтар қорғалған</span>
+            <hr class="my-6 border-default sm:mx-auto lg:my-8" />
+            <span class="block text-sm text-body text-center">© 2026 <a href="{% url 'landing:index' %}"
+                    class="hover:underline">Robo-Baldyrgan™</a>. Барлық құқықтар қорғалған.</span>
         </div>
     </footer>
 </div>

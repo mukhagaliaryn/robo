@@ -9,16 +9,24 @@
     <link rel="shortcut icon" href="{% static 'images/icon.svg' %}" type="image/x-icon">
     {% tailwind_css %}
 
+    <!-- CDNs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 </head>
 
-<body class="font-inter text-foreground leading-normal tracking-normal text-sm">
+<body class="font-inter text-body leading-normal tracking-normal text-sm">
     {% block base %}
     {% endblock base %}
 
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <!-- CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    
+    {% block script %}{% endblock script %}
 </body>
 </html>
