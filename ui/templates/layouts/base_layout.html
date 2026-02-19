@@ -1,9 +1,102 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block base %}
-<div class="max-w-6xl mx-auto">
-    {% block base_layout %}
-    {% endblock base_layout %}
+<div class="min-h-screen flex flex-col">
+    <div class="flex-1">
+        <header class="sticky top-0 z-10 bg-white border-b border-border-200">
+            <div class="max-w-7xl flex justify-between gap-4 mx-auto p-4">
+                <a href="{% url 'landing:index' %}" class="flex w-28 mx-auto lg:mx-0">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-full" alt="Robo Logo" />
+                </a>
+                
+                <nav class="hidden lg:flex items-center">
+                    <a 
+                        href="#" 
+                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                    >
+                        Басты бет
+                    </a>
+                    <a 
+                        href="#" 
+                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                    >
+                        Курстар
+                    </a>
+                    <a 
+                        href="#" 
+                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                    >
+                        Кітаптар
+                    </a>
+                    <a 
+                        href="#" 
+                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                    >
+                        Онлайн симулятор
+                    </a>
+                    <a 
+                        href="#" 
+                        class="flex px-6 py-3 rounded-2xl transition whitespace-nowrap hover:bg-secondary-100 active:scale-95 focus:ring focus:ring-secondary-300"
+                    >
+                        Біз жайлы
+                    </a>
+                </nav>
+                
+                <div class="hidden lg:flex gap-2 items-center">
+                    <a 
+                        href="#"
+                        class="flex px-6 py-3 rounded-2xl bg-primary-500 text-white font-medium whitespace-nowrap transition hover:bg-primary-600 active:scale-95 focus:ring-2 focus:ring-primary-300"    
+                    >
+                        Жүйеге кіру
+                    </a>
+
+                    <a 
+                        href="#"
+                        class="flex px-6 py-3 rounded-2xl bg-white font-medium whitespace-nowrap transition border border-border-200 hover:bg-secondary-100 active:scale-95 focus:ring-2 focus:ring-secondary-300"    
+                    >
+                        Тіркелу
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {% block base_layout %}
+            {% endblock base_layout %}
+        </main>
+    </div>
+
+
+
+
+    <footer class="bg-white border-t border-border-200">
+        <div class="w-full max-w-7xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="{% url 'landing:index' %}" class="flex w-28">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-full" alt="Robo Logo" />
+                </a>
+
+                <ul class="flex flex-wrap items-center font-medium text-muted sm:mb-0">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Біз жайлы</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Құпиялылық саясаты</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Лицензия</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Байланыс</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-border-200 sm:mx-auto lg:my-8" />
+            <span class="block text-muted sm:text-center">
+                © 2026 
+                <a href="{% url 'landing:index' %}" class="hover:underline">Robo-Baldyrgan™</a>. Барлық құқықтар қорғалған</span>
+        </div>
+    </footer>
 </div>
 {% endblock base %}
