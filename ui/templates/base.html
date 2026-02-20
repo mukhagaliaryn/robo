@@ -19,6 +19,20 @@
 <body class="font-inter text-body leading-normal tracking-normal text-sm">
     {% block base %}
     {% endblock base %}
+    <style>
+        html { scroll-behavior: smooth; }
+
+        [data-reveal]{
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity .6s ease, transform .6s ease;
+            will-change: opacity, transform;
+        }
+        [data-reveal].is-visible{
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 
 
     <!-- CDNs -->
@@ -27,6 +41,30 @@
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
     
+    <script>
+        (function () {
+            const els = document.querySelectorAll("[data-reveal]");
+            if (!els.length) return;
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    const el = entry.target;
+                    const delay = parseInt(el.getAttribute("data-reveal-delay") || "0", 10);
+                    if (delay) el.style.transitionDelay = delay + "ms";
+
+                    el.classList.add("is-visible");
+                    io.unobserve(el); // once
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: "0px 0px -10% 0px"
+            });
+
+            els.forEach(el => io.observe(el));
+        })();
+    </script>
     {% block script %}{% endblock script %}
 </body>
 </html>

@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
 
     # apps...
-
+    'apps.learner.apps.LearnerConfig',
 ]
 
 MIDDLEWARE = [

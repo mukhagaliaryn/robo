@@ -9,7 +9,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('', include('apps.landing.urls')),
-    # path("", include("apps.main.urls")),
+    path('learner/', include('apps.learner.urls')),
     # path("manager/", include("apps.manager.urls")),
 ]
 
