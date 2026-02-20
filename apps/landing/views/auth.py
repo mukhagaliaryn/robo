@@ -25,7 +25,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, 'app/learner/auth/login/page.html', {'form': form})
+    return render(request, 'app/auth/login/page.html', {'form': form})
 
 
 # register page
@@ -45,11 +45,11 @@ def register_view(request):
     else:
         form = UserRegisterForm()
 
-    return render(request, 'app/learner/auth/register/page.html', {'form': form})
+    return render(request, 'app/auth/register/page.html', {'form': form})
 
 
 # logout
 # ----------------------------------------------------------------------------------------------------------------------
 def logout_view(request):
     logout(request)
-    return redirect('learner:login')
+    return redirect('landing:login')

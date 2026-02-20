@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block base %}
+<nav class="fixed top-0 z-50 w-full bg-neutral-primary-soft border-b border-default">
+    <div class="px-3 py-3 lg:px-5 lg:pl-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center justify-start rtl:justify-end">
+                <button data-drawer-target="top-bar-sidebar" data-drawer-toggle="top-bar-sidebar"
+                    aria-controls="top-bar-sidebar" type="button"
+                    class="sm:hidden text-heading bg-transparent box-border border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm p-2 focus:outline-none">
+                    <span class="sr-only">Open sidebar</span>
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="M5 7h14M5 12h14M5 17h10" />
+                    </svg>
+                </button>
+                <a href="{% url 'learner:dashboard' %}" class="flex ms-2 md:me-24">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-24 me-3" alt="Robo-Baldyrgan Logo" />
+                </a>
+            </div>
+            <div class="flex items-center">
+                <div class="flex items-center ms-3">
+                    <div>
+                        <button 
+                            type="button"
+                            class="flex text-sm bg-neutral-800 rounded-full focus:ring-4 focus:ring-neutral-300 dark:focus:ring-neutral-600"
+                            aria-expanded="false" 
+                            data-dropdown-toggle="dropdown-user"
+                        >
+                            <span class="sr-only">Open user menu</span>
+                            {% if user.avatar %}
+                                <img 
+                                    class="w-8 h-8 rounded-full"
+                                    src="{{ user.avatar.url }}" 
+                                    alt="user photo"
+                                >
+                            {% else %}
+                                <div class="w-8 h-8 rounded-full bg-neutral-secondary flex items-center justify-center text-heading">
+                                    {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                                </div>
+                            {% endif %}
+                        </button>
+                    </div>
+                    <div 
+                        id="dropdown-user"
+                        class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
+                    >
+                        <div class="px-4 py-3 border-b border-default-medium" role="none">
+                            <p class="text-sm font-medium text-heading" role="none">
+                                {{ user }} 
+                            </p>
+                            <p class="text-sm text-body truncate" role="none">
+                                {{ user.email }}
+                            </p>
+                        </div>
+                        <ul class="p-2 text-sm text-body font-medium" role="none">
+                            <li>
+                                <a href="#"
+                                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                    role="menuitem">Аккаунт</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                    role="menuitem">Баптаулар</a>
+                            </li>
+                            <li>
+                                <form action="{% url 'landing:logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button 
+                                        type="submit"
+                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                        role="menuitem"
+                                    >
+                                        Жүйеден шығу
+                                    </button>
+                                </form>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<aside 
+    id="top-bar-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0"
+    aria-label="Sidebar"
+>
+    <div class="mt-14 h-full px-3 py-4 overflow-y-auto bg-neutral-primary-soft border-e border-default">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <a 
+                    href="{% url 'learner:dashboard' %}"
+                    class="
+                        flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-brand group
+                        {% if request.path == '/learner/' %}text-brand bg-neutral-tertiary{% endif %}
+                    "
+                >
+                    <svg class="w-5 h-5 transition duration-75 group-hover:text-brand" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
+                    </svg>
+                    <span class="ms-3">Басты бет</span>
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#"
+                    class="
+                        flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-brand group
+                        {% if request.path == '/learner/courses/' %}text-brand bg-neutral-tertiary{% endif %}
+                    "
+                >
+                    <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19.2857 7V5.78571c0-.43393-.3482-.78571-.7778-.78571H6.06345c-.42955 0-.77777.35178-.77777.78571V16m0 0h-1c-.55229 0-1 .4477-1 1v1c0 .5523.44771 1 1 1h5m-4-3h4m7.00002-6v3c0 .5523-.4477 1-1 1h-3m8-3v8c0 .5523-.4477 1-1 1h-6c-.5523 0-1-.4477-1-1v-5.397c0-.2536.0963-.4977.2696-.683l2.434-2.603c.189-.2022.4535-.317.7304-.317h3.566c.5523 0 1 .4477 1 1Z" />
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Курстар</span>
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#"
+                    class="
+                        flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-brand group
+                        {% if request.path == '/learner/books/' %}text-brand bg-neutral-tertiary{% endif %}    
+                    "
+                >
+                    <svg 
+                        class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-brand" 
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Кітаптар</span>
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#"
+                    class="
+                        flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-brand group
+                        {% if request.path == '/learner/simulator' %}text-brand bg-neutral-tertiary{% endif %}    
+                    "
+                >
+                    <svg 
+                        class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-brand" 
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 6.5h2M11 18h2m-7-5v-2m12 2v-2M5 8h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm0 12h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm12 0h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Zm0-12h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1Z" />
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Онлайн симулятор</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="p-4 sm:ml-64 mt-16">
+    <div class="max-w-7xl mx-auto">
+        {% block learn_layout %}
+        {% endblock learn_layout %}
+    </div>
+</div>
+{% endblock base %}

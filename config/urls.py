@@ -10,7 +10,7 @@ urlpatterns = [
 
     path('', include('apps.landing.urls')),
     path('learner/', include('apps.learner.urls')),
-    # path("manager/", include("apps.manager.urls")),
+    path('tutor/', include('apps.tutor.urls')),
 ]
 
 

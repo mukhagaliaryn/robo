@@ -27,7 +27,9 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
 
     # apps...
+    'apps.landing.apps.LandingConfig',
     'apps.learner.apps.LearnerConfig',
+    'apps.tutor.apps.TutorConfig',
 ]
 
 MIDDLEWARE = [
