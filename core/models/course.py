@@ -41,7 +41,7 @@ class Course(TimeStampedModel, PublishModel):
     )
     title = models.CharField(_('Курс атауы'), max_length=255)
     slug = models.SlugField(_('Кілттік сөз'), max_length=255, unique=True)
-    thumbnail = models.ImageField(_('Сурет'), upload_to="courses/thumbnails/", blank=True, null=True)
+    thumbnail = models.ImageField(_('Сурет'), upload_to='courses/thumbnails/', blank=True, null=True)
     description = models.TextField(_('Сипаттамасы'), blank=True)
     level = models.CharField(_('Деңгейі'), max_length=20, choices=Level.choices, default=Level.BEGINNER)
     order = models.PositiveIntegerField(_('Реті'), default=0)

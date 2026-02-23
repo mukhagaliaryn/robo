@@ -14,7 +14,7 @@ from core.models.generics import TimeStampedModel, PublishModel
 class Task(TimeStampedModel, PublishModel):
     class TaskType(models.TextChoices):
         VIDEO = 'video', _('Видео')
-        READING = 'reading', _('Оқылым'),
+        READING = 'reading', _('Оқылым')
         TEST = 'test', _('Тест')
         MATCHING = 'matching', _('Сәйкестендіру')
         # WRITING = 'writing', _('Жазбаша'),
@@ -27,10 +27,19 @@ class Task(TimeStampedModel, PublishModel):
     task_type = models.CharField(_('Тапсырма түрі'), max_length=20, choices=TaskType.choices)
     order = models.PositiveIntegerField(_('Реті'), default=0)
     # Бағалау шкаласы 1-10
-    rating = models.PositiveSmallIntegerField(_('Балл (1–10)'), default=0)
+    is_gradable = models.BooleanField(
+        _('Бағалана ма'),
+        default=True,
+        help_text=_('Видео/оқылым үшін False, тест/сәйкестендіру үшін True'),
+    )
+    rating = models.PositiveSmallIntegerField(
+        _('Балл (1–10)'),
+        blank=True,
+        null=True,
+        help_text=_('Тек баға қойылатын тапсырмалар үшін'),
+    )
     duration_sec = models.PositiveIntegerField(_('Уақыт шектеуі (сек)'), default=0)
     is_required = models.BooleanField(_('Міндетті ме'), default=True)
-    # UI/логика параметрлері (shuffle, time_limit, layout т.б.)
     params = models.JSONField(_('Параметрлер'), blank=True, default=dict)
 
     class Meta:
@@ -40,8 +49,14 @@ class Task(TimeStampedModel, PublishModel):
         constraints = [
             models.UniqueConstraint(fields=['lesson', 'order'], name='uniq_task_order_in_lesson'),
             models.CheckConstraint(
-                name='chk_task_rating_1_10',
-                condition=(models.Q(rating__gte=1) & models.Q(rating__lte=10))
+                name='chk_task_grading_rules',
+                condition=(
+                        (models.Q(task_type__in=['video', 'reading']) & models.Q(is_gradable=False) & models.Q(
+                            rating__isnull=True))
+                        |
+                        (models.Q(task_type__in=['test', 'matching']) & models.Q(is_gradable=True) & models.Q(
+                            rating__gte=1) & models.Q(rating__lte=10))
+                ),
             ),
         ]
         indexes = [
@@ -52,6 +67,16 @@ class Task(TimeStampedModel, PublishModel):
 
     def __str__(self) -> str:
         return f"{self.lesson.title} — {self.title}"
+
+    def save(self, *args, **kwargs):
+        if self.task_type in ['video', 'reading']:
+            self.is_gradable = False
+            self.rating = None
+        else:
+            self.is_gradable = True
+            if self.rating is None:
+                self.rating = 1
+        super().save(*args, **kwargs)
 
 
 # Video
@@ -76,7 +101,7 @@ class VideoTask(TimeStampedModel):
 
 # Reading
 # ----------------------------------------------------------------------------------------------------------------------
-class ReadingTask(models.Model):
+class ReadingTask(TimeStampedModel):
     task = models.OneToOneField(
         Task, verbose_name=_('Тапсырма'),
         on_delete=models.CASCADE, related_name='reading',

@@ -2,7 +2,7 @@ from __future__ import annotations
 from decimal import Decimal
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from config import settings
+from django.conf import settings
 from core.models import Task, Question
 from core.models.course import Lesson
 from core.models.generics import TimeStampedModel
@@ -121,7 +121,7 @@ class TaskAttempt(TimeStampedModel):
         verbose_name_plural = _('Тапсыру әрекеттері')
         ordering = ['user_task_id', 'attempt_no']
         constraints = [
-            models.UniqueConstraint(fields=["user_task", "attempt_no"], name="uniq_attempt_no_per_user_task"),
+            models.UniqueConstraint(fields=['user_task', 'attempt_no'], name='uniq_attempt_no_per_user_task'),
         ]
         indexes = [
             models.Index(fields=['user_task', 'status']),
@@ -133,18 +133,16 @@ class TaskAttempt(TimeStampedModel):
 
 class VideoProgress(TimeStampedModel):
     user_task = models.OneToOneField(
-        UserTask,
-        verbose_name=_("Қолданушы тапсырмасы"),
-        on_delete=models.CASCADE,
-        related_name="video_progress",
+        UserTask, verbose_name=_('Қолданушы тапсырмасы'),
+        on_delete=models.CASCADE, related_name='video_progress',
     )
-    watched_sec = models.PositiveIntegerField(_("Қараған уақыты (сек)"), default=0)
-    last_position_sec = models.PositiveIntegerField(_("Соңғы позиция (сек)"), default=0)
-    is_completed = models.BooleanField(_("Аяқталды ма"), default=False)
+    watched_sec = models.PositiveIntegerField(_('Қараған уақыты (сек)'), default=0)
+    last_position_sec = models.PositiveIntegerField(_('Соңғы позиция (сек)'), default=0)
+    is_completed = models.BooleanField(_('Аяқталды ма'), default=False)
 
     class Meta:
-        verbose_name = _("Видео прогресс")
-        verbose_name_plural = _("Видео прогрестер")
+        verbose_name = _('Видео прогресс')
+        verbose_name_plural = _('Видео прогрестер')
 
     def __str__(self) -> str:
         return f"{self.user_task} — видео прогресс"
@@ -152,31 +150,27 @@ class VideoProgress(TimeStampedModel):
 
 class QuestionAttempt(TimeStampedModel):
     attempt = models.ForeignKey(
-        TaskAttempt,
-        verbose_name=_("Әрекет"),
-        on_delete=models.CASCADE,
-        related_name="question_attempts",
+        TaskAttempt, verbose_name=_('Әрекет'),
+        on_delete=models.CASCADE, related_name='question_attempts',
     )
     question = models.ForeignKey(
-        Question,
-        verbose_name=_("Сұрақ"),
-        on_delete=models.CASCADE,
-        related_name="+",
+        Question, verbose_name=_('Сұрақ'),
+        on_delete=models.CASCADE, related_name='+',
     )
 
     # Бір/көп таңдау үшін: id тізімі
-    selected_option_ids = models.JSONField(_("Таңдалған нұсқалар"), blank=True, default=list)
+    selected_option_ids = models.JSONField(_('Таңдалған нұсқалар'), blank=True, default=list)
     # shuffle freeze үшін (қажет болса):
-    option_order = models.JSONField(_("Нұсқалар реті (freeze)"), blank=True, default=list)
-    is_correct = models.BooleanField(_("Дұрыс па"), default=False)
-    score = models.DecimalField(_("Ұпай"), max_digits=8, decimal_places=2, default=Decimal("0.00"))
-    answered_at = models.DateTimeField(_("Жауап берілген уақыты"), blank=True, null=True)
+    option_order = models.JSONField(_('Нұсқалар реті (freeze)'), blank=True, default=list)
+    is_correct = models.BooleanField(_('Дұрыс па'), default=False)
+    score = models.DecimalField(_('Ұпай'), max_digits=8, decimal_places=2, default=Decimal('0.00'))
+    answered_at = models.DateTimeField(_('Жауап берілген уақыты'), blank=True, null=True)
 
     class Meta:
-        verbose_name = _("Сұрақ әрекеті")
-        verbose_name_plural = _("Сұрақ әрекеттері")
+        verbose_name = _('Сұрақ нәтижесі')
+        verbose_name_plural = _('Сұрақ нәтижелері')
         indexes = [
-            models.Index(fields=["attempt", "question"]),
+            models.Index(fields=['attempt', 'question']),
         ]
 
     def __str__(self) -> str:
@@ -185,19 +179,17 @@ class QuestionAttempt(TimeStampedModel):
 
 class MatchingAttempt(TimeStampedModel):
     attempt = models.OneToOneField(
-        TaskAttempt,
-        verbose_name=_("Әрекет"),
-        on_delete=models.CASCADE,
-        related_name="matching_attempt",
+        TaskAttempt, verbose_name=_('Әрекет'),
+        on_delete=models.CASCADE, related_name='matching_attempt',
     )
     # формат: [{"pair_id": 1, "right_text": "..."}] немесе {"left":"right"} — өзіңе ыңғайлысын бекітесің
-    answer = models.JSONField(_("Жауап"), default=dict, blank=True)
-    is_correct = models.BooleanField(_("Дұрыс па"), default=False)
-    score = models.DecimalField(_("Ұпай"), max_digits=8, decimal_places=2, default=Decimal("0.00"))
+    answer = models.JSONField(_('Жауап'), default=dict, blank=True)
+    is_correct = models.BooleanField(_('Дұрыс па'), default=False)
+    score = models.DecimalField(_('Ұпай'), max_digits=8, decimal_places=2, default=Decimal('0.00'))
 
     class Meta:
-        verbose_name = _("Сәйкестендіру әрекеті")
-        verbose_name_plural = _("Сәйкестендіру әрекеттері")
+        verbose_name = _('Сәйкестендіру жауабы')
+        verbose_name_plural = _('Сәйкестендіру жауаптары')
 
     def __str__(self) -> str:
         return f"{self.attempt} — сәйкестендіру"
