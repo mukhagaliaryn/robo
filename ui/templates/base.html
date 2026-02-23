@@ -17,6 +17,36 @@
 </head>
 
 <body class="font-inter text-body leading-normal tracking-normal text-sm">
+    {% if messages %}
+        {% for message in messages %}
+            <div
+				class="message-item fixed z-50 bottom-0 left-0 w-full bg-black flex justify-center items-center gap-2 px-4 py-2 text-white transition-all duration-500" 
+				role="alert"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+					stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+					class="lucide lucide-circle-alert-icon lucide-circle-alert {{ message.tags }}">
+					<circle cx="12" cy="12" r="10" />
+					<line x1="12" x2="12" y1="8" y2="12" />
+					<line x1="12" x2="12.01" y1="16" y2="16" />
+				</svg>
+                <span class="font-medium">
+                    {{ message }}
+                </span>
+            </div>
+
+			<script>
+				setTimeout(() => {
+					const messages = document.querySelectorAll('.message-item');
+					messages.forEach((msg) => {
+						msg.classList.add('translate-y-10', 'opacity-0');
+						setTimeout(() => msg.remove(), 1000);
+					});
+				}, 5000);
+			</script>
+        {% endfor %}
+    {% endif %}
+
     {% block base %}
     {% endblock base %}
     <style>

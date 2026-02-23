@@ -151,8 +151,8 @@ AUTH_USER_MODEL = 'core.User'
 # Authentication settings
 # ----------------------------------------------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "core.utils.db.backends.EmailOrUsernameBackend",
+    'django.contrib.auth.backends.ModelBackend',
+    'core.utils.db.backends.EmailOrUsernameBackend',
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -162,10 +162,10 @@ LOGIN_URL = '/auth/login/'
 
 # CKEditor settings
 # ----------------------------------------------------------------------------------------------------------------------
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
-    "default": {
+    'default': {
         "skin": "moono-lisa",
         "defaultLanguage": "ru",
         "width": 840,

@@ -10,20 +10,90 @@
                     <img src="{% static 'images/vertical-logo.svg' %}" class="w-28" alt="Robo Logo">
                 </a>
                 <div class="md:order-2 rtl:space-x-reverse">
-                    <div class="hidden lg:flex gap-2">
-                        <a
-                            href="{% url 'landing:login' %}"
-                            class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
-                        >
-                            Жүйеге кіру
-                        </a>
-                        <a
-                            href="{% url 'landing:register' %}"
-                            class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
-                        >
-                            Тіркелу
-                        </a>
-                    </div>
+                    {% if not user.is_authenticated %}
+                        <div class="hidden lg:flex gap-2">
+                            <a
+                                href="{% url 'landing:login' %}"
+                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                            >
+                                Жүйеге кіру
+                            </a>
+                            <a
+                                href="{% url 'landing:register' %}"
+                                class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                            >
+                                Тіркелу
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="flex items-center ms-3">
+                            <div>
+                                <button 
+                                    type="button"
+                                    class="flex text-sm bg-neutral-800 rounded-full focus:ring-4 focus:ring-neutral-300 dark:focus:ring-neutral-600"
+                                    aria-expanded="false" 
+                                    data-dropdown-toggle="dropdown-user"
+                                >
+                                    <span class="sr-only">Open user menu</span>
+                                    {% if user.avatar %}
+                                        <img 
+                                            class="w-8 h-8 rounded-full"
+                                            src="{{ user.avatar.url }}" 
+                                            alt="user photo"
+                                        >
+                                    {% else %}
+                                        <div class="w-8 h-8 rounded-full bg-neutral-secondary flex items-center justify-center text-heading">
+                                            {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                                        </div>
+                                    {% endif %}
+                                </button>
+                            </div>
+                            <div 
+                                id="dropdown-user"
+                                class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
+                            >
+                                <div class="px-4 py-3 border-b border-default-medium" role="none">
+                                    <p class="text-sm font-medium text-heading" role="none">
+                                        {{ user }} 
+                                    </p>
+                                    <p class="text-sm text-body truncate" role="none">
+                                        {{ user.email }}
+                                    </p>
+                                </div>
+                                <ul class="p-2 text-sm text-body font-medium" role="none">
+                                    <li>
+                                        <a href="{% url 'learner:dashboard' %}"
+                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                            role="menuitem">Платформа</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                            role="menuitem">Аккаунт</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                            role="menuitem">Баптаулар</a>
+                                    </li>
+                                    <li>
+                                        <form action="{% url 'landing:logout' %}" method="post">
+                                            {% csrf_token %}
+                                            <button 
+                                                type="submit"
+                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                                role="menuitem"
+                                            >
+                                                Жүйеден шығу
+                                            </button>
+                                        </form>
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+
                     <button 
                         data-collapse-toggle="navbar-sticky" 
                         type="button"

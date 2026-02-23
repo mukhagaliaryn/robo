@@ -46,7 +46,7 @@ def settings_view(request):
         elif 'delete_account' in request.POST:
             user.delete()
             messages.success(request, _('Аккаунт жойылды'))
-            return redirect('learner:login')
+            return redirect('landing:login')
 
     context = {
         'password_form': password_form

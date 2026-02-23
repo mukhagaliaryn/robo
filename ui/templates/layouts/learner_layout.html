@@ -57,12 +57,12 @@
                         </div>
                         <ul class="p-2 text-sm text-body font-medium" role="none">
                             <li>
-                                <a href="#"
+                                <a href="{% url 'learner:account' %}"
                                     class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                                     role="menuitem">Аккаунт</a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="{% url 'learner:settings' %}"
                                     class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
                                     role="menuitem">Баптаулар</a>
                             </li>
@@ -170,8 +170,8 @@
 
 <div class="p-4 sm:ml-64 mt-16">
     <div class="max-w-7xl mx-auto">
-        {% block learn_layout %}
-        {% endblock learn_layout %}
+        {% block learner_layout %}
+        {% endblock learner_layout %}
     </div>
 </div>
 {% endblock base %}
