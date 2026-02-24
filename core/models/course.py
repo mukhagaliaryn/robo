@@ -94,7 +94,7 @@ class Lesson(TimeStampedModel, PublishModel):
     title = models.CharField(_('Сабақ атауы'), max_length=255)
     description = models.TextField(_('Сипаттамасы'), blank=True)
     order = models.PositiveIntegerField(_('Реті'), default=0)
-    duration_sec = models.PositiveIntegerField(_('Ұзақтығы (сек)'), default=0)
+    duration = models.PositiveIntegerField(_('Ұзақтығы (мин)'), default=0)
 
     class Meta:
         verbose_name = _('Сабақ')

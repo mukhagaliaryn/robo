@@ -166,37 +166,38 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-        "skin": "moono-lisa",
-        "defaultLanguage": "ru",
-        "width": 840,
-        "height": 420,
-        "removePlugins": "autogrow",
+        'skin': 'moono-lisa',
+        'defaultLanguage': 'ru',
+        'width': 840,
+        'height': 420,
+        'removePlugins': 'autogrow',
 
-        "autogrow": [
+        'toolbar': [
             {
-                "autogrow": "styles",
-                "items": ["Format"]
+                'name': 'styles',
+                'items': ['Format'],
             },
             {
-                "name": "basicstyles",
-                "items": ["Bold", "Italic", "Underline", "-", "RemoveFormat"]
+                'name': 'basicstyles',
+                'items': ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'],
             },
             {
-                "name": "paragraph",
-                "items": [
-                    "NumberedList", "BulletedList", "-",
+                'name': 'paragraph',
+                'items': [
+                    'NumberedList', 'BulletedList', '-',
                     'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                ]
+                ],
             },
             {
                 'name': 'insert',
-                'items': ['Image', 'Table', 'Mathjax', ]
+                'items': ['Image', 'Table', 'Mathjax', 'Iframe'],
             },
             {
                 'name': 'document',
-                'items': ['Source', '-', 'Preview', '-', 'Maximize']
+                'items': ['Source', '-', 'Preview', '-', 'Maximize'],
             },
         ],
+
         'format_tags': 'p;h2;h3;h4',
         'mathJaxLib': 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
@@ -205,10 +206,11 @@ CKEDITOR_CONFIGS = {
         'filebrowserUploadUrl': '/ckeditor/upload/',
         'filebrowserBrowseUrl': '/ckeditor/browse/',
 
+        'extraAllowedContent': 'iframe[!src,width,height,frameborder,allow,allowfullscreen,loading,referrerpolicy];',
+
         'extraPlugins': ','.join([
             'mathjax',
             'uploadimage',
-            'autogrow',
             'clipboard',
             'dialog',
             'dialogui',

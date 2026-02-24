@@ -1,12 +1,13 @@
 from django.contrib import admin
 from core.admin._mixins import LinkedAdminMixin
+from core.forms.course import CourseAdminForm, LessonAdminForm
 from core.models.course import Category, Course, Module, Lesson
+from core.admin.task import TaskInline
 
 
-# -----------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Inlines
-# -----------------------------
-
+# ----------------------------------------------------------------------------------------------------------------------
 class CourseInline(admin.TabularInline, LinkedAdminMixin):
     model = Course
     extra = 0
@@ -39,7 +40,7 @@ class LessonInline(admin.TabularInline, LinkedAdminMixin):
     model = Lesson
     extra = 0
     show_change_link = False
-    fields = ('order', 'title', 'duration_sec', 'is_published', 'detail_link')
+    fields = ('order', 'title', 'duration', 'is_published', 'detail_link')
     readonly_fields = ('detail_link', )
     ordering = ('order',)
 
@@ -49,9 +50,9 @@ class LessonInline(admin.TabularInline, LinkedAdminMixin):
     detail_link.short_description = 'Сілтеме'
 
 
-# -----------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Admins
-# -----------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin, LinkedAdminMixin):
     list_display = ('title', 'slug', 'order', 'is_published', 'courses_link')
@@ -61,7 +62,7 @@ class CategoryAdmin(admin.ModelAdmin, LinkedAdminMixin):
     inlines = (CourseInline,)
 
     def courses_link(self, obj):
-        return self.admin_link(obj, label='Ашу')
+        return self.admin_link(obj, label='Толығырақ')
 
     courses_link.short_description = 'Категория'
 
@@ -74,6 +75,7 @@ class CourseAdmin(admin.ModelAdmin, LinkedAdminMixin):
     ordering = ('order', 'title')
     inlines = (ModuleInline,)
     readonly_fields = ('category_link', )
+    form = CourseAdminForm
 
     def category_link(self, obj):
         return self.parent_link(obj, parent_field_name='category')
@@ -98,11 +100,13 @@ class ModuleAdmin(admin.ModelAdmin, LinkedAdminMixin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin, LinkedAdminMixin):
-    list_display = ('title', 'order', 'duration_sec', 'is_published', 'module_link')
+    list_display = ('title', 'order', 'duration', 'is_published', 'module_link')
     list_filter = ('is_published', 'module__course')
     search_fields = ('title',)
     ordering = ('module_id', 'order')
-    readonly_fields = ('module_link', )
+    readonly_fields = ('module_link',)
+    inlines = (TaskInline,)
+    form = LessonAdminForm
 
     def module_link(self, obj):
         return self.parent_link(obj, parent_field_name='module')

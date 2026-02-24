@@ -1,5 +1,4 @@
 from __future__ import annotations
-from decimal import Decimal
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from core.models.course import Lesson
@@ -17,16 +16,13 @@ class Task(TimeStampedModel, PublishModel):
         READING = 'reading', _('Оқылым')
         TEST = 'test', _('Тест')
         MATCHING = 'matching', _('Сәйкестендіру')
-        # WRITING = 'writing', _('Жазбаша'),
 
     lesson = models.ForeignKey(
         Lesson, verbose_name=_('Сабақ'),
         on_delete=models.CASCADE, related_name='tasks',
     )
-    title = models.CharField(_('Тапсырма атауы'), max_length=255)
     task_type = models.CharField(_('Тапсырма түрі'), max_length=20, choices=TaskType.choices)
     order = models.PositiveIntegerField(_('Реті'), default=0)
-    # Бағалау шкаласы 1-10
     is_gradable = models.BooleanField(
         _('Бағалана ма'),
         default=True,
@@ -38,9 +34,8 @@ class Task(TimeStampedModel, PublishModel):
         null=True,
         help_text=_('Тек баға қойылатын тапсырмалар үшін'),
     )
-    duration_sec = models.PositiveIntegerField(_('Уақыт шектеуі (сек)'), default=0)
+    duration = models.PositiveIntegerField(_('Уақыты (мин)'), default=0)
     is_required = models.BooleanField(_('Міндетті ме'), default=True)
-    params = models.JSONField(_('Параметрлер'), blank=True, default=dict)
 
     class Meta:
         verbose_name = _('Тапсырма')
@@ -66,7 +61,7 @@ class Task(TimeStampedModel, PublishModel):
         ]
 
     def __str__(self) -> str:
-        return f"{self.lesson.title} — {self.title}"
+        return f"{self.lesson.title} — {self.get_task_type_display()}"
 
     def save(self, *args, **kwargs):
         if self.task_type in ['video', 'reading']:
@@ -96,7 +91,7 @@ class VideoTask(TimeStampedModel):
         verbose_name_plural = _('Видео тапсырмалар')
 
     def __str__(self) -> str:
-        return f"Видео: {self.task.title}"
+        return f"Видео: {self.task.pk}"
 
 
 # Reading
@@ -117,7 +112,7 @@ class ReadingTask(TimeStampedModel):
         verbose_name_plural = _('Оқу тапсырмалары')
 
     def __str__(self) -> str:
-        return f'Оқу: {self.task.title}'
+        return f'Оқу: {self.task.pk}'
 
 
 # Test
@@ -128,6 +123,8 @@ class TestTask(TimeStampedModel):
         on_delete=models.CASCADE, related_name='test',
         limit_choices_to={"task_type": Task.TaskType.TEST},
     )
+    title = models.CharField(_('Тақырыбы'), max_length=128)
+    max_points = models.PositiveSmallIntegerField(_('Макс. ұпай'), default=0)
     shuffle_questions = models.BooleanField(_('Сұрақтарды араластыру'), default=True)
     shuffle_options = models.BooleanField(_('Нұсқаларды араластыру'), default=True)
 
@@ -136,7 +133,7 @@ class TestTask(TimeStampedModel):
         verbose_name_plural = _('Тест тапсырмалар')
 
     def __str__(self) -> str:
-        return f"Тест: {self.task.title}"
+        return f"Тест: {self.title}"
 
 
 # Question
@@ -151,7 +148,7 @@ class Question(TimeStampedModel):
     )
     text = models.TextField(_('Сұрақ мәтіні'))
     question_type = models.CharField(_('Сұрақ түрі'), max_length=10, choices=QuestionType.choices, default=QuestionType.SINGLE)
-    points = models.DecimalField(_('Ұпай'), max_digits=6, decimal_places=2, default=Decimal('1.00'))
+    points = models.PositiveSmallIntegerField(_('Ұпай'), default=0)
     order = models.PositiveIntegerField(_('Реті'), default=0)
 
     class Meta:
@@ -166,7 +163,7 @@ class Question(TimeStampedModel):
         ]
 
     def __str__(self) -> str:
-        return f"Сұрақ: {self.text[:60]}"
+        return f"Сұрақ: {self.pk}"
 
 
 # Option
@@ -183,7 +180,7 @@ class Option(TimeStampedModel):
         verbose_name_plural = _('Нұсқалар')
 
     def __str__(self) -> str:
-        return self.text
+        return f"Нұсқа: {self.pk}"
 
 
 # Matching
@@ -199,6 +196,7 @@ class MatchingTask(TimeStampedModel):
         on_delete=models.CASCADE, related_name='matching',
         limit_choices_to={'task_type': Task.TaskType.MATCHING},
     )
+    title = models.CharField(_('Тақырыбы'), max_length=128)
     layout = models.CharField(_('Көрсету түрі'), max_length=10, choices=Layout.choices, default=Layout.ROW)
     shuffle = models.BooleanField(_('Араластыру'), default=True)
 
@@ -207,7 +205,7 @@ class MatchingTask(TimeStampedModel):
         verbose_name_plural = _('Сәйкестендіру тапсырмалар')
 
     def __str__(self) -> str:
-        return f"Сәйкестендіру: {self.task.title}"
+        return f"Сәйкестендіру: {self.title}"
 
 
 # MatchingPair
@@ -216,8 +214,8 @@ class MatchingPair(TimeStampedModel):
         MatchingTask, verbose_name=_('Сәйкестендіру тапсырма'),
         on_delete=models.CASCADE, related_name='pairs',
     )
-    left_text = models.CharField(_('Сол жақ мәтін'), max_length=255)
-    right_text = models.CharField(_('Оң жақ мәтін'), max_length=255)
+    left_text = models.TextField(_('Сол жақ мәтін'))
+    right_text = models.TextField(_('Оң жақ мәтін'))
     order = models.PositiveIntegerField(_('Реті'), default=0)
 
     class Meta:
