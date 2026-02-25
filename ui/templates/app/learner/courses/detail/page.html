@@ -1,0 +1,105 @@
+{% extends 'layouts/learner_layout.html' %}
+{% load dict_extras %}
+
+{% block title %}{{ course.title }}{% endblock title %}
+
+{% block learner_layout %}
+<div class="space-y-6">
+
+    <div class="bg-neutral-primary-soft border border-default rounded-base overflow-hidden">
+        {% if course.thumbnail %}
+            <img src="{{ course.thumbnail.url }}" class="w-full h-56 object-cover" alt="{{ course.title }}">
+        {% else %}
+            <div class="w-full h-56 bg-neutral-tertiary"></div>
+        {% endif %}
+
+        <div class="p-5 space-y-3">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <h1 class="text-heading text-xl font-semibold">{{ course.title }}</h1>
+                    <div class="text-body text-sm">
+                        {{ course.category.title }} • {{ course.get_level_display }}
+                    </div>
+                </div>
+
+                <div class="shrink-0">
+                    {% if user_course %}
+                        <a href="#"
+                           class="px-4 py-2 rounded-base bg-brand text-white text-sm font-medium hover:opacity-90">
+                            Жалғастыру
+                        </a>
+                    {% else %}
+                        <form method="post" action="{% url 'learner:course_enroll' course.id %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="px-4 py-2 rounded-base bg-brand text-white text-sm font-medium hover:opacity-90">
+                                Курсты бастау
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if course.description %}
+                <div class="text-body text-sm">
+                    {{ course.description|safe }}
+                </div>
+            {% endif %}
+
+            {% if user_course %}
+                <div class="mt-4 p-4 rounded-base bg-neutral-tertiary">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-body">Прогресс</span>
+                        <span class="text-heading font-medium">{{ user_course.progress_percent }}%</span>
+                    </div>
+                    <div class="mt-2 w-full h-2 bg-neutral-secondary rounded">
+                        <div class="h-2 bg-brand rounded" style="width: {{ user_course.progress_percent }}%;"></div>
+                    </div>
+                    <div class="mt-2 text-xs text-body">
+                        {% if user_course.last_lesson %}
+                            Соңғы сабақ: <span class="text-heading font-medium">{{ user_course.last_lesson.title }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="space-y-3">
+        <h2 class="text-heading text-lg font-semibold">Бағдарлама</h2>
+
+        <div class="space-y-3">
+            {% for m in modules %}
+                <div class="bg-neutral-primary-soft border border-default rounded-base p-4">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="text-heading font-semibold">{{ m.title }}</div>
+                            {% if m.description %}
+                                <div class="text-body text-sm">{{ m.description|striptags }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mt-4 space-y-2">
+                        {% for l in m.lessons.all %}
+                            <div class="flex items-center justify-between gap-3 p-3 rounded-base bg-neutral-tertiary">
+                                <div>
+                                    <div class="text-heading text-sm font-medium">{{ l.title }}</div>
+                                </div>
+                                <a href="#" class="text-sm font-medium text-brand hover:underline">
+                                    Ашy
+                                </a>
+                            </div>
+                        {% empty %}
+                            <div class="text-body text-sm">Сабақ жоқ</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-body text-sm">Модуль жоқ</div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock learner_layout %}
