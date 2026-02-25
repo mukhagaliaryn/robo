@@ -12,7 +12,7 @@ class UserSubject(models.Model):
         verbose_name=_('Қолданушы'), related_name='user_subjects')
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE,
-        verbose_name=_('Пән'), related_name='user_subjects'
+        verbose_name=_('Курс'), related_name='user_subjects'
     )
     rating = models.PositiveSmallIntegerField(_('Жалпы бағасы'), default=0)
     percentage = models.DecimalField(_('Пайыздық мөлшері'), default=0, max_digits=5, decimal_places=2)

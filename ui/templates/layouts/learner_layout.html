@@ -12,14 +12,6 @@
         </a>
 
         <div class="flex items-center">
-            {% if user.user_type == 'teacher' %}
-                <a 
-                    href="{% url 'admin:index' %}"
-                    class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
-                >
-                    Администрация
-                </a>
-            {% endif %}
             <div class="flex items-center ms-3">
                 <div>
                     <button 

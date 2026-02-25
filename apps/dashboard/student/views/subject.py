@@ -95,7 +95,6 @@ def lesson_start_handler(request, subject_id, chapter_id, lesson_id):
             user_lesson=user_lesson,
             task=task
         )
-
         if task.task_type == 'video':
             for video in task.videos.all():
                 UserVideo.objects.get_or_create(

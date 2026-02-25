@@ -13,7 +13,8 @@ def get_related_data(user_task):
         data['user_videos'] = user_task.user_videos.all()
 
     if task_type == 'reading':
-        data['user_reading'] = user_task.user_reading
+        data["reading"] = getattr(user_task.task, "reading", None)
+        data["user_reading"] = getattr(user_task, "user_reading", None)
 
     elif task_type == 'test':
         data['user_answers'] = user_task.user_options.select_related('question').prefetch_related('options').order_by('question__order')
@@ -53,15 +54,21 @@ def handle_video(request, user_task):
 
 
 # ---------------------- READING ----------------------
-def handle_reading(user_task, request):
-    ur = user_task.user_reading
+def handle_reading(request, user_task):
+    ur = getattr(user_task, "user_reading", None)
+    if ur is None:
+        messages.error(request, "Reading прогресі табылмады.")
+        return
+
     ur.is_read = True
-    ur.read_seconds = max(ur.read_seconds, 1)
+    ur.read_seconds = int(request.POST.get("read_seconds", 0) or 0)
     ur.save(update_fields=["is_read", "read_seconds"])
 
     user_task.is_completed = True
     user_task.rating = user_task.task.rating
     user_task.save(update_fields=["is_completed", "rating"])
+
+    messages.success(request, "Оқу тапсырмасы аяқталды")
 
 
 # ---------------------- TEST ----------------------

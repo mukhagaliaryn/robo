@@ -10,7 +10,7 @@ from core.utils.decorators import role_required
 
 @login_required
 @role_required('teacher')
-def teacher_view(request):
+def teacher_dashboard_view(request):
     user = request.user
     subjects_data = []
 

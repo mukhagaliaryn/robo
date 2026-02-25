@@ -1,3 +1,89 @@
+{% load filters %}
+
 <div class="w-full">
-    <h1>Бұл жерге текст</h1>
+    {# reading: task.reading (OneToOne), user_reading: user_task.user_reading (OneToOne) #}
+    {% with r=reading|default:user_task.task.reading ur=user_reading|default:user_task.user_reading %}
+        {% if user_task.is_completed %}
+            <div class="grid gap-4">
+                <div class="flex justify-between">
+                    <div class="flex gap-2 bg-secondary-100 font-medium p-2.5 rounded-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock4-icon lucide-clock-4">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span>{{ ur.read_seconds|default:0|format_seconds }}</span>
+                    </div>
+
+                    <div class="flex gap-1 items-center font-medium px-4 py-2 rounded-2xl bg-primary-100 text-primary-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-icon lucide-circle-check">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        <span>Орындалды</span>
+                    </div>
+                </div>
+
+                <div class="grid gap-3 p-5 rounded-2xl border border-border-200 bg-white text-left">
+                    {% if r.title %}<h2 class="text-lg font-bold">{{ r.title }}</h2>{% endif %}
+                    <div class="richtext text-foreground/90">
+                        {{ r.content|safe }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <form method="post" class="grid gap-4" id="reading-form">
+                {% csrf_token %}
+
+                <div class="grid gap-3 p-5 rounded-2xl border border-border-200 bg-white text-left">
+                    {% if r.title %}<h2 class="text-lg font-bold">{{ r.title }}</h2>{% endif %}
+                    <div class="richtext text-foreground/90">
+                        {{ r.content|safe }}
+                    </div>
+                </div>
+
+                <input type="hidden" id="read-seconds" name="read_seconds" value="0">
+
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2 bg-secondary-100 text-secondary-700 p-2.5 rounded-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock4-icon lucide-clock-4">
+                            <path d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span id="reading-timer">0 сек</span>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                    >
+                        Оқып болдым
+                    </button>
+                </div>
+
+                <script>
+                    let secondsRead = 0;
+                    const timerEl = document.getElementById("reading-timer");
+
+                    function formatTime(seconds) {
+                        const mins = Math.floor(seconds / 60);
+                        const secs = seconds % 60;
+                        return mins > 0 ? `${mins} мин ${secs} сек` : `${secs} сек`;
+                    }
+
+                    setInterval(() => {
+                        secondsRead++;
+                        if (timerEl) timerEl.textContent = formatTime(secondsRead);
+                    }, 1000);
+
+                    document.getElementById("reading-form").addEventListener("submit", function () {
+                        const input = document.getElementById("read-seconds");
+                        if (input) input.value = secondsRead;
+                    });
+                </script>
+            </form>
+        {% endif %}
+    {% endwith %}
 </div>

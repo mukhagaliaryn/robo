@@ -2,9 +2,7 @@
 {% load static %}
 {% load filters %}
 
-
 {% block title %}{{ user_lesson.lesson.title }}{% endblock title %}
-
 
 {% block lesson_layout %}
     <div class="w-full md:max-w-2xl mx-auto text-center grid gap-4">
@@ -105,7 +103,7 @@
                     disabled
                     class="flex gap-2 justify-center items-center text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                 >
-                    <span class="hidden sm:block">Сабаққа кіру</span>
+                    <span class="block">Сабаққа кіру</span>
                 </a>
             {% elif user_lesson.status == 'finished' %}
                 <a
