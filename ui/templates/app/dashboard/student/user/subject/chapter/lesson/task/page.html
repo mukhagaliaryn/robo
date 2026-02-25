@@ -22,16 +22,12 @@
     
     {% if task_type == 'video' %}
         {% include 'components/app/task_video.html' %}
-    {% elif task_type == 'written' %}
-        {% include 'components/app/task_written.html' %}
-    {% elif task_type == 'text_gap' %}
-        {% include 'components/app/task_text_gap.html' %}
+    {% elif task_type == 'reading' %}
+        {% include 'components/app/task_reading.html' %}
     {% elif task_type == 'test' %}
         {% include 'components/app/task_test.html' %}
     {% elif task_type == 'matching' %}
         {% include 'components/app/task_matching.html' %}
-    {% elif task_type == 'table' %}
-        {% include 'components/app/task_table.html' %}
     {% endif %}
 
     <div class="fixed z-50 bottom-10 right-10">

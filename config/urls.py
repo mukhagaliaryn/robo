@@ -6,6 +6,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('__reload__/', include('django_browser_reload.urls')),
     path('admin/', admin.site.urls),
 

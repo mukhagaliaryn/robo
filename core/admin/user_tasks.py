@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from django_summernote.admin import SummernoteModelAdminMixin
-from core.models import UserTask, UserVideo, UserWritten, UserTextGap, UserAnswer, UserMatchingAnswer, UserTableAnswer
+from core.models import UserTask, UserVideo, UserAnswer, UserMatchingAnswer, UserReading
 
 
 # UserTask admin
@@ -12,13 +11,8 @@ class UserVideoTab(admin.TabularInline):
     extra = 0
 
 
-class UserWrittenTab(SummernoteModelAdminMixin, admin.TabularInline):
-    model = UserWritten
-    extra = 0
-
-
-class UserTextGapTab(admin.TabularInline):
-    model = UserTextGap
+class UserReadingTab(admin.TabularInline):
+    model = UserReading
     extra = 0
 
 
@@ -29,11 +23,6 @@ class UserAnswerTab(admin.TabularInline):
 
 class UserMatchingAnswerTab(admin.TabularInline):
     model = UserMatchingAnswer
-    extra = 0
-
-
-class UserTableAnswerTab(admin.TabularInline):
-    model = UserTableAnswer
     extra = 0
 
 
@@ -60,15 +49,11 @@ class UserTaskAdmin(admin.ModelAdmin):
         match obj.task.task_type:
             case 'video':
                 inlines = [UserVideoTab]
-            case 'written':
-                inlines = [UserWrittenTab]
-            case 'text_gap':
-                inlines = [UserTextGapTab]
+            case 'reading':
+                inlines = [UserReadingTab]
             case 'test':
                 inlines = [UserAnswerTab]
             case 'matching':
                 inlines = [UserMatchingAnswerTab]
-            case 'table':
-                inlines = [UserTableAnswerTab]
 
         return [inline(self.model, self.admin_site) for inline in inlines]

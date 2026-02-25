@@ -8,11 +8,9 @@ from core.models import Lesson
 class Task(models.Model):
     TASK_TYPE = (
         ('video', _('Видеосабақ')),
-        ('written', _('Жазбаша')),
+        ('reading', _('Оқу мәтіні')),
         ('test', _('Тест')),
         ('matching', _('Сәйкестендіру')),
-        # ('text_gap', _('Толықтыру')),
-        # ('table', _('Кесте толтыру')),
     )
 
     PARAMS = (
@@ -25,7 +23,6 @@ class Task(models.Model):
             ('row', _('Қатар')),
             ('col', _('Баған')),
         )),
-        # ('lab', _('Виртуалды лаборатория'))
     )
 
     lesson = models.ForeignKey(
@@ -35,8 +32,8 @@ class Task(models.Model):
     task_type = models.CharField(_('Тапсырма түрі'), choices=TASK_TYPE, default='video', max_length=32)
     params = models.CharField(_('Параметрлер'), choices=PARAMS, default='none', max_length=32)
     rating = models.PositiveIntegerField(_('Жалпы бағасы'), default=0)
-    duration = models.PositiveSmallIntegerField(_('Тапсырма уақыты (мин)'), default=0)
     description = models.TextField(_('Анықтамасы'), blank=True, null=True)
+    duration = models.PositiveSmallIntegerField(_('Тапсырма уақыты (мин)'), default=0)
     order = models.PositiveIntegerField(_('Реттілік нөмері'), default=0)
 
     def __str__(self):
@@ -67,39 +64,18 @@ class Video(models.Model):
         ordering = ('order', )
 
 
-# Task type: Written model
+# Task type: Reading model
 # ----------------------------------------------------------------------------------------------------------------------
-class Written(models.Model):
-    task = models.ForeignKey(
-        Task, on_delete=models.CASCADE,
-        related_name='written', verbose_name=_('Тапсырма')
-    )
-    instruction = models.TextField(_('Тапсырма'), blank=True, null=True)
+class Reading(models.Model):
+    task = models.OneToOneField(Task, on_delete=models.CASCADE, related_name='reading')
+    content = models.TextField(_('Мәтін'))
 
     def __str__(self):
-        return f'{self.pk} - жазбаша'
+        return f'{self.pk} - оқу мәтіні'
 
     class Meta:
-        verbose_name = _('Жазбаша')
-        verbose_name_plural = _('Жазбашалар')
-
-
-# Task type: TextGap model
-# ----------------------------------------------------------------------------------------------------------------------
-class TextGap(models.Model):
-    task = models.ForeignKey(
-        Task, on_delete=models.CASCADE,
-        related_name='text_gaps', verbose_name=_('Сабақ')
-    )
-    prompt = models.TextField(_('Сөйлем (көп нүктемен)'))
-    correct_answer = models.CharField(_('Дұрыс жауап'), max_length=255)
-
-    def __str__(self):
-        return f'{self.pk} - толықтыру'
-
-    class Meta:
-        verbose_name = _('Толықтыру')
-        verbose_name_plural = _('Толықтырулар')
+        verbose_name = _('Оқу мәтіні')
+        verbose_name_plural = _('Оқу мәтіндері')
 
 
 # Task type: Test model
@@ -178,51 +154,3 @@ class MatchingItem(models.Model):
     class Meta:
         verbose_name = _('Сәйкес элемент')
         verbose_name_plural = _('Сәйкес элементтер')
-
-
-# Task type: Table model
-# ----------------------------------------------------------------------------------------------------------------------
-# TableColumn
-class TableColumn(models.Model):
-    task = models.ForeignKey(
-        Task, on_delete=models.CASCADE,
-        related_name='table_columns', verbose_name=_('Тапсырма')
-    )
-    label = models.TextField(_('Баған атауы'))
-    order = models.PositiveIntegerField(_('Реттілік нөмері'), default=0)
-
-    def __str__(self):
-        return f'Баған: {self.label[:32]}'
-
-    class Meta:
-        verbose_name = _('Кесте бағаны')
-        verbose_name_plural = _('Кесте бағандары')
-        ordering = ('order', )
-
-
-# TableRow
-class TableRow(models.Model):
-    task = models.ForeignKey(
-        Task, on_delete=models.CASCADE,
-        related_name='table_rows', verbose_name=_('Тапсырма')
-    )
-    label = models.TextField(_('Қатар атауы'))
-    order = models.PositiveIntegerField(_('Реттілік нөмері'), default=0)
-
-    def __str__(self):
-        return f'Қатар: {self.label[:32]}'
-
-    class Meta:
-        verbose_name = _('Кесте қатары')
-        verbose_name_plural = _('Кесте қатарлары')
-        ordering = ('order', )
-
-# TableCell
-class TableCell(models.Model):
-    row = models.ForeignKey(TableRow, on_delete=models.CASCADE, related_name='correct_cells', verbose_name='Қатар')
-    column = models.ForeignKey(TableColumn, on_delete=models.CASCADE, related_name='correct_cells', verbose_name='Баған')
-    correct = models.BooleanField('Дұрыс жауап', default=False)
-
-    class Meta:
-        verbose_name = 'Кесте ұяшығы (дұрыс жауап)'
-        verbose_name_plural = 'Кесте ұяшықтары (дұрыс жауаптар)'

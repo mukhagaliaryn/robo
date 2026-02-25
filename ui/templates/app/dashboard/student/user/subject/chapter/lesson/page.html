@@ -333,12 +333,12 @@
                             >   
                                 {% csrf_token %}
                                 <div class="grid gap-2 text-left">
-                                    <label for="rating" class="block font-medium">Бағалау (1-5):</label>
+                                    <label for="rating" class="block font-semibold ml-4">Бағалау (1-5):</label>
                                     <select 
                                         name="rating" 
                                         id="rating" 
                                         required
-                                        class="text-sm bg-secondary-50 border border-border-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"    
+                                        class="text-sm border border-border-300 rounded-2xl focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5 px-4"    
                                     >
                                         <option value="">Таңдаңыз</option>
                                         <option value="1">1 - Өте нашар</option>
@@ -356,7 +356,7 @@
                                         name="comment" 
                                         rows="4" 
                                         placeholder="Қосымша пікір..."
-                                        class="block text-sm p-2.5 w-full bg-secondary-50 rounded-lg border border-secondary-300 focus:ring-primary-500 focus:border-primary-500"    
+                                        class="block text-sm py-2.5 px-4 w-full bg-secondary-50 rounded-2xl border border-secondary-300 focus:ring-primary-500 focus:border-primary-500"    
                                     ></textarea>
                                 </div>
 
@@ -370,7 +370,6 @@
                                 </div>
                             </form>
                         </div>
-                        
                     </div>
                 </div>
 

@@ -6,8 +6,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from apps.dashboard.student.services.subject import handle_post_request, get_related_data
-from core.models import UserSubject, UserChapter, UserLesson, UserTask, UserVideo, UserWritten, UserTextGap, \
-    UserAnswer, UserMatchingAnswer, UserTableAnswer, Feedback
+from core.models import UserSubject, UserChapter, UserLesson, UserTask, UserVideo, UserAnswer, UserMatchingAnswer, \
+    Feedback, UserReading
 from core.utils.decorators import role_required
 
 
@@ -20,7 +20,7 @@ def user_lesson_view(request, subject_id, chapter_id, lesson_id):
     user_subject = get_object_or_404(UserSubject, user=user, pk=subject_id)
     user_lesson = get_object_or_404(UserLesson, user_subject=user_subject, pk=lesson_id)
     user_chapter = get_object_or_404(UserChapter, user_subject=user_subject, chapter=user_lesson.lesson.chapter)
-    tasks = user_lesson.lesson.tasks.exclude(task_type='video')
+    tasks = user_lesson.lesson.tasks.exclude(task_type__in=['video', 'reading'])
     user_lessons_qs = UserLesson.objects.filter(user_subject=user_subject).order_by('lesson__order')
 
     # ------------------ link for user tasks ------------------
@@ -31,7 +31,6 @@ def user_lesson_view(request, subject_id, chapter_id, lesson_id):
         .order_by('task__order')
         .first()
     )
-
     # ------------------ prev, next links ------------------
     previous_lesson = None
     next_lesson = None
@@ -104,19 +103,11 @@ def lesson_start_handler(request, subject_id, chapter_id, lesson_id):
                     video=video
                 )
 
-        elif task.task_type == 'written':
-            for written in task.written.all():
-                UserWritten.objects.get_or_create(
-                    user_task=user_task,
-                    written=written,
-                )
-
-        elif task.task_type == 'text_gap':
-            for text_gap in task.text_gaps.all():
-                UserTextGap.objects.get_or_create(
-                    user_task=user_task,
-                    text_gap=text_gap,
-                )
+        elif task.task_type == 'reading':
+            UserReading.objects.get_or_create(
+                user_task=user_task,
+                reading=task.reading,
+            )
 
         elif task.task_type == 'test':
             for question in task.questions.all():
@@ -134,17 +125,6 @@ def lesson_start_handler(request, subject_id, chapter_id, lesson_id):
                         item=item,
                     )
 
-        elif task.task_type == 'table':
-            rows = task.table_rows.all()
-            columns = task.table_columns.all()
-            for row in rows:
-                for column in columns:
-                    UserTableAnswer.objects.get_or_create(
-                        user_task=user_task,
-                        row=row,
-                        column=column,
-                    )
-
     user_lesson.status = 'in-progress'
     user_lesson.started_at = timezone.now()
     user_lesson.save()
@@ -160,7 +140,6 @@ def lesson_start_handler(request, subject_id, chapter_id, lesson_id):
             lesson_id=lesson_id,
             task_id=first_user_task.id
         )
-
     return redirect('student:user_lesson', subject_id=subject_id, chapter_id=chapter_id, lesson_id=lesson_id)
 
 
@@ -178,14 +157,15 @@ def lesson_finish_handler(request, subject_id, chapter_id, lesson_id):
         return redirect('student:user_lesson', subject_id=subject_id, chapter_id=chapter_id, lesson_id=lesson_id)
 
     # ---------------- UserLesson rating ----------------
-    user_tasks = UserTask.objects.filter(user_lesson=user_lesson)
-    total_rating = user_tasks.aggregate(total=Sum('rating')).get('total', 0) or 0
-    user_lesson.rating = total_rating
-    user_lesson.percentage = int(round(user_lesson.rating))
+    user_tasks = UserTask.objects.filter(user_lesson=user_lesson).select_related("task")
+    lesson_rating = user_tasks.aggregate(s=Sum("rating"))["s"] or 0
+    lesson_max = user_tasks.aggregate(s=Sum("task__rating"))["s"] or 0
+    user_lesson.rating = int(lesson_rating)
+    user_lesson.percentage = int(round((lesson_rating / lesson_max) * 100)) if lesson_max else 0
     user_lesson.is_completed = True
+    user_lesson.status = "finished"
     user_lesson.completed_at = timezone.now()
-    user_lesson.status = 'finished'
-    user_lesson.save()
+    user_lesson.save(update_fields=["rating", "percentage", "is_completed", "status", "completed_at"])
 
     # ---------------- UserChapter rating ----------------
     chapter_lessons = UserLesson.objects.filter(user_subject=user_subject, lesson__chapter=user_lesson.lesson.chapter)
@@ -237,7 +217,6 @@ def feedback_handler(request, subject_id, chapter_id, lesson_id):
             'comment': comment,
         }
     )
-
     if not created:
         feedback.rating = rating
         feedback.comment = comment

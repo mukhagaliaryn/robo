@@ -13,7 +13,7 @@ from core.utils.decorators import role_required
 @role_required('student')
 def student_view(request):
     user = request.user
-    subjects = Subject.objects.all()
+    subjects = Subject.objects.filter(is_public=True)
     user_subjects_qs = UserSubject.objects.filter(user=user).prefetch_related(
         'user_chapters__chapter',
         'user_lessons__lesson__chapter'
@@ -126,7 +126,7 @@ def enroll_user_to_subject(request, subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
 
     if not subject.chapters.exists() or not Lesson.objects.filter(chapter__subject=subject).exists():
-        messages.warning(request, _('Бұл пәнде бөлімдер мен сабақтар әлі қосылмаған'))
+        messages.warning(request, _('Бұл курста бөлімдер мен сабақтар әлі қосылмаған'))
         return redirect('student:dashboard')
 
     user_subject, __ = UserSubject.objects.get_or_create(user=user, subject=subject)
@@ -137,5 +137,5 @@ def enroll_user_to_subject(request, subject_id):
         for lesson in chapter.lessons.all():
             UserLesson.objects.get_or_create(user_subject=user_subject, user=user, lesson=lesson)
 
-    messages.success(request, _('Пән қосылды!'))
+    messages.success(request, _('Курс басталды!'))
     return redirect('student:dashboard')

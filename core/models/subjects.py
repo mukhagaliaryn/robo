@@ -7,13 +7,13 @@ from core.models import User
 # ----------------------------------------------------------------------------------------------------------------------
 class Subject(models.Model):
     name = models.CharField(_('Атауы'), max_length=255)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subjects', verbose_name=_('Авторы'))
     poster = models.ImageField(_('Постер'), blank=True, null=True, upload_to='core/models/subject/posters')
     description = models.TextField(_('Анықтамасы'), blank=True, null=True)
     created_at = models.DateTimeField(_('Уақыты'), auto_now_add=True)
     last_update = models.DateTimeField(_('Соңғы өзгеріс'), auto_now=True)
     view = models.PositiveIntegerField(_('Қаралым'), default=0)
     cert = models.FileField(_('Сертификат'), blank=True, null=True, upload_to='core/models/subject/certs')
+    is_public = models.BooleanField(_('Ашық курс'), default=False)
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class Subject(models.Model):
 class Chapter(models.Model):
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE,
-        verbose_name=_('Пән'), related_name='chapters'
+        verbose_name=_('Курс'), related_name='chapters'
     )
     name = models.CharField(_('Атауы'), max_length=255)
     order = models.PositiveIntegerField(_('Реттілік нөмері'), default=0)
@@ -48,7 +48,7 @@ class Chapter(models.Model):
 class Lesson(models.Model):
     subject = models.ForeignKey(
         Subject, on_delete=models.CASCADE,
-        verbose_name=_('Пән'), related_name='lessons', null=True, blank=True
+        verbose_name=_('Курс'), related_name='lessons', null=True, blank=True
     )
     chapter = models.ForeignKey(
         Chapter, on_delete=models.CASCADE,
@@ -78,7 +78,6 @@ class LessonDocs(models.Model):
     )
     title = models.CharField(_('Тақырыбы'), max_length=255)
     file = models.FileField(_('Файл'), upload_to='core/models/lesson/docs/', blank=True, null=True)
-    description = models.TextField(_('Мәтін'), blank=True, null=True)
 
     def __str__(self):
         return self.title

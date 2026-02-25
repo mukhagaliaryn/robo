@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from core.forms.subjects import SubjectAdminForm, LessonAdminForm
 from core.models import Subject, Chapter, Lesson, LessonDocs
 from django_summernote.admin import SummernoteModelAdmin, SummernoteModelAdminMixin
 from core.models.tasks import Task
@@ -53,11 +54,11 @@ class LessonTab(SummernoteModelAdminMixin, admin.TabularInline):
 
 # Subject admin
 @admin.register(Subject)
-class SubjectAdmin(SummernoteModelAdmin):
-    list_display = ('name', 'owner', 'created_at', 'last_update', 'view', )
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created_at', 'last_update', 'view', )
     search_fields = ('name', 'description', )
-    list_filter = ('owner', )
     inlines = (ChapterTab, LessonTab, )
+    form = SubjectAdminForm
 
 
 # Chapter admin
@@ -106,13 +107,14 @@ class TaskTab(SummernoteModelAdminMixin, admin.TabularInline):
 
 # Lesson admin
 @admin.register(Lesson)
-class LessonAdmin(SummernoteModelAdmin):
+class LessonAdmin(admin.ModelAdmin):
     list_display = ('title', 'subject', 'chapter', 'order', )
     search_fields = ('title', 'subject', 'chapter', 'description', )
     list_filter = ('subject', 'chapter', )
     ordering = ('order', )
     inlines = (LessonDocsTab, TaskTab, )
     readonly_fields = ('subject_link', )
+    form = LessonAdminForm
 
 
     def subject_link(self, obj):

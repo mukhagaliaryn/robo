@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from core.models import Task, Option, UserLesson, Video, Written, TextGap, Question, MatchingItem, MatchingColumn
+from core.models import Task, Option, UserLesson, Video, Question, MatchingItem, MatchingColumn, Reading
 
 
 # UserTask model
@@ -45,43 +45,20 @@ class UserVideo(models.Model):
         verbose_name_plural = _('Қолданушының видеосабақтары')
 
 
-# UserWritten model
+# UserReading
 # ----------------------------------------------------------------------------------------------------------------------
-class UserWritten(models.Model):
-    user_task = models.ForeignKey(
-        UserTask, on_delete=models.CASCADE,
-        related_name='user_written', verbose_name=_('Қолданушының тапсырмасы')
+class UserReading(models.Model):
+    user_task = models.OneToOneField(UserTask, on_delete=models.CASCADE, related_name='user_reading')
+    reading = models.ForeignKey(
+            Reading, on_delete=models.CASCADE,
+            related_name='user_reading', verbose_name=_('Оқу мәтіні')
     )
-    written = models.ForeignKey(
-        Written, on_delete=models.CASCADE, null=True,
-        related_name='user_written', verbose_name=_('Жазбаша')
-    )
-    file = models.FileField(_('Файл'), upload_to='core/models/user_written/files/', null=True, blank=True)
-    answer = models.TextField(_('Жауабы'))
-    is_submitted = models.BooleanField(_('Жіберілді'), default=False)
+    is_read = models.BooleanField(default=False)
+    read_seconds = models.PositiveIntegerField(default=0)
 
     class Meta:
-        verbose_name = _('Қолданушының жазбаша жауабы')
-        verbose_name_plural = _('Қолданушының жазбаша жауаптары')
-
-
-# UserTextGap model
-# ----------------------------------------------------------------------------------------------------------------------
-class UserTextGap(models.Model):
-    user_task = models.ForeignKey(
-        UserTask, on_delete=models.CASCADE,
-        related_name='user_text_gaps', verbose_name=_('Қолданушының тапсырмасы')
-    )
-    text_gap = models.ForeignKey(
-        TextGap, on_delete=models.CASCADE, null=True,
-        related_name='user_text_gaps', verbose_name=_('Толықтыру')
-    )
-    answer = models.CharField(_('Жауабы'), max_length=255, null=True, blank=True)
-    is_correct = models.BooleanField(_('Дұрыс па?'), default=False)
-
-    class Meta:
-        verbose_name = _('Қолданушының сәйкестендіруі')
-        verbose_name_plural = _('Қолданушының сәйкестендірулері')
+        verbose_name = _('Қолданушының оқу мәтіні')
+        verbose_name_plural = _('Қолданушының оқу мәтіндері')
 
 
 # Test model
@@ -127,25 +104,3 @@ class UserMatchingAnswer(models.Model):
         verbose_name = _('Қолданушының сәйкестендіруі')
         verbose_name_plural = _('Қолданушының сәйкестендірулері')
 
-
-# UserTableAnswer model
-# ----------------------------------------------------------------------------------------------------------------------
-class UserTableAnswer(models.Model):
-    user_task = models.ForeignKey(
-        UserTask, on_delete=models.CASCADE,
-        related_name='user_table_answers', verbose_name=_('Қолданушы тапсырмасы')
-    )
-    row = models.ForeignKey(
-        'core.TableRow', on_delete=models.CASCADE,
-        related_name='user_answers', verbose_name=_('Қатар')
-    )
-    column = models.ForeignKey(
-        'core.TableColumn', on_delete=models.CASCADE,
-        related_name='user_answers', verbose_name=_('Баған')
-    )
-    checked = models.BooleanField(_('Белгіленген'), default=False)
-
-    class Meta:
-        verbose_name = _('Кесте ұяшығына жауап')
-        verbose_name_plural = _('Кесте ұяшығына жауаптар')
-        unique_together = ('user_task', 'row', 'column')
