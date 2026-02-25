@@ -5,17 +5,17 @@ from django.views.static import serve
 
 
 urlpatterns = [
+    path('summernote/', include('django_summernote.urls')),
+    path('__reload__/', include('django_browser_reload.urls')),
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    path('', include('apps.landing.urls')),
-    # path('learner/', include('apps.learner.urls')),
-    path('tutor/', include('apps.tutor.urls')),
+    path('', include('apps.main.urls')),
+    path('account/', include('apps.account.urls')),
+    path('student/', include('apps.dashboard.student.urls')),
+    path('teacher/', include('apps.dashboard.teacher.urls')),
 ]
 
 
-if settings.DEBUG:
-    urlpatterns += [re_path(r'^i18n/', include('django.conf.urls.i18n'))]
-    urlpatterns += [re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})]
-    urlpatterns += [re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})]
-    urlpatterns += [path('__reload__/', include('django_browser_reload.urls'))]
+urlpatterns += [re_path(r'^i18n/', include('django.conf.urls.i18n'))]
+urlpatterns += [re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})]
+urlpatterns += [re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})]

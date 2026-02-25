@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decouple import config
 from django.contrib import messages
@@ -5,12 +6,13 @@ from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG') == 'True'
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 
-# Applications
+# Application definition
 # ----------------------------------------------------------------------------------------------------------------------
 INSTALLED_APPS = [
     'admin_interface',
@@ -21,15 +23,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
+    'django_summernote',
     'tailwind',
+    'django_browser_reload',
     'ui',
-    'core.apps.CoreConfig',
+    'core',
 
     # apps...
-    'apps.landing.apps.LandingConfig',
-    'apps.learner.apps.LearnerConfig',
-    'apps.tutor.apps.TutorConfig',
+    'apps.main.apps.MainConfig',
+    'apps.account.apps.AccountConfig',
+    'apps.dashboard.student.apps.StudentConfig',
+    'apps.dashboard.teacher.apps.TeacherConfig',
 ]
 
 MIDDLEWARE = [
@@ -41,13 +45,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware'
 ]
 
-if DEBUG:
-    INSTALLED_APPS += ["django_browser_reload"]
-    MIDDLEWARE += [
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-    ]
+ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
+AUTH_USER_MODEL = 'core.User'
 
 TEMPLATES = [
     {
@@ -64,12 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
-ROOT_URLCONF = 'config.urls'
-
-
-# DATABASE
-# ----------------------------------------------------------------------------------------------------------------------
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -81,9 +79,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# ----------------------------------------------------------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -102,18 +98,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # ----------------------------------------------------------------------------------------------------------------------
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Almaty'
-USE_I18N = True
-USE_TZ = True
-
 LANGUAGES = (
     ('kk', _('Kazakh')),
     ('ru', _('Russian')),
     ('en', _('English')),
 )
 
-LOCALE_PATHS = [BASE_DIR / 'locales']
+LOCALE_PATHS = [
+    BASE_DIR / 'locales'
+]
+
+LANGUAGE_CODE = 'kk-kz'
+TIME_ZONE = 'Asia/Almaty'
+USE_I18N = True
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -123,15 +121,17 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [BASE_DIR / 'ui/static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'ui/static'
+]
 
 
-# Tailwind settings
+# Templates settings
 # ----------------------------------------------------------------------------------------------------------------------
 TAILWIND_APP_NAME = 'ui'
 
 # Messages
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'text-green-600',
@@ -141,80 +141,19 @@ MESSAGE_TAGS = {
 }
 
 
-# CORS Settings
+# Default primary key field type
+# ----------------------------------------------------------------------------------------------------------------------
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CORS, API settings
 # ----------------------------------------------------------------------------------------------------------------------
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ['security.W019']
-AUTH_USER_MODEL = 'core.User'
 
 
-# Authentication settings
+# Authentification settings
 # ----------------------------------------------------------------------------------------------------------------------
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'core.utils.db.backends.EmailOrUsernameBackend',
-]
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/auth/login/'
-LOGIN_URL = '/auth/login/'
-
-
-# CKEditor settings
-# ----------------------------------------------------------------------------------------------------------------------
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'skin': 'moono-lisa',
-        'defaultLanguage': 'ru',
-        'width': 840,
-        'height': 420,
-        'removePlugins': 'autogrow',
-
-        'toolbar': [
-            {
-                'name': 'styles',
-                'items': ['Format'],
-            },
-            {
-                'name': 'basicstyles',
-                'items': ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat'],
-            },
-            {
-                'name': 'paragraph',
-                'items': [
-                    'NumberedList', 'BulletedList', '-',
-                    'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                ],
-            },
-            {
-                'name': 'insert',
-                'items': ['Image', 'Table', 'Mathjax', 'Iframe'],
-            },
-            {
-                'name': 'document',
-                'items': ['Source', '-', 'Preview', '-', 'Maximize'],
-            },
-        ],
-
-        'format_tags': 'p;h2;h3;h4',
-        'mathJaxLib': 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_HTML',
-        'tabSpaces': 4,
-
-        'image_upload_url': '/ckeditor/upload/',
-        'filebrowserUploadUrl': '/ckeditor/upload/',
-        'filebrowserBrowseUrl': '/ckeditor/browse/',
-
-        'extraAllowedContent': 'iframe[!src,width,height,frameborder,allow,allowfullscreen,loading,referrerpolicy];',
-
-        'extraPlugins': ','.join([
-            'mathjax',
-            'uploadimage',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath',
-        ]),
-    }
-}
+LOGIN_REDIRECT_URL = 'student'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'

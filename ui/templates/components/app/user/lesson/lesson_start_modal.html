@@ -1,0 +1,59 @@
+<button 
+    data-modal-target="popup-modal" 
+    data-modal-toggle="popup-modal"
+    class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+    type="button"
+>
+    Сабақты бастау
+</button>
+
+<div 
+    id="popup-modal" 
+    tabindex="-1"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+>
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-2xl shadow-sm">
+            <button
+                type="button"
+                data-modal-hide="popup-modal"
+                class="absolute top-3 end-2.5 text-muted bg-transparent hover:bg-secondary-100 hover:text-foreground rounded-2xl w-8 h-8 ms-auto inline-flex justify-center items-center"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-6 grid gap-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info mx-auto text-muted">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
+                </svg>
+                <span class="mb-5 font-normal text-muted">
+                    Сабақты бастаймыз ба?
+                </span>
+
+                <form action="{% url 'student:lesson_start' user_subject.pk user_chapter.pk user_lesson.pk %}" method="post" class="flex gap-2 justify-center">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                    >
+                        Ия, бастаймыз
+                    </button>
+                    <button 
+                        data-modal-hide="popup-modal" 
+                        type="button"
+                        class="flex gap-2 justify-center items-center text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                    >
+                        Жоқ
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

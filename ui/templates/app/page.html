@@ -14,8 +14,8 @@
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
                         <img src="{% static 'images/vertical-logo.svg' %}" class="w-64 mx-auto lg:mx-0" alt="">
-                        <h1 class="text-2xl font-black text-heading">Өз туындыңды іске қос!</h1>
-                        <span>
+                        <h1 class="text-2xl font-black">Өз туындыңды іске қос!</h1>
+                        <span class="text-muted">
                             Robo-Baldyrgan — робототехникаға арналған онлайн платформа. 
                             Мұнда сен робот жасауды, код жазуды және өз жобаңа дейін жетуді үйренесің. 
                             Оқу ойын сияқты өтеді, ал нәтиже — нағыз жұмыс істейтін робот идеясы.
@@ -23,14 +23,14 @@
 
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
-                                href="#"
-                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                href="{% url 'account:login' %}"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Бастап көру
                             </a>
                             <a 
-                                href="#"
-                                class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                                href="{% url 'account:register' %}"
+                                class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
                                 Тіркелу
                             </a>
@@ -48,9 +48,9 @@
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black text-heading">Онлайн курстар</h1>
-                        <h1 class="text-2xl font-black text-heading">Қадам-қадаммен робот жасауды үйрен!</h1>
-                        <span>
+                        <h1 class="text-5xl lg:text-6xl font-black">Онлайн курстар</h1>
+                        <h1 class="text-2xl font-black">Қадам-қадаммен робот жасауды үйрен!</h1>
+                        <span class="text-muted">
                             Онлайн курстарда сен LEGO және Arduino негіздерін меңгеріп, программалауды түсініп, 
                             әр сабақтан кейін өз қолыңмен шағын жоба жасап үйренесің. Теорияны қарап қана қоймай, 
                             оны бірден практикада қолданып көресің.
@@ -58,7 +58,7 @@
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#"
-                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Курстарды қарап шығу
                             </a>
@@ -75,10 +75,10 @@
             <!-- 3 -->
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
-                    <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black text-heading">Онлайн симулятор</h1>
-                        <h1 class="text-2xl font-black text-heading">Құрастыр. Жаз. Іске қос!</h1>
-                        <span>
+                    <div class="max-w-2xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
+                        <h1 class="text-5xl lg:text-6xl font-black">Онлайн симулятор</h1>
+                        <h1 class="text-2xl font-black">Құрастыр. Жаз. Іске қос!</h1>
+                        <span class="text-muted">
                             Онлайн симуляторда сен роботтың бөлшектерін қосып, код жазып, 
                             оның қалай жұмыс істейтінін бірден көресің. Қателессең — түзетіп қайта сынайсың, 
                             ал дұрыс істесе — нәтижесін бірден байқап қуанасың.
@@ -86,7 +86,7 @@
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#"
-                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Симуляторды көру
                             </a>
@@ -104,16 +104,16 @@
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black text-heading">Кітаптар</h1>
-                        <h1 class="text-2xl font-black text-heading">Оқы да бірден жасап көр!</h1>
-                        <span>
+                        <h1 class="text-5xl lg:text-6xl font-black">Кітаптар</h1>
+                        <h1 class="text-2xl font-black">Оқы да бірден жасап көр!</h1>
+                        <span class="text-muted">
                             Электронды кітаптар саған робототехника мен электрониканы қарапайым әрі түсінікті тілмен түсіндіреді. 
                             Суреттер мен схемалар арқылы сен теорияны жеңіл меңгеріп, оны өз жобаңа қолдана аласың.
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#"
-                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Кітаптарды ашу
                             </a>
@@ -138,8 +138,8 @@
 <section id="features" class="scroll-mt-16">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Негізгі мүмкіндіктер</h1>
-            <span>Платформаның негізгі артықшылықтары және неліктен Robo-Baldyrgan платформасын таңдайды?</span>
+            <h1 class="text-4xl font-black">Негізгі мүмкіндіктер</h1>
+            <span class="text-muted">Платформаның негізгі артықшылықтары және неліктен Robo-Baldyrgan платформасын таңдайды?</span>
         </div>
 
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
@@ -147,7 +147,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="0" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/vqkaxtlm.json" 
@@ -155,8 +155,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Интерактивті онлайн курстар</h1>
-                <span>
+                <h1 class="text-xl font-black">Интерактивті онлайн курстар</h1>
+                <span class="text-muted">
                     Сабақтар видео, түсіндірме және тапсырмалар арқылы өтеді. 
                     Әр тақырыптан кейін білім алушы алған білімін практикада қолданып көреді, сондықтан оқу процесі белсенді әрі түсінікті болады.
                 </span>
@@ -165,7 +165,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="80" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/zlidaevn.json" 
@@ -173,8 +173,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Нәтижені бірден көру мүмкіндігі</h1>
-                <span>
+                <h1 class="text-xl font-black">Нәтижені бірден көру мүмкіндігі</h1>
+                <span class="text-muted">
                     Жазылған код немесе қосылған компонент бірден тексеріледі. 
                     Бұл оқу процесін түсінікті етіп, әр әрекеттің нәтижесін көруге көмектеседі.
                 </span>
@@ -183,7 +183,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="160" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/xtbppedy.json" 
@@ -191,8 +191,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Робототехникаға нақты бағыт</h1>
-                <span>
+                <h1 class="text-xl font-black">Робототехникаға нақты бағыт</h1>
+                <span class="text-muted">
                     Платформа LEGO, Arduino және STEM жүйесіне негізделген. 
                     Бұл білім алушыға техникалық және инженерлік ойлауды жүйелі түрде дамытуға мүмкіндік береді.
                 </span>
@@ -201,7 +201,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="240" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/xzvgfwwv.json" 
@@ -209,8 +209,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Қауіпсіз және қолжетімді орта</h1>
-                <span>
+                <h1 class="text-xl font-black">Қауіпсіз және қолжетімді орта</h1>
+                <span class="text-muted">
                     Барлық оқу процесі онлайн форматта ұйымдастырылған. Білім алушы кез келген жерде, 
                     кез келген уақытта платформаға кіріп, тәжірибе жасай алады.
                 </span>
@@ -219,7 +219,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="320" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/owwibima.json" 
@@ -227,8 +227,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Онлайн симулятор</h1>
-                <span>
+                <h1 class="text-xl font-black">Онлайн симулятор</h1>
+                <span class="text-muted">
                     Арнайы виртуалды тренажер арқылы робот бөлшектерін қосып, код жазып және нәтижесін 
                     бірден тексеруге болады. Бұл шынайы зертханаға ұқсас тәжірибе жасауға мүмкіндік береді.
                 </span>
@@ -237,7 +237,7 @@
             <div 
                 data-reveal 
                 data-reveal-delay="400" 
-                class="grid gap-2 rounded-2xl border border-default p-4 text-center"
+                class="grid gap-2 rounded-2xl border border-border-200 p-4 text-center"
             >
                 <lord-icon 
                     src="https://cdn.lordicon.com/iuqyhlid.json" 
@@ -245,8 +245,8 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black text-heading">Кітаптарды онлайн оқу</h1>
-                <span>
+                <h1 class="text-xl font-black">Кітаптарды онлайн оқу</h1>
+                <span class="text-muted">
                     Платформада робототехника мен электроникаға арналған электронды кітаптар бар. 
                     Білім алушы материалды тікелей сайт ішінде оқып, схемалар мен түсіндірмелер арқылы теорияны оңай меңгереді.
                 </span>
@@ -256,35 +256,35 @@
 </section>
 
 <!-- 3-секция. Курстар -->
-<section id="courses" class="scroll-mt-16 bg-neutral-secondary border-t border-default">
+<section id="courses" class="scroll-mt-16 bg-secondary-50 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Қол жетімді курстар</h1>
-            <span>Қазір курстар саны шектеулі болуы мүмкін. Жақын уақытта пәндер мен сыныптар кеңейеді.</span>
+            <h1 class="text-4xl font-black">Қол жетімді курстар</h1>
+            <span class="text-muted">Қазір курстар саны шектеулі болуы мүмкін. Жақын уақытта пәндер мен сыныптар кеңейеді.</span>
         </div>
 
         <div class="swiper courseSwiper">
             <div class="swiper-wrapper">
                 <!-- Card 1 -->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary transition hover:shadow-sm">
-                    <div class="rounded-t-3xl aspect-video bg-neutral-quaternary"></div>
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white transition hover:shadow-sm">
+                    <div class="rounded-t-3xl aspect-video bg-secondary-200"></div>
                     <div class="p-4 grid gap-4">
                         <div class="grid gap-1">
-                            <span class="font-semibold text-body-subtle">Категория атауы</span>
-                            <h1 class="text-lg font-black text-heading">Негізгі тақырыбы</h1>
-                            <span>Курстың қысқартылған анықтамасы</span>
+                            <span class="font-semibold text-subtle">Категория атауы</span>
+                            <h1 class="text-lg font-black">Негізгі тақырыбы</h1>
+                            <span class="text-muted">Курстың қысқартылған анықтамасы</span>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Видео</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Видео</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Тест</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Тест</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Сәйкестендіру</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Сәйкестендіру</span>
                         </div>
                         <a 
                             href="#"
-                            class="flex justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                            class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                         >
                             Толығырақ
                         </a>
@@ -292,25 +292,25 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary transition hover:shadow-sm">
-                    <div class="rounded-t-3xl aspect-video bg-neutral-quaternary"></div>
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white transition hover:shadow-sm">
+                    <div class="rounded-t-3xl aspect-video bg-secondary-200"></div>
                     <div class="p-4 grid gap-4">
                         <div class="grid gap-1">
-                            <span class="font-semibold text-body-subtle">Категория атауы</span>
-                            <h1 class="text-lg font-black text-heading">Негізгі тақырыбы</h1>
-                            <span>Курстың қысқартылған анықтамасы</span>
+                            <span class="font-semibold text-subtle">Категория атауы</span>
+                            <h1 class="text-lg font-black">Негізгі тақырыбы</h1>
+                            <span class="text-muted">Курстың қысқартылған анықтамасы</span>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Видео</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Видео</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Тест</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Тест</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Сәйкестендіру</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Сәйкестендіру</span>
                         </div>
                         <a 
                             href="#"
-                            class="flex justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                            class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                         >
                             Толығырақ
                         </a>
@@ -318,25 +318,25 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary transition hover:shadow-sm">
-                    <div class="rounded-t-3xl aspect-video bg-neutral-quaternary"></div>
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white transition hover:shadow-sm">
+                    <div class="rounded-t-3xl aspect-video bg-secondary-200"></div>
                     <div class="p-4 grid gap-4">
                         <div class="grid gap-1">
-                            <span class="font-semibold text-body-subtle">Категория атауы</span>
-                            <h1 class="text-lg font-black text-heading">Негізгі тақырыбы</h1>
-                            <span>Курстың қысқартылған анықтамасы</span>
+                            <span class="font-semibold text-subtle">Категория атауы</span>
+                            <h1 class="text-lg font-black">Негізгі тақырыбы</h1>
+                            <span class="text-muted">Курстың қысқартылған анықтамасы</span>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Видео</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Видео</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Тест</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Тест</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Сәйкестендіру</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Сәйкестендіру</span>
                         </div>
                         <a 
                             href="#"
-                            class="flex justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                            class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                         >
                             Толығырақ
                         </a>
@@ -344,51 +344,25 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary transition hover:shadow-sm">
-                    <div class="rounded-t-3xl aspect-video bg-neutral-quaternary"></div>
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white transition hover:shadow-sm">
+                    <div class="rounded-t-3xl aspect-video bg-secondary-200"></div>
                     <div class="p-4 grid gap-4">
                         <div class="grid gap-1">
-                            <span class="font-semibold text-body-subtle">Категория атауы</span>
-                            <h1 class="text-lg font-black text-heading">Негізгі тақырыбы</h1>
-                            <span>Курстың қысқартылған анықтамасы</span>
+                            <span class="font-semibold text-subtle">Категория атауы</span>
+                            <h1 class="text-lg font-black">Негізгі тақырыбы</h1>
+                            <span class="text-muted">Курстың қысқартылған анықтамасы</span>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Видео</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Видео</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Тест</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Тест</span>
                             <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Сәйкестендіру</span>
+                                class="rounded-xl border border-border-200 bg-secondary-50 px-3 py-1 text-xs text-muted font-medium">Сәйкестендіру</span>
                         </div>
                         <a 
                             href="#"
-                            class="flex justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
-                        >
-                            Толығырақ
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary transition hover:shadow-sm">
-                    <div class="rounded-t-3xl aspect-video bg-neutral-quaternary"></div>
-                    <div class="p-4 grid gap-4">
-                        <div class="grid gap-1">
-                            <span class="font-semibold text-body-subtle">Категория атауы</span>
-                            <h1 class="text-lg font-black text-heading">Негізгі тақырыбы</h1>
-                            <span>Курстың қысқартылған анықтамасы</span>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Видео</span>
-                            <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Тест</span>
-                            <span
-                                class="rounded-xl border border-default bg-neutral-secondary px-3 py-1 text-xs font-medium">Сәйкестендіру</span>
-                        </div>
-                        <a 
-                            href="#"
-                            class="flex justify-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                            class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                         >
                             Толығырақ
                         </a>
@@ -404,44 +378,41 @@
 </section>
 
 <!-- 4-секция. Онлайн симулятор -->
-<section id="simulator" class="scroll-mt-16 border-t border-default">
+<section id="simulator" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Онлайн симулятор</h1>
-            <span>
+            <h1 class="text-4xl font-black">Онлайн симулятор</h1>
+            <span class="text-muted">
                 Онлайн симулятор — бұл сенің виртуалды зертханаң. Мұнда роботтың бөлшектерін қосып,
                 код жазып және оның қалай жұмыс істейтінін бірден тексеруге болады.
-                Тәжірибе жасау үшін арнайы құрал қажет емес — барлығы платформа ішінде.
             </span>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-2 items-center">
             <!-- Preview / mockup -->
-            <div class="rounded-3xl border border-default bg-neutral-secondary">
-                <div class="aspect-video rounded-2xl bg-neutral-quaternary flex items-center justify-center text-heading font-bold">
+            <div class="rounded-3xl border border-border-200">
+                <div class="aspect-video rounded-2xl bg-secondary-200 flex items-center justify-center text-heading font-bold">
                     Симулятор preview (workspace скриншот)
                 </div>
             </div>
 
             <!-- Description -->
             <div class="space-y-4">
-                <h2 class="text-2xl font-black text-heading">
+                <h2 class="text-2xl font-black">
                     Құрастыр. Жаз. Іске қос.
                 </h2>
 
-                <p>
+                <p class="text-muted">
                     LED, мотор және сенсорларды қосып, код жазып және оның нәтижесін сол сәтте көр.
                     Қателессең — түзетіп қайта сынауға болады. Әр әрекет бірден нәтиже береді.
                 </p>
-
-                <p>
+                <p class="text-muted">
                     Бұл бөлім робототехниканы түсінуді жеңілдетіп,
                     инженерлік ойлауды тәжірибе арқылы қалыптастырады.
                 </p>
-
                 <a 
                     href="#"
-                    class="inline-flex text-white bg-brand hover:bg-brand-strong active:scale-95 rounded-full px-6 py-3 font-medium"
+                    class="inline-flex text-white bg-primary-500 hover:bg-primary-600 active:scale-95 rounded-full px-6 py-3 font-medium"
                 >
                     Симуляторды ашу
                 </a>
@@ -452,78 +423,77 @@
 </section>
 
 <!-- 5-секция. Кітаптар -->
-<section id="books" class="scroll-mt-16 border-t border-default bg-neutral-secondary">
+<section id="books" class="scroll-mt-16 border-t border-border-200 bg-secondary-50">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Электронды кітаптар</h1>
-            <span>
+            <h1 class="text-4xl font-black">Электронды кітаптар</h1>
+            <span class="text-muted">
                 Электронды кітаптар робототехника мен электроника негіздерін
                 қарапайым әрі түсінікті тілмен түсіндіреді.
-                Теорияны оқып, оны практикада қолдануға мүмкіндік беріледі.
             </span>
         </div>
 
         <div class="swiper bookSwiper">
             <div class="swiper-wrapper">
                 <!-- 1-->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary">
-                    <div class="aspect-3/4 rounded-t-2xl bg-neutral-quaternary"></div>
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white">
+                    <div class="aspect-3/4 rounded-t-2xl bg-secondary-200"></div>
                     <div class="p-4 space-y-2">
-                        <h3 class="text-lg font-black text-heading">
+                        <h3 class="text-lg font-black">
                             Робототехника негіздері
                         </h3>
-                        <span class="block text-sm">
+                        <span class="block text-muted">
                             Роботтың құрылымы, негізгі компоненттер және олардың қызметі туралы түсінік.
                         </span>
-                        <a href="#" class="flex text-brand font-medium hover:underline">
+                        <a href="#" class="flex text-primary-500 font-medium hover:underline">
                             Оқуды бастау →
                         </a>
                     </div>
                 </div>
 
-                <!-- 1-->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary">
-                    <div class="aspect-3/4 rounded-t-2xl bg-neutral-quaternary"></div>
+               <!-- 2 -->
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white">
+                    <div class="aspect-3/4 rounded-t-2xl bg-secondary-200"></div>
                     <div class="p-4 space-y-2">
-                        <h3 class="text-lg font-black text-heading">
+                        <h3 class="text-lg font-black">
                             Робототехника негіздері
                         </h3>
-                        <span class="block text-sm">
+                        <span class="block text-muted">
                             Роботтың құрылымы, негізгі компоненттер және олардың қызметі туралы түсінік.
                         </span>
-                        <a href="#" class="flex text-brand font-medium hover:underline">
+                        <a href="#" class="flex text-primary-500 font-medium hover:underline">
                             Оқуды бастау →
                         </a>
                     </div>
                 </div>
 
-                <!-- 1-->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary">
-                    <div class="aspect-3/4 rounded-t-2xl bg-neutral-quaternary"></div>
+                <!-- 3 -->
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white">
+                    <div class="aspect-3/4 rounded-t-2xl bg-secondary-200"></div>
                     <div class="p-4 space-y-2">
-                        <h3 class="text-lg font-black text-heading">
+                        <h3 class="text-lg font-black">
                             Робототехника негіздері
                         </h3>
-                        <span class="block text-sm">
+                        <span class="block text-muted">
                             Роботтың құрылымы, негізгі компоненттер және олардың қызметі туралы түсінік.
                         </span>
-                        <a href="#" class="flex text-brand font-medium hover:underline">
+                        <a href="#" class="flex text-primary-500 font-medium hover:underline">
                             Оқуды бастау →
                         </a>
                     </div>
                 </div>
 
-                <!-- 1-->
-                <div class="swiper-slide rounded-3xl border border-default bg-neutral-primary">
-                    <div class="aspect-3/4 rounded-t-2xl bg-neutral-quaternary"></div>
+                <!-- 4 -->
+                <div class="swiper-slide rounded-3xl border border-border-200 bg-white">
+                    <div class="aspect-3/4 rounded-t-2xl bg-secondary-200"></div>
                     <div class="p-4 space-y-2">
-                        <h3 class="text-lg font-black text-heading">
+                        <h3 class="text-lg font-black">
                             Робототехника негіздері
                         </h3>
-                        <span class="block text-sm">
+                        <span class="block text-muted">
                             Роботтың құрылымы, негізгі компоненттер және олардың қызметі туралы түсінік.
                         </span>
-                        <a href="#" class="flex text-brand font-medium hover:underline">
+                        <a href="#" class="flex text-primary-500 font-medium hover:underline">
                             Оқуды бастау →
                         </a>
                     </div>
@@ -538,11 +508,11 @@
 </section>
 
 <!-- 6-секция. Біз жайлы -->
-<section id="about" class="scroll-mt-16 bg-neutral-primary border-t border-default">
+<section id="about" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Біз жайлы</h1>
-            <span>...</span>
+            <h1 class="text-4xl font-black">Біз жайлы</h1>
+            <span class="text-muted">Біз туралы ақпарат</span>
         </div>
         
         <!-- Автор жайлы -->
@@ -553,13 +523,13 @@
         >
             <!-- Аватар -->
             <div class="max-w-sm w-full">
-                <div class="rounded-3xl border border-default bg-neutral-secondary p-6">
+                <div class="rounded-3xl border border-border-200 bg-secondary-50 p-6">
                     <div class="grid text-center gap-4">
                         <img src="{% static 'images/author.png' %}" alt="Автор"
-                            class="h-48 w-48 mx-auto rounded-full object-cover border-4 border-brand" />
+                            class="h-48 w-48 mx-auto rounded-full object-cover border-4 border-primary-500" />
                         <div>
-                            <p class="text-lg font-black text-heading">Каратаев Нурлан Сагынбекович</p>
-                            <p class="text-sm font-semibold">Жоба авторы</p>
+                            <p class="text-lg font-black">Каратаев Нурлан Сагынбекович</p>
+                            <p class="text-sm font-semibold text-subtle">Жоба авторы</p>
                         </div>
                     </div>
 
@@ -568,7 +538,7 @@
                         <a 
                             href="#"
                             target="_blank"
-                            class="rounded-2xl border border-default bg-white p-3 transition hover:border-brand  hover:bg-brand text-heading hover:text-white"
+                            class="rounded-2xl border border-border-200 bg-white p-3 transition hover:border-primary-500 hover:bg-primary-500 hover:text-white"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook-icon lucide-facebook mx-auto">
@@ -579,7 +549,7 @@
                         <a 
                             href="https://www.instagram.com/nurlan.karatayev/"
                             target="_blank"
-                            class="rounded-2xl border border-default bg-white p-3 transition hover:border-brand hover:bg-brand text-heading hover:text-white"
+                            class="rounded-2xl border border-border-200 bg-white p-3 transition hover:border-primary-500 hover:bg-primary-500 hover:text-white"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -593,7 +563,7 @@
                         <a 
                             href="#"
                             target="_blank"
-                            class="rounded-2xl border border-default bg-white p-3 transition hover:border-brand hover:bg-brand text-heading hover:text-white"
+                            class="rounded-2xl border border-border-200 bg-white p-3 transition hover:border-primary-500 hover:bg-primary-500 hover:text-white"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter-icon lucide-twitter mx-auto">
@@ -605,7 +575,7 @@
                         <a 
                             href="#"
                             target="_blank"
-                            class="rounded-2xl border border-default bg-white p-3 transition hover:border-brand hover:bg-brand text-heading hover:text-white"
+                            class="rounded-2xl border border-border-200 bg-white p-3 transition hover:border-primary-500 hover:bg-primary-500 hover:text-white"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -619,7 +589,7 @@
                         <a 
                             href="#"
                             target="_blank" 
-                            class="rounded-2xl border border-default bg-white p-3 transition hover:border-brand hover:bg-brand text-heading hover:text-white"
+                            class="rounded-2xl border border-border-200 bg-white p-3 transition hover:border-primary-500 hover:bg-primary-500 hover:text-white"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -638,8 +608,8 @@
                 data-reveal-delay="160" 
                 class="max-w-lg w-full"
             >
-                <h2 class="font-black text-heading tracking-tight text-xl sm:text-2xl">Автор туралы</h2>
-                <p class="mt-2 leading-relaxed">
+                <h2 class="font-black tracking-tight text-xl sm:text-2xl">Автор туралы</h2>
+                <p class="mt-2 leading-relaxed text-muted">
                     <span class="font-semibold text-foreground">Каратаев Нурлан Сагынбекович</span> — Robobaldyrgan жобасының авторы.
                     Жобаның идеясы қарапайым: оқушы тек “көріп қоймай”, міндетті түрде “орындап” бекітсін.
                     Сондықтан әр сабақта видео мен практика бірге жүреді.
@@ -745,11 +715,11 @@
 </section>
 
 <!-- 7-секция. Байланыс -->
-<section id="contact" class="scroll-mt-16 border-t border-default bg-neutral-secondary">
+<section id="contact" class="scroll-mt-16 border-t border-border-200 bg-secondary-50">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
             <h1 class="text-4xl font-black text-heading">Байланыс</h1>
-            <span>Сұрақтарыңыз болса немесе баланы оқуға жазу қажет болса — бізбен хабарласыңыз.</span>
+            <span class="text-muted">Сұрақтарыңыз болса немесе баланы оқуға жазу қажет болса — бізбен хабарласыңыз.</span>
         </div>
 
         <div class="grid gap-6 lg:grid-cols-12 lg:gap-8">
@@ -757,7 +727,7 @@
                 <!-- Contacts -->
                 <div class="space-y-2">
                     <!-- Address -->
-                    <div class="rounded-2xl border border-default bg-neutral-primary p-4">
+                    <div class="rounded-2xl border border-border-200 bg-white p-4">
                         <div class="flex items-center gap-2">
                             <lord-icon
                                 src="https://cdn.lordicon.com/bpmglzll.json"
@@ -765,15 +735,15 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div class="flex-1">
-                                <h4 class="font-black text-base text-heading">Мекенжай</h4>
-                                <span class="block">
+                                <h4 class="font-black text-base">Мекенжай</h4>
+                                <span class="text-muted">
                                     Шымкент қ., А.Байтұрсынов 13
                                 </span>
                             </div>
                         </div>
                     </div>
                     <!-- Phone -->
-                    <div class="rounded-2xl border border-default bg-neutral-primary p-4">
+                    <div class="rounded-2xl border border-border-200 bg-white p-4">
                         <div class="flex items-start gap-2">
                             <lord-icon
                                 src="https://cdn.lordicon.com/dhcosedn.json"
@@ -781,21 +751,21 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div>
-                                <h4 class="font-black text-base text-heading">Телефон</h4>
+                                <h4 class="font-black text-base">Телефон</h4>
                                 <a 
                                     href="tel:+77781308431"
                                     class="mt-1 block font-semibold hover:underline"
                                 >
                                     +7 (778)-130-84-31
                                 </a>
-                                <p class="mt-1 text-xs">
+                                <p class="mt-1 text-xs text-muted">
                                     Жұмыс уақыты: Дс–Жм, 09:00–18:00
                                 </p>
                             </div>
                         </div>
                     </div>
                     <!-- Email -->
-                    <div class="rounded-2xl border border-default bg-neutral-primary p-4">
+                    <div class="rounded-2xl border border-border-200 bg-white p-4">
                         <div class="flex items-start gap-2">
                             <lord-icon
                                 src="https://cdn.lordicon.com/uufkkpxl.json"
@@ -803,21 +773,21 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div>
-                                <h4 class="font-black text-base text-heading">Email</h4>
+                                <h4 class="font-black text-base">Email</h4>
                                 <a 
                                     href="mailto:robo-baldyrganl@gmail.com"
                                     class="mt-1 block text-sm font-semibold text-heading hover:underline"
                                 >
                                     robo-baldyrganl@gmail.com
                                 </a>
-                                <p class="mt-1 text-xs">
+                                <p class="mt-1 text-xs text-muted">
                                     Серіктестік және ресми сұрақтар үшін.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <!-- WhatsApp -->
-                    <div class="rounded-2xl border border-default bg-neutral-primary p-4">
+                    <div class="rounded-2xl border border-border-200 bg-white p-4">
                         <div class="flex items-start gap-2">
                             <lord-icon
                                 src="https://cdn.lordicon.com/dhcosedn.json"
@@ -825,12 +795,12 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div>
-                                <h4 class="font-black text-base text-heading">WhatsApp</h4>
+                                <h4 class="font-black text-base">WhatsApp</h4>
                                 <a href="https://wa.me/77781308431" target="_blank"
                                     class="mt-1 block text-sm font-semibold text-heading hover:underline">
                                     +7 (778)-130-84-31
                                 </a>
-                                <p class="mt-1 text-xs">
+                                <p class="mt-1 text-xs text-muted">
                                     Ең ыңғайлы арна: жазсаңыз — тез жауап береміз.
                                 </p>
                             </div>
@@ -841,7 +811,7 @@
 
             <!-- Map -->
             <div class="lg:col-span-7">
-                <div class="rounded-3xl border border-default shadow-sm">
+                <div class="rounded-3xl border border-border-200 shadow-sm">
                     <div class="aspect-video overflow-hidden rounded-3xl">
                         <iframe
                             src="https://yandex.kz/map-widget/v1/?indoorLevel=1&ll=69.593311%2C42.320968&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg2NzM3NTQzNBJW0prQsNC30LDSm9GB0YLQsNC9LCDQqNGL0LzQutC10L3Rgiwg0JDRhdC80LXRgiDQkdCw0LnRgtKx0YDRgdGL0L3QvtCyINC606nRiNC10YHRliwgMTMiCg3HL4tCFaxIKUI%2C&z=17.06"
@@ -859,25 +829,25 @@
 </section>
 
 <!-- 8-секция. FAQ -->
-<section id="faq" class="scroll-mt-16 border-t border-default">
+<section id="faq" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-xl w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Жиі қойылатын сұрақтар (FAQ)</h1>
-            <span>Нақты сұрақтарың болса — тіркеліп, платформаны көріп шық.</span>
+            <h1 class="text-4xl font-black">Жиі қойылатын сұрақтар (FAQ)</h1>
+            <span class="text-muted">Нақты сұрақтарың болса — тіркеліп, платформаны көріп шық.</span>
         </div>
 
         <div class="max-w-4xl mx-auto">
             <div 
                 id="accordion-flush" 
                 data-accordion="collapse" 
-                data-active-classes="bg-white text-heading"
-                data-inactive-classes="text-body"
+                data-active-classes="bg-white text-foreground"
+                data-inactive-classes="text-subtle"
             >
                 <!-- Q1 -->
                 <h2 id="accordion-flush-heading-1">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-1" 
                         aria-expanded="true"
                         aria-controls="accordion-flush-body-1"
@@ -895,7 +865,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Robo-Baldyrgan — балаларға арналған робототехника онлайн платформасы. 
                         Мұнда онлайн курстар, электронды кітаптар және интерактивті симулятор 
                         арқылы робот құрастыру мен программалау негіздері үйретіледі.
@@ -906,7 +876,7 @@
                 <h2 id="accordion-flush-heading-2">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-2" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-2"
@@ -924,7 +894,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Платформа 5–16 жас аралығындағы балаларға арналған. Материалдар деңгейге сәйкес ұйымдастырылған, 
                         сондықтан әр бала өз мүмкіндігіне қарай үйрене алады.
                     </div>
@@ -934,7 +904,7 @@
                 <h2 id="accordion-flush-heading-3">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-3" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-3"
@@ -952,7 +922,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Жоқ. Платформа толық онлайн жұмыс істейді. Компьютер немесе планшет және интернет жеткілікті.
                     </div>
                 </div>
@@ -961,7 +931,7 @@
                 <h2 id="accordion-flush-heading-4">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-4" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-4"
@@ -979,7 +949,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Онлайн симуляторда роботтың виртуалды бөлшектері қосылып, код жазылады және нәтижесі бірден тексеріледі. 
                         Бұл шынайы зертханаға ұқсас тәжірибе жасауға мүмкіндік береді.
                     </div>
@@ -989,7 +959,7 @@
                 <h2 id="accordion-flush-heading-5">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-5" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-5"
@@ -1007,7 +977,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Барлық электронды кітаптар платформа ішінде ашылады. Материалдарды онлайн оқып, 
                         схемалар мен түсіндірмелер арқылы теорияны меңгеруге болады.
                     </div>
@@ -1017,7 +987,7 @@
                 <h2 id="accordion-flush-heading-6">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-6" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-6"
@@ -1035,7 +1005,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-6" class="hidden" aria-labelledby="accordion-flush-heading-6">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Әр курс белгілі бір тақырып бойынша білім мен дағды қалыптастырады. 
                         Білім алушы өз прогресін көріп, келесі деңгейге өте алады.
                     </div>
@@ -1045,7 +1015,7 @@
                 <h2 id="accordion-flush-heading-7">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-7" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-7"
@@ -1063,7 +1033,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-7" class="hidden" aria-labelledby="accordion-flush-heading-7">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Тіркелу тәртібі мен тарифтік жоспарлар туралы ақпарат платформада көрсетіледі. 
                         Кейбір мүмкіндіктер тегін танысу режимінде қолжетімді болуы мүмкін.
                     </div>
@@ -1073,7 +1043,7 @@
                 <h2 id="accordion-flush-heading-8">
                     <button 
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 border-b border-default py-6 text-left font-semibold"
+                        class="flex w-full items-center justify-between gap-3 border-b border-border-200 py-6 text-left font-semibold"
                         data-accordion-target="#accordion-flush-body-8" 
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-8"
@@ -1091,7 +1061,7 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-8" class="hidden" aria-labelledby="accordion-flush-heading-8">
-                    <div class="py-4 bg-neutral-secondary">
+                    <div class="py-4 bg-secondary-50 text-subtle">
                         Егер басқару панелі қосылған болса, ата-ана немесе мұғалім білім алушының прогресін бақылау мүмкіндігіне ие болады.
                     </div>
                 </div>
@@ -1099,85 +1069,86 @@
         </div>
     </div>
 </section>
-
     
 <!-- Preview видео -->
-<button
-    type="button"
-    id="openVideoModal"
-    class="group fixed z-50 bottom-4 left-4 w-32 overflow-hidden rounded-3xl border border-default bg-neutral-secondary transition hover:bg-neutral-quaternary hover:scale-105 focus:outline-none focus:ring-4 focus:ring-secondary-ring"
-    aria-haspopup="dialog"
-    aria-controls="videoModal"
->
-    <div class="relative aspect-square w-full">
-        <video
-            id="previewVideo"
-            class="h-full w-full object-cover"
-            src="{% static 'movie/intro.MP4' %}"
-            autoplay muted loop playsinline preload="metadata"
-        ></video>
+<section id="preview-video">
+    <button
+        type="button"
+        id="openVideoModal"
+        class="group fixed z-50 bottom-4 left-4 w-32 overflow-hidden rounded-3xl border border-border-200 bg-secondary-50 transition hover:bg-secondary-100 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-secondary-200"
+        aria-haspopup="dialog"
+        aria-controls="videoModal"
+    >
+        <div class="relative aspect-square w-full">
+            <video
+                id="previewVideo"
+                class="h-full w-full object-cover"
+                src="{% static 'movie/intro.MP4' %}"
+                autoplay muted loop playsinline preload="metadata"
+            ></video>
 
-        <!-- overlay -->
-        <div class="absolute inset-0 bg-black/20 transition group-hover:bg-black/40"></div>
+            <!-- overlay -->
+            <div class="absolute inset-0 bg-black/20 transition group-hover:bg-black/40"></div>
 
-        <!-- Play icon -->
-        <div class="absolute inset-0 hidden group-hover:grid place-items-center cursor-pointer">
-            <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white/90 text-slate-900 shadow-sm transition group-hover:scale-105">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play">
-                    <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />
-                </svg>
+            <!-- Play icon -->
+            <div class="absolute inset-0 hidden group-hover:grid place-items-center cursor-pointer">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white/90 text-slate-900 shadow-sm transition group-hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play">
+                        <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />
+                    </svg>
+                </div>
             </div>
         </div>
-    </div>
-</button>
+    </button>
 
-<div
-    id="videoModal"
-    class="fixed inset-0 z-50 hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="videoModalTitle"
->
-    <!-- Backdrop -->
-    <div id="videoModalBackdrop" class="absolute inset-0 bg-black/60"></div>
-    <!-- Dialog -->
-    <div class="relative mx-auto flex min-h-full max-w-5xl items-center p-4">
-        <div class="w-full overflow-hidden rounded-3xl bg-neutral-primary shadow-sm border border-border-primary">
-            <div class="flex items-center justify-between border-b border-border-primary px-5 py-4">
-                <h4 id="videoModalTitle" class="font-black text-heading">
-                    Robo-Baldyrgan — таныстыру видео
-                </h4>
+    <div
+        id="videoModal"
+        class="fixed inset-0 z-50 hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="videoModalTitle"
+    >
+        <!-- Backdrop -->
+        <div id="videoModalBackdrop" class="absolute inset-0 bg-black/60"></div>
+        <!-- Dialog -->
+        <div class="relative mx-auto flex min-h-full max-w-5xl items-center p-4">
+            <div class="w-full overflow-hidden rounded-3xl bg-white shadow-sm border border-border-200">
+                <div class="flex items-center justify-between border-b border-border-200 px-5 py-4">
+                    <h4 id="videoModalTitle" class="font-black text-xl">
+                        Robo-Baldyrgan — таныстыру видеосы
+                    </h4>
 
-                <button 
-                    type="button" 
-                    id="closeVideoModal"
-                    class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-default bg-neutral-primary hover:bg-neutral-quaternary"
-                    aria-label="Жабу"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M18 6 6 18" />
-                        <path d="m6 6 12 12" />
-                    </svg>
-                </button>
-            </div>
+                    <button 
+                        type="button" 
+                        id="closeVideoModal"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border-200 bg-white hover:bg-secondary-50 focus:outline-none focus:ring-4 focus:ring-secondary-200 transition"
+                        aria-label="Жабу"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                    </button>
+                </div>
 
-            <div class="relative">
-                <div class="overflow-hidden rounded-b-2xl bg-black">
-                    <video
-                        id="modalVideo"
-                        class="h-55 w-full sm:h-120"
-                        src="{% static 'movie/intro.MP4' %}"
-                        controls
-                        playsinline
-                        preload="metadata"
-                    ></video>
+                <div class="relative">
+                    <div class="overflow-hidden rounded-b-2xl bg-black">
+                        <video
+                            id="modalVideo"
+                            class="h-55 w-full sm:h-120"
+                            src="{% static 'movie/intro.MP4' %}"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        ></video>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock base_layout %}
 
 
@@ -1246,6 +1217,32 @@
 </script>
 
 <script>
+    (function () {
+        const els = document.querySelectorAll("[data-reveal]");
+        if (!els.length) return;
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                const el = entry.target;
+                const delay = parseInt(el.getAttribute("data-reveal-delay") || "0", 10);
+                if (delay) el.style.transitionDelay = delay + "ms";
+
+                el.classList.add("is-visible");
+                io.unobserve(el); // once
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -10% 0px"
+        });
+
+        els.forEach(el => io.observe(el));
+    })();
+</script>
+
+<script>
+    
     (function () {
         const openBtn = document.getElementById("openVideoModal");
         const modal = document.getElementById("videoModal");

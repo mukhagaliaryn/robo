@@ -4,33 +4,47 @@
 {% block base %}
 <div class="min-h-screen flex flex-col">
     <div class="flex-1">
-        <nav class="bg-neutral-primary sticky z-10 top-0 start-0 border-b border-default">
-            <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="{% url 'landing:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-28" alt="Robo Logo">
+        <nav class="bg-white sticky z-10 top-0 start-0 border-b border-border-200">
+            <div class="max-w-7xl h-16 flex flex-wrap items-center justify-between mx-auto px-4">
+                <a href="{% url 'main:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-24" alt="Robo Logo">
                 </a>
                 <div class="md:order-2 rtl:space-x-reverse">
                     {% if not user.is_authenticated %}
                         <div class="hidden lg:flex gap-2">
                             <a
-                                href="{% url 'landing:login' %}"
-                                class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                href="{% url 'account:login' %}"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Жүйеге кіру
                             </a>
                             <a
-                                href="{% url 'landing:register' %}"
-                                class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                                href="{% url 'account:register' %}"
+                                class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
                                 Тіркелу
                             </a>
                         </div>
+                        
+                        <button 
+                            data-collapse-toggle="navbar-sticky" 
+                            type="button"
+                            class="inline-flex items-center p-2 w-10 h-10 justify-center text-muted rounded-xl lg:hidden hover:bg-secondary-50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-secondary-200"
+                            aria-controls="navbar-sticky" 
+                            aria-expanded="false"
+                        >
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+                            </svg>
+                        </button>
                     {% else %}
                         <div class="flex items-center ms-3">
                             <div>
                                 <button 
                                     type="button"
-                                    class="flex text-sm bg-neutral-800 rounded-full focus:ring-4 focus:ring-neutral-300 dark:focus:ring-neutral-600"
+                                    class="flex text-sm rounded-full border-2 border-border-200 focus:ring-4 focus:ring-secondary-200"
                                     aria-expanded="false" 
                                     data-dropdown-toggle="dropdown-user"
                                 >
@@ -42,7 +56,7 @@
                                             alt="user photo"
                                         >
                                     {% else %}
-                                        <div class="w-8 h-8 rounded-full bg-neutral-secondary flex items-center justify-center text-heading">
+                                        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
                                             {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
                                         </div>
                                     {% endif %}
@@ -50,38 +64,38 @@
                             </div>
                             <div 
                                 id="dropdown-user"
-                                class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
+                                class="z-50 hidden bg-white border border-border-200 rounded-2xl shadow-lg w-44"
                             >
-                                <div class="px-4 py-3 border-b border-default-medium" role="none">
+                                <div class="px-4 py-3 border-b border-border-200" role="none">
                                     <p class="text-sm font-medium text-heading" role="none">
                                         {{ user }} 
                                     </p>
-                                    <p class="text-sm text-body truncate" role="none">
+                                    <p class="text-sm text-muted truncate" role="none">
                                         {{ user.email }}
                                     </p>
                                 </div>
-                                <ul class="p-2 text-sm text-body font-medium" role="none">
+                                <ul class="p-2 text-subtle font-medium" role="none">
                                     <li>
-                                        <a href="{% url 'learner:dashboard' %}"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                        <a href="{% url 'student:dashboard' %}"
+                                            class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
                                             role="menuitem">Платформа</a>
                                     </li>
                                     <li>
-                                        <a href="#"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                        <a href="{% url 'account:account' %}"
+                                            class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
                                             role="menuitem">Аккаунт</a>
                                     </li>
                                     <li>
-                                        <a href="#"
-                                            class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                        <a href="{% url 'account:settings' %}"
+                                            class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
                                             role="menuitem">Баптаулар</a>
                                     </li>
                                     <li>
-                                        <form action="{% url 'landing:logout' %}" method="post">
+                                        <form action="{% url 'account:logout' %}" method="post">
                                             {% csrf_token %}
                                             <button 
                                                 type="submit"
-                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                                                class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
                                                 role="menuitem"
                                             >
                                                 Жүйеден шығу
@@ -93,84 +107,73 @@
                             </div>
                         </div>
                     {% endif %}
+                </div>
 
-                    <button 
-                        data-collapse-toggle="navbar-sticky" 
-                        type="button"
-                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-body rounded-base lg:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
-                        aria-controls="navbar-sticky" 
-                        aria-expanded="false"
-                    >
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
-                    <ul class="flex flex-col mt-4 mb-4 font-medium lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:mb-0 lg:border-0 md:bg-neutral-primary">
-                        <li>
-                            <a href="#main"
-                                class="block py-2 px-3 text-white bg-brand rounded-2xl lg:bg-transparent lg:text-brand lg:p-0"
-                                aria-current="page">Басты бет</a>
-                        </li>
-                        <li>
-                            <a  
-                                href="#courses"
-                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                {% if not user.is_authenticated %}
+                    <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-sticky">
+                        <ul class="flex flex-col mt-4 mb-4 font-medium lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:mb-0 lg:border-0 md:bg-neutral-primary">
+                            <li>
+                                <a href="#main"
+                                    class="block py-2 px-4 text-white bg-primary-500 rounded-2xl lg:bg-transparent lg:text-primary-500 lg:p-0"
+                                    aria-current="page">Басты бет</a>
+                            </li>
+                            <li>
+                                <a  
+                                    href="#courses"
+                                    class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
+                                >
+                                    Курстар
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href="#simulator"
+                                    class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
+                                >
+                                    Онлайн симулятор
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href="#books"
+                                    class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
+                                >
+                                    Кітаптар
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href="#about"
+                                    class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
+                                >
+                                    Біз жайлы
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    href="#contact"
+                                    class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
+                                >
+                                    Байланыс
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="grid gap-2 lg:hidden text-center">
+                            <a
+                                href="#"
+                                class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Курстар
+                                Жүйеге кіру
                             </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="#simulator"
-                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
+                            <a
+                                href="#"
+                                class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
-                                Онлайн симулятор
+                                Тіркелу
                             </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="#books"
-                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
-                            >
-                                Кітаптар
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="#about"
-                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
-                            >
-                                Біз жайлы
-                            </a>
-                        </li>
-                        <li>
-                            <a 
-                                href="#contact"
-                                class="block py-2 px-3 text-heading rounded-2xl hover:bg-neutral-tertiary lg:hover:bg-transparent lg:border-0 lg:hover:text-brand lg:p-0 lg:dark:hover:bg-transparent"
-                            >
-                                Байланыс
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="grid gap-2 lg:hidden text-center">
-                        <a
-                            href="#"
-                            class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
-                        >
-                            Жүйеге кіру
-                        </a>
-                        <a
-                            href="#"
-                            class="text-body bg-neutral-primary-soft border border-default hover:bg-neutral-secondary-medium hover:text-heading active:scale-95 focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
-                        >
-                            Тіркелу
-                        </a>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </nav>
 
@@ -180,13 +183,13 @@
         </main>
     </div>
 
-    <footer class="bg-neutral-primary-soft border-t border-default">
-        <div class="w-full max-w-7xl mx-auto p-4 md:py-8">
+    <footer class="bg-white border-t border-border-200">
+        <div class="w-full max-w-7xl mx-auto px-4 py-4 lg:py-8">
             <div class="grid gap-4 sm:flex sm:items-center sm:justify-between">
-                <a href="{% url 'landing:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-28" alt="Robo Logo">
+                <a href="{% url 'main:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{% static 'images/vertical-logo.svg' %}" class="w-24" alt="Robo Logo">
                 </a>
-                <ul class="flex flex-wrap items-center mb-6 text-body sm:mb-0">
+                <ul class="flex flex-wrap items-center mb-6 text-muted sm:mb-0">
                     <li>
                         <a href="#" class="hover:underline me-4 md:me-6">Біз жайлы</a>
                     </li>
@@ -201,8 +204,8 @@
                     </li>
                 </ul>
             </div>
-            <hr class="my-6 border-default sm:mx-auto lg:my-8" />
-            <span class="block text-sm text-body text-center">© 2026 <a href="{% url 'landing:index' %}"
+            <hr class="my-6 border-border-200 sm:mx-auto lg:my-8" />
+            <span class="block text-sm text-muted text-center">© 2026 <a href="{% url 'main:index' %}"
                     class="hover:underline">Robo-Baldyrgan™</a>. Барлық құқықтар қорғалған.</span>
         </div>
     </footer>
