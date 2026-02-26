@@ -232,7 +232,7 @@
                 >
                     <div class="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 p-4 text-left">
                         <div 
-                            class="radial-progress bg-secondary-100 text-2xl font-medium text-primary-500" 
+                            class="radial-progress bg-background text-2xl font-black text-primary-500" 
                             style="--value: {{ user_lesson.percentage|floatformat:0 }}; --size: 10rem;" 
                             aria-valuenow="{{ user_lesson.percentage|floatformat:0 }}" role="progressbar"
                         >
@@ -240,7 +240,7 @@
                         </div>
 
                         <div class="grid gap-2">
-                            <h1 class="font-semibold text-xl">Жалпы қорытындысы</h1>
+                            <h1 class="font-black text-xl">Жалпы қорытындысы</h1>
                             
                             <div class="grid text-base">
                                 <div class="flex gap-1 items-center">
@@ -253,15 +253,15 @@
                                     <span class="font-semibold">{{ user_lesson.percentage|floatformat:0 }}%</span>
                                 </div>
 
-                                <!-- <div class="flex gap-1 items-center">
+                                <div class="flex gap-1 items-center">
                                     <strong class="font-normal">Басталған уақыты:</strong>
-                                    <span class="font-semibold">{{ user_lesson.started_at|date:"d.m.Y - H:i" }}</span>
+                                    <span class="font-semibold">{{ user_lesson.started_at|date:"H:i" }}</span>
                                 </div>
 
                                 <div class="flex gap-1 items-center">
                                     <strong class="font-normal">Аяқталған уақыты:</strong>
-                                    <span class="font-semibold">{{ user_lesson.completed_at|date:"d.m.Y - H:i" }}</span>
-                                </div> -->
+                                    <span class="font-semibold">{{ user_lesson.completed_at|date:"H:i" }}</span>
+                                </div>
 
                                 <div class="flex gap-1 items-center">
                                     <strong class="font-normal">Қатысу уақыты:</strong>
@@ -295,13 +295,11 @@
                                             src="{{ user.avatar.url }}" alt="user photo"
                                         >
                                     {% else %}
-                                        <div 
-                                            class="w-8 h-8 rounded-full bg-secondary-100 flex items-center justify-center text-foreground"
-                                        >
+                                        <div class="w-8 h-8 rounded-full bg-background flex items-center justify-center text-foreground">
                                             {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
                                         </div>
                                     {% endif %}
-                                    <div class="flex flex-col gap-2 w-full leading-1.5 p-4 border-border-200 bg-border-100 rounded-e-xl rounded-es-xl text-left">
+                                    <div class="flex flex-col gap-2 w-full leading-1.5 p-4 border-border-200 bg-background rounded-e-2xl rounded-es-2xl text-left">
                                         <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                             <span class="text-sm font-semibold">{{ feed.user_lesson.user.first_name }} {{ feed.user_lesson.user.last_name }}</span>
                                             <span class="text-sm font-normal text-muted">{{ feed.created_at }}</span>
@@ -354,14 +352,14 @@
                                         name="comment" 
                                         rows="4" 
                                         placeholder="Қосымша пікір..."
-                                        class="block text-sm py-2.5 px-4 w-full bg-secondary-50 rounded-2xl border border-secondary-300 focus:ring-primary-500 focus:border-primary-500"    
+                                        class="block text-sm py-2.5 px-4 w-full rounded-2xl border border-secondary-300 focus:ring-primary-500 focus:border-primary-500"    
                                     ></textarea>
                                 </div>
 
                                 <div class="flex justify-center">
                                     <button 
                                         type="submit" 
-                                        class="flex gap-2 justify-center items-center text-center cursor-pointer focus:outline-none text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5"
+                                        class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                                     >
                                         Жіберу
                                     </button>

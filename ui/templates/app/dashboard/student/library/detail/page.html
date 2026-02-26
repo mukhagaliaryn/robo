@@ -1,0 +1,73 @@
+{% extends "layouts/learner_layout.html" %}
+
+{% block title %}{{ book.title }}{% endblock title %}
+
+{% block learner_layout %}
+<div class="max-w-7xl mx-auto px-4 py-8 grid gap-4">
+    <div class="flex items-start gap-8 justify-center">
+        <div class="sticky top-20 max-w-sm w-full aspect-3/4 flex justify-center items-center rounded-2xl bg-secondary-100">
+            {% if book.poster %}
+                <img src="{{ book.poster.url }}" class="w-full object-cover">
+            {% else %}
+                <div class="w-full flex items-center justify-center text-muted">
+                    <span class="text-4xl">PDF</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="flex-1 grid gap-4">
+            <div class="space-y-1">
+                <a href="{% url 'student:library' %}" class="flex items-center font-medium text-primary-500 hover:underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-left-icon lucide-chevron-left">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                    <span>Кітапхана</span>
+                </a>
+                <h1 class="text-2xl font-black">{{ book.title }}</h1>
+                {% if book.user_books.first %}
+                    <span class="text-xs font-semibold px-2 py-1 rounded-full bg-green-100 text-green-600">Кітап сақталған</span>
+                {% endif %}
+            </div>
+
+            <div class="flex gap-2">
+                {% if user_book %}
+                    <div class="flex items-center justify-between gap-2">
+                        
+                        <a
+                            href="{% url 'student:user_book_detail' user_book.id %}"
+                            class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                        >
+                            Оқуды жалғастыру
+                        </a>
+                    </div>
+
+                    <form method="post" action="{% url 'student:book_toggle' book.id %}">
+                        {% csrf_token %}
+                        <button 
+                            type="submit" 
+                            class="text-white bg-red-600 hover:bg-red-700 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-red-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                        >
+                            Кітапханадан алу
+                        </button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{% url 'student:book_toggle' book.id %}">
+                        {% csrf_token %}
+                        <button 
+                            type="submit"
+                            class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                        >
+                            Кітапханаға сақтау
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+
+            {% if book.description %}
+                <div class="text-muted">{{ book.description|safe }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock learner_layout %}

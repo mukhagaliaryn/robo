@@ -3,17 +3,16 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.aggregates import Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
-from core.models import Subject, UserSubject, Lesson, UserChapter, UserLesson
+from core.models import Subject, UserSubject, Lesson, UserChapter, UserLesson, UserBook
 from core.utils.decorators import role_required
 
 
 # student dashboard page
 # ----------------------------------------------------------------------------------------------------------------------
-@login_required
 @role_required('student')
 def student_view(request):
     user = request.user
-    subjects = Subject.objects.filter(is_public=True)
+    subjects = Subject.objects.filter(is_public=True)[:4]
     user_subjects_qs = UserSubject.objects.filter(user=user).prefetch_related(
         'user_chapters__chapter',
         'user_lessons__lesson__chapter'
@@ -21,6 +20,68 @@ def student_view(request):
     user_subjects = {us.subject_id: us for us in user_subjects_qs}
     average_percentage = user_subjects_qs.aggregate(avg=Avg('percentage'))['avg'] or 0
 
+    subject_list = []
+    for subject in subjects:
+        user_subject = user_subjects.get(subject.pk)
+
+        first_user_chapter = user_subject.user_chapters.first() if user_subject else None
+        first_chapter = first_user_chapter
+
+        first_user_lesson = (
+            user_subject.user_lessons.filter(lesson__chapter=first_chapter.chapter).first()
+            if user_subject and first_chapter else None
+        )
+        first_lesson = first_user_lesson
+
+        completed_chapter_count = 0
+        completed_lesson_count = 0
+
+        if user_subject:
+            completed_chapter_count = user_subject.user_chapters.filter(is_completed=True).count()
+            completed_lesson_count = user_subject.user_lessons.filter(is_completed=True).count()
+
+        subject_students = UserSubject.objects.filter(subject=subject).select_related('user')[:3]
+
+        subject_list.append({
+            'subject': subject,
+            'user_subject': user_subject,
+            'first_chapter': first_chapter,
+            'first_lesson': first_lesson,
+            'completed_chapter_count': completed_chapter_count,
+            'completed_lesson_count': completed_lesson_count,
+            'students': subject_students,
+        })
+
+    user_books = (
+        UserBook.objects
+        .filter(user=request.user, is_saved=True)
+        .select_related("book")
+        .order_by("-updated_at")[:4]
+    )
+
+    context = {
+        'statistics': {
+            'in_process': user_subjects_qs.filter(is_completed=False).count(),
+            'completed': user_subjects_qs.filter(is_completed=True).count(),
+            'average_percentage': round(average_percentage),
+        },
+        'subject_list': subject_list,
+        "user_books": user_books,
+    }
+    return render(request, 'app/dashboard/student/page.html', context)
+
+
+# student dashboard page
+# ----------------------------------------------------------------------------------------------------------------------
+@role_required('student')
+def courses_view(request):
+    user = request.user
+    subjects = Subject.objects.filter(is_public=True)
+    user_subjects_qs = UserSubject.objects.filter(user=user).prefetch_related(
+        'user_chapters__chapter',
+        'user_lessons__lesson__chapter'
+    )
+    user_subjects = {us.subject_id: us for us in user_subjects_qs}
     subject_list = []
     for subject in subjects:
         user_subject = user_subjects.get(subject.id)
@@ -54,15 +115,9 @@ def student_view(request):
         })
 
     context = {
-        'statistics': {
-            'in_process': user_subjects_qs.filter(is_completed=False).count(),
-            'completed': user_subjects_qs.filter(is_completed=True).count(),
-            'average_percentage': round(average_percentage),
-        },
         'subject_list': subject_list,
     }
-    return render(request, 'app/dashboard/student/page.html', context)
-
+    return render(request, 'app/dashboard/student/courses/page.html', context)
 
 # Subject detail page
 # ----------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,115 @@
+{% extends "layouts/learner_layout.html" %}
+{% load static %}
+
+{% block title %}Барлық курстар{% endblock title %}
+
+{% block learner_layout %}
+<div class="max-w-screen-xl mx-auto grid gap-8 py-8 px-4">
+    <div class="grid gap-4">
+        <h5 class="text-2xl font-black leading-none">Ашық курстар</h5>
+        {% if subject_list %}
+            <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {% for item in subject_list %}
+                    <div class="rounded-2xl border border-border-200 overflow-hidden hover:shadow-lg transition active:scale-95 active:shadow-none">
+                        <a 
+                            href="{% url 'student:subject_detail' item.subject.id %}" 
+                            class="block aspect-video"
+                        >
+                            {% if item.subject.poster %}
+                                <img
+                                    src="{{ item.subject.poster.url }}"
+                                    class="w-full h-full flex justify-center items-center text-muted bg-secondary-100" 
+                                />
+                            {% else %}
+                                <div class="w-full h-full flex justify-center items-center text-muted bg-secondary-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-icon lucide-box">
+                                        <path
+                                            d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                                        <path d="m3.3 7 8.7 5 8.7-5" />
+                                        <path d="M12 22V12" />
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </a>
+                        
+                        <div class="p-4">
+                            <a 
+                                href="{% url 'student:subject_detail' item.subject.id %}" 
+                                class="grid gap-2 pb-2"
+                            >
+                                <h1 class="text-base font-semibold line-clamp-1">{{ item.subject.name }}</h1>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex gap-2 items-center text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-folder-open-icon lucide-folder-open">
+                                            <path
+                                                d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                        <span class="block">{{ item.subject.chapters.count }} бөлім</span>
+                                    </div>
+                                    <div class="flex gap-2 items-center text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-folder-open-icon lucide-folder-open">
+                                            <path
+                                                d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                        <span class="block">{{ item.subject.lessons.count }} сабақ</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="flex gap-2">
+                                {% if item.user_subject %}
+                                    <a 
+                                        href="{% url 'student:user_lesson' item.user_subject.id item.first_chapter.id item.first_lesson.id %}" 
+                                        class="w-full flex items-center justify-center gap-2 text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+                                    >
+                                        <span>Сабаққа кіру</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-arrow-right-icon lucide-arrow-right">
+                                            <path d="M5 12h14" />
+                                            <path d="m12 5 7 7-7 7" />
+                                        </svg>
+                                    </a>
+                                {% else %}
+                                    <form action="{% url 'student:enroll_subject' item.subject.id %}" method="post" class="w-full">
+                                        {% csrf_token %}
+                                        <button
+                                            type="submit"
+                                            class="w-full flex items-center justify-center gap-2 text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus">
+                                                <path d="M5 12h14" />
+                                                <path d="M12 5v14" />
+                                            </svg>
+                                            <span>Курсты бастау</span>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="flex justify-center py-8">
+                <div class="grid gap-2 text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-icon lucide-box mx-auto">
+                        <path
+                            d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                        <path d="m3.3 7 8.7 5 8.7-5" />
+                        <path d="M12 22V12" />
+                    </svg>
+                    <span>Платформада ешқандай курстар тіркелмеген</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock learner_layout %}

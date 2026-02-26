@@ -4,12 +4,45 @@
 {% block base %}
 <nav class="fixed top-0 z-40 w-full bg-white border-b border-border-200">
     <div class="max-w-7xl h-16 px-4 flex items-center justify-between mx-auto">
-        <a 
-            href="{% url 'student:dashboard' %}" 
-            class="flex items-center rounded-sm border border-transparent active:border active:border-dashed active:border-border-200"
-        >
-            <img src="{% static 'images/vertical-logo.svg' %}" class="w-24" alt="Logo" />
-        </a>
+        <div class="flex items-center gap-8">
+            <a 
+                href="{% url 'student:dashboard' %}" 
+                class="flex items-center rounded-sm border border-transparent active:border active:border-dashed active:border-border-200"
+            >
+                <img src="{% static 'images/vertical-logo.svg' %}" class="w-24" alt="Logo" />
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-2">
+                <a 
+                    href="{% url 'student:courses' %}" 
+                    class="
+                        px-4 py-2.5 font-medium transition rounded-2xl hover:text-foreground hover:bg-secondary-100 active:scale-95
+                        {% if request.path == '/student/courses/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
+                    "
+                >
+                    Курстар
+                </a>
+                <a 
+                    href="{% url 'student:library' %}" 
+                    class="
+                        px-4 py-2.5 font-medium transition rounded-2xl hover:text-foreground hover:bg-secondary-100 active:scale-95
+                        {% if request.path == '/student/library/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
+                    "
+                >
+                    Кітапхана
+                </a>
+                <a 
+                    href="{% url 'student:simulator' %}" 
+                    class="
+                        px-4 py-2.5 font-medium transition rounded-2xl hover:text-foreground hover:bg-secondary-100 active:scale-95
+                        {% if request.path == '/student/simulator/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
+                    "
+                >
+                    Онлайн симулятор
+                </a>
+            </nav>
+        </div>
+
 
         <div class="flex items-center">
             <div class="flex items-center ms-3">

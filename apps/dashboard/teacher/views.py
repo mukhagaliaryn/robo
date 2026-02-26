@@ -1,9 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.aggregates import Avg
-from django.http import HttpResponse
 from django.shortcuts import render
-
 from core.models import Subject, UserSubject, UserChapter, UserLesson, User
 from core.utils.decorators import role_required
 

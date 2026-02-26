@@ -1,20 +1,19 @@
 {% load filters %}
 
-<div class="max-w-screen-lg w-full mx-auto grid gap-4">
+<div class="max-w-screen-lg w-full mx-auto grid gap-5">
     {% if user_task.is_completed %}
         <div class="grid gap-4">
-            <div class="flex justify-between">
-                <div class="flex items-center gap-2 bg-secondary-100 font-medium p-2.5 rounded-2xl">
+            <div class="flex flex-wrap justify-between gap-3">
+                <div class="flex items-center gap-2 bg-secondary-100 font-medium px-3 py-2 rounded-2xl">
                     <svg class="w-5 h-5 text-amber-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
                     </svg>
-
-                    <span>{{ user_task.task.rating }}/{{ user_task.rating }} балл</span>
+                    <span>{{ user_task.rating }}/{{ user_task.task.rating }} балл</span>
                 </div>
 
-                <div class="flex gap-1 items-center font-medium px-4 py-2.5 rounded-2xl bg-primary-100 text-primary-500">
+                <div class="flex gap-2 items-center font-medium px-4 py-2 rounded-2xl bg-primary-100 text-primary-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-circle-check-icon lucide-circle-check">
@@ -26,46 +25,61 @@
             </div>
 
             {% if user_task.task.params == 'row' %}
-                <table class="w-full text-center table-fixed">
-                    <thead>
-                        <tr>
-                            {% for column in user_task.task.columns.all %}
-                                <th class="border border-border-200 p-2 bg-secondary-100 font-semibold">{{ column.label|safe }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for column in user_task.task.columns.all %}
-                                <td class="border border-border-200 align-top min-h-[100px] p-2">
-                                    {% for answer in user_task.matching_answers.all %}
-                                        {% if answer.selected_column.id == column.id %}
-                                            <div class="rounded p-2 mb-2 text-left text-white {% if answer.is_correct %}bg-primary-600{% else %}bg-destructive{% endif %}">
-                                                {{ answer.item.text|safe }}
-                                                {% if not answer.is_correct %}
-                                                    <div class="text-sm text-white mt-1 italic">Дұрысы: {{ answer.item.correct_column.label|safe }}</div>
+                <div class="overflow-x-auto rounded-2xl border border-border-200 bg-white">
+                    <table class="min-w-full text-left table-fixed">
+                        <thead class="bg-secondary-100 sticky top-0 z-10">
+                            <tr>
+                                {% for column in user_task.task.columns.all %}
+                                    <th class="border-b border-border-200 p-4 font-semibold text-secondary-700">
+                                        {{ column.label|safe }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for column in user_task.task.columns.all %}
+                                    <td class="align-top p-3 border-b border-border-200">
+                                        <div class="min-h-[140px] rounded-2xl border border-border-200 bg-secondary-50 p-3 grid gap-2">
+                                            {% for answer in user_task.matching_answers.all %}
+                                                {% if answer.selected_column.id == column.id %}
+                                                    <div class="rounded-xl px-3 py-2 text-white text-sm leading-6
+                                                        {% if answer.is_correct %}bg-primary-500{% else %}bg-destructive{% endif %}">
+                                                        <div class="font-medium">{{ answer.item.text|safe }}</div>
+                                                        {% if not answer.is_correct %}
+                                                            <div class="text-xs text-white/90 mt-1 italic">
+                                                                Дұрысы: {{ answer.item.correct_column.label|safe }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
                                                 {% endif %}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
-            {% elif user_task.task.params == 'col' %}
-                <div class="grid border border-border-200">
-                    {% for column in user_task.task.columns.all %}
-                        <div class="flex">
-                            <div class="max-w-xs w-full p-4 bg-secondary-100 font-semibold border-b border-border-200">{{ column.label|safe }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                            <div class="dropzone flex-1 flex flex-col gap-2 p-2 border-b border-border-200" data-column-id="{{ column.id }}">
+            {% elif user_task.task.params == 'col' %}
+                <div class="grid gap-3">
+                    {% for column in user_task.task.columns.all %}
+                        <div class="grid md:grid-cols-[280px_1fr] gap-3 rounded-2xl border border-border-200 bg-white p-3">
+                            <div class="rounded-2xl bg-secondary-100 px-4 py-3 font-semibold text-secondary-800">
+                                {{ column.label|safe }}
+                            </div>
+
+                            <div class="grid gap-2 rounded-2xl bg-secondary-50 p-3">
                                 {% for answer in user_task.matching_answers.all %}
                                     {% if answer.selected_column.id == column.id %}
-                                        <div class="rounded p-2 mb-2 text-white text-left {% if answer.is_correct %}bg-primary-600{% else %}bg-destructive{% endif %}">
-                                            {{ answer.item.text|safe }}
+                                        <div class="rounded-xl px-3 py-2 text-white text-sm leading-6
+                                            {% if answer.is_correct %}bg-primary-500{% else %}bg-destructive{% endif %}">
+                                            <div class="font-medium">{{ answer.item.text|safe }}</div>
                                             {% if not answer.is_correct %}
-                                                <div class="text-sm text-white mt-1 italic">Дұрысы: {{ answer.item.correct_column.label|safe }}</div>
+                                                <div class="text-xs text-white/90 mt-1 italic">
+                                                    Дұрысы: {{ answer.item.correct_column.label|safe }}
+                                                </div>
                                             {% endif %}
                                         </div>
                                     {% endif %}
@@ -76,49 +90,83 @@
                 </div>
             {% endif %}
         </div>
+
     {% else %}
-        <form method="post" id="matching-form" class="grid gap-8">
+        <form method="post" id="matching-form" class="grid gap-6">
             {% csrf_token %}
 
+            {# =========== BOARD =========== #}
             {% if user_task.task.params == 'row' %}
-                <table class="w-full border text-center table-fixed">
-                    <thead>
-                        <tr>
-                            {% for column in user_task.task.columns.all %}
-                                <th class="border border-border-200 p-4 bg-secondary-100 font-semibold">{{ column.label|safe }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for column in user_task.task.columns.all %}
-                                <td class="border border-border-200 align-top min-h-[100px]">
-                                    <div class="dropzone min-h-[120px] flex flex-col gap-2 p-2 text-left rounded" data-column-id="{{ column.id }}">
-                                        {% for answer in user_task.matching_answers.all %}
-                                            {% if answer.selected_column.id == column.id %}
-                                                <div class="draggable item bg-primary-200 rounded p-1 mb-1 cursor-move" draggable="true" data-item-id="{{ answer.item.id }}">
-                                                    {{ answer.item.text|safe }}
-                                                    <input type="hidden" name="column_{{ answer.item.id }}" value="{{ column.id }}">
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
-            {% elif user_task.task.params == 'col' %}
-                <div class="grid border border-border-200">
-                    {% for column in user_task.task.columns.all %}
-                        <div class="flex">
-                            <div class="max-w-xs w-full p-4 bg-secondary-100 font-semibold border-b border-border-200">{{ column.label|safe }}</div>
+                <div class="overflow-x-auto rounded-2xl border border-border-200 bg-white">
+                    <table class="min-w-full text-left table-fixed">
+                        <thead class="bg-secondary-100 sticky top-0 z-10">
+                            <tr>
+                                {% for column in user_task.task.columns.all %}
+                                    <th class="border-b border-border-200 p-4 font-semibold text-secondary-700">
+                                        {{ column.label|safe }}
+                                    </th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
 
-                            <div class="dropzone flex-1 flex flex-col gap-2 px-2 pt-2 pb-10 border-b border-border-200 text-left" data-column-id="{{ column.id }}">
+                        <tbody>
+                            <tr>
+                                {% for column in user_task.task.columns.all %}
+                                    <td class="align-top p-3 border-b border-border-200">
+                                        <div
+                                            class="dropzone min-h-[160px] rounded-2xl border border-border-200 bg-secondary-50 p-3 grid gap-2 transition"
+                                            data-column-id="{{ column.id }}"
+                                            data-zone="column"
+                                        >
+                                            <div class="zone-hint text-xs text-secondary-500">
+                                                Мұнда тастаңыз
+                                            </div>
+
+                                            {% for answer in user_task.matching_answers.all %}
+                                                {% if answer.selected_column.id == column.id %}
+                                                    <div class="draggable item rounded-xl bg-primary-100 border border-primary-200 px-3 py-2 cursor-move select-none"
+                                                         draggable="true"
+                                                         data-item-id="{{ answer.item.id }}">
+                                                        <div class="text-sm font-medium text-secondary-900">
+                                                            {{ answer.item.text|safe }}
+                                                        </div>
+                                                        <input type="hidden" name="column_{{ answer.item.id }}" value="{{ column.id }}">
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            {% elif user_task.task.params == 'col' %}
+                <div class="grid gap-3">
+                    {% for column in user_task.task.columns.all %}
+                        <div class="grid md:grid-cols-[280px_1fr] gap-3 rounded-2xl border border-border-200 bg-white p-3">
+                            <div class="rounded-2xl bg-secondary-100 px-4 py-3 font-semibold text-secondary-800">
+                                {{ column.label|safe }}
+                            </div>
+
+                            <div
+                                class="dropzone min-h-[140px] rounded-2xl border border-border-200 bg-secondary-50 p-3 grid gap-2 transition"
+                                data-column-id="{{ column.id }}"
+                                data-zone="column"
+                            >
+                                <div class="zone-hint text-xs text-secondary-500">
+                                    Мұнда тастаңыз
+                                </div>
+
                                 {% for answer in user_task.matching_answers.all %}
                                     {% if answer.selected_column.id == column.id %}
-                                        <div class="draggable item bg-primary-200 rounded p-1 mb-1 cursor-move" draggable="true" data-item-id="{{ answer.item.id }}">
-                                            {{ answer.item.text|safe }}
+                                        <div class="draggable item rounded-xl bg-primary-100 border border-primary-200 px-3 py-2 cursor-move select-none"
+                                             draggable="true"
+                                             data-item-id="{{ answer.item.id }}">
+                                            <div class="text-sm font-medium text-secondary-900">
+                                                {{ answer.item.text|safe }}
+                                            </div>
                                             <input type="hidden" name="column_{{ answer.item.id }}" value="{{ column.id }}">
                                         </div>
                                     {% endif %}
@@ -129,13 +177,31 @@
                 </div>
             {% endif %}
 
-            <div class="grid gap-4 text-left">
-                <h1 class="font-semibold">Сәйкестендіру керек жауаптар:</h1>
-                <div id="draggables" class="flex flex-wrap gap-2">
+            {# =========== POOL =========== #}
+            <div class="grid gap-3 rounded-2xl border border-border-200 bg-white p-4">
+                <div class="flex items-center justify-between gap-3">
+                    <h2 class="font-semibold text-secondary-900">Сәйкестендіру керек жауаптар</h2>
+                    <div class="text-xs text-secondary-500">Элементті сүйреп апарып бағанға тастаңыз (немесе кері қайтарыңыз)</div>
+                </div>
+
+                <div
+                    id="draggables-pool"
+                    class="dropzone min-h-[84px] rounded-2xl border border-dashed border-border-200 bg-secondary-50 p-3 flex flex-wrap gap-2 transition"
+                    data-zone="pool"
+                    data-column-id=""
+                >
+                    <div class="zone-hint w-full text-xs text-secondary-500">
+                        Бос элементтер осы жерде тұрады
+                    </div>
+
                     {% for answer in user_task.matching_answers.all %}
                         {% if not answer.selected_column %}
-                            <div class="draggable item bg-amber-200 rounded-lg py-2 px-4 cursor-move" draggable="true" data-item-id="{{ answer.item.id }}">
-                                {{ answer.item.text|safe }}
+                            <div class="draggable item rounded-xl bg-amber-100 border border-amber-200 px-3 py-2 cursor-move select-none"
+                                 draggable="true"
+                                 data-item-id="{{ answer.item.id }}">
+                                <div class="text-sm font-medium text-secondary-900">
+                                    {{ answer.item.text|safe }}
+                                </div>
                                 <input type="hidden" name="column_{{ answer.item.id }}" value="">
                             </div>
                         {% endif %}
@@ -144,47 +210,79 @@
             </div>
 
             <div class="flex justify-center">
-                <button 
+                <button
                     type="submit"
-                    class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
+                    class="flex gap-2 justify-center items-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-5 py-3 focus:outline-none"
                 >
-                    Сәйкестендіруді аятау
+                    Сәйкестендіруді аяқтау
                 </button>
             </div>
         </form>
 
         <script>
-            const draggables = document.querySelectorAll('.draggable');
-            const dropzones = document.querySelectorAll('.dropzone');
+            // ---- Drag & Drop (move nodes, not outerHTML clones) ----
+            let draggingEl = null;
 
-            draggables.forEach(draggable => {
-                draggable.addEventListener('dragstart', e => {
-                    e.dataTransfer.setData('text/plain', draggable.outerHTML);
-                    draggable.classList.add('dragging');
+            function setZoneActive(zone, active) {
+                zone.classList.toggle("ring-2", active);
+                zone.classList.toggle("ring-primary-300", active);
+                zone.classList.toggle("border-primary-300", active);
+            }
+
+            function bindDraggable(el) {
+                el.addEventListener("dragstart", (e) => {
+                    draggingEl = el;
+                    el.classList.add("opacity-60");
+                    e.dataTransfer.effectAllowed = "move";
+                    e.dataTransfer.setData("text/plain", el.dataset.itemId); // for FF
                 });
-            });
 
-            dropzones.forEach(zone => {
-                zone.addEventListener('dragover', e => e.preventDefault());
-                zone.addEventListener('drop', e => {
+                el.addEventListener("dragend", () => {
+                    el.classList.remove("opacity-60");
+                    draggingEl = null;
+                });
+            }
+
+            function updateHiddenInput(itemEl, columnId) {
+                const input = itemEl.querySelector('input[type="hidden"]');
+                if (input) input.value = columnId || "";
+            }
+
+            // bind existing draggables
+            document.querySelectorAll(".draggable").forEach(bindDraggable);
+
+            // zones (columns + pool)
+            document.querySelectorAll(".dropzone").forEach((zone) => {
+                zone.addEventListener("dragover", (e) => {
                     e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                });
 
-                    const data = e.dataTransfer.getData('text/plain');
-                    const temp = document.createElement('div');
-                    temp.innerHTML = data;
-                    const newItem = temp.firstElementChild;
+                zone.addEventListener("dragenter", () => setZoneActive(zone, true));
+                zone.addEventListener("dragleave", () => setZoneActive(zone, false));
 
-                    const sameItem = document.querySelector(`[data-item-id="${newItem.dataset.itemId}"]`);
-                    if (sameItem) sameItem.remove();
+                zone.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    setZoneActive(zone, false);
 
-                    newItem.querySelector('input[type="hidden"]').value = zone.dataset.columnId;
+                    // If something else is dragging, use it; otherwise find by id
+                    const id = e.dataTransfer.getData("text/plain");
+                    const el = draggingEl || document.querySelector(`[data-item-id="${id}"]`);
+                    if (!el) return;
 
-                    zone.appendChild(newItem);
+                    // remove hint text once there is at least one item
+                    const hint = zone.querySelector(".zone-hint");
+                    if (hint) hint.remove();
 
-                    newItem.addEventListener('dragstart', e => {
-                        e.dataTransfer.setData('text/plain', newItem.outerHTML);
-                        newItem.classList.add('dragging');
-                    });
+                    // move element
+                    zone.appendChild(el);
+
+                    // update hidden value
+                    const colId = zone.dataset.columnId || "";
+                    updateHiddenInput(el, colId);
+
+                    // rebind (safe)
+                    bindDraggable(el);
                 });
             });
         </script>
