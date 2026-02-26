@@ -85,7 +85,7 @@
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
-                                href="#"
+                                href="#simulator"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Симуляторды көру
@@ -112,7 +112,7 @@
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
-                                href="#"
+                                href="#books"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
                                 Кітаптарды ашу
@@ -268,12 +268,12 @@
                         <div class="rounded-2xl border border-border-200 overflow-hidden hover:shadow-lg transition active:scale-95 active:shadow-none">
                             <a 
                                 href="{% url 'student:subject_detail' course.id %}" 
-                                class="block aspect-video"
+                                class="block aspect-video overflow-hidden"
                             >
                                 {% if course.poster %}
                                     <img
                                         src="{{ course.poster.url }}"
-                                        class="w-full" 
+                                        class="w-full object-fill" 
                                     />
                                 {% else %}
                                     <div class="w-full h-full flex justify-center items-center text-muted bg-secondary-100">
