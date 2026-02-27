@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from core.models import Subject, UserSubject, UserChapter, UserLesson, User, Book, UserTask, Task, UserMatchingAnswer, \
-    UserAnswer, UserReading, UserVideo
+    UserAnswer, UserReading, UserVideo, Chapter, Lesson
 from core.utils.decorators import role_required
 
 
@@ -310,7 +310,6 @@ def teacher_courses_view(request):
         course_cards.append({
             "obj": s,
             "admin_change_url": admin_change_url(s),
-            "detail_url": reverse("teacher:course_detail", args=[s.pk]),
         })
     return render(
         request,
@@ -318,49 +317,18 @@ def teacher_courses_view(request):
         {"course_cards": course_cards},
     )
 
-
-@role_required("teacher")
-def teacher_course_detail_view(request, pk: int):
-    subject = get_object_or_404(Subject, pk=pk)
-
-    return render(
-        request,
-        "app/dashboard/teacher/courses/detail/page.html",
-        {
-            "subject": subject,
-            "admin_change_url": admin_change_url(subject),
-        },
-    )
-
-
 @role_required("teacher")
 def teacher_books_view(request):
     books = Book.objects.all().order_by("title", "id")
-
     book_cards = []
     for b in books:
         book_cards.append({
             "obj": b,
             "admin_change_url": admin_change_url(b),
-            "detail_url": reverse("teacher:book_detail", args=[b.pk]),
         })
 
     return render(
         request,
         "app/dashboard/teacher/books/page.html",
         {"book_cards": book_cards},
-    )
-
-
-@role_required("teacher")
-def teacher_book_detail_view(request, pk: int):
-    book = get_object_or_404(Book, pk=pk)
-
-    return render(
-        request,
-        "app/dashboard/teacher/books/detail/page.html",
-        {
-            "book": book,
-            "admin_change_url": admin_change_url(book),
-        },
     )
