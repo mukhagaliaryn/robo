@@ -225,7 +225,7 @@
                         href="{% url 'student:user_book_detail' ub.id %}"
                         class="rounded-2xl border border-border-200 bg-white overflow-hidden transition hover:shadow-lg active:scale-95 active:shadow-none"
                     >
-                        <div class="w-full flex justify-center items-center aspect-3/4 border-b border-border-200 bg-secondary-100">
+                        <div class="w-full flex justify-center items-center aspect-3/4 overflow-hidden border-b border-border-200 bg-secondary-100">
                             {% if ub.book.poster %}
                                 <img src="{{ ub.book.poster.url }}" class="w-full object-cover">
                             {% else %}

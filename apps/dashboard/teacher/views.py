@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.aggregates import Avg
 from django.shortcuts import render
@@ -6,7 +5,6 @@ from core.models import Subject, UserSubject, UserChapter, UserLesson, User
 from core.utils.decorators import role_required
 
 
-@login_required
 @role_required('teacher')
 def teacher_dashboard_view(request):
     user = request.user

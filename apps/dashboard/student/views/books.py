@@ -81,7 +81,6 @@ def user_book_detail_view(request, user_book_id: int):
     return render(request, "app/dashboard/student/user/library/page.html", context)
 
 
-
 @role_required("student")
 def simulator_view(request):
     return render(request, "app/dashboard/student/simulator/page.html")

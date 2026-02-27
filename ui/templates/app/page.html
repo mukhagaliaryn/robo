@@ -396,7 +396,7 @@
                 {% for book in books %}
                     <div class="swiper-slide rounded-2xl border border-border-200 bg-white overflow-hidden transition hover:shadow-lg active:scale-95 active:shadow-none">
                         <a href="{% url 'student:book_detail' book.id %}" class="block">
-                            <div class="w-full flex justify-center items-center aspect-3/4 border-b border-border-200 bg-secondary-100">
+                            <div class="w-full flex justify-center items-center aspect-3/4 overflow-hidden border-b border-border-200 bg-secondary-100">
                                 {% if book.poster %}
                                     <img src="{{ book.poster.url }}" class="w-full object-cover">
                                 {% else %}

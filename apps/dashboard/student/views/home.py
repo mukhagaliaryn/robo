@@ -9,9 +9,12 @@ from core.utils.decorators import role_required
 
 # student dashboard page
 # ----------------------------------------------------------------------------------------------------------------------
-@role_required('student')
+@login_required
 def student_view(request):
     user = request.user
+    if user.user_type == 'teacher':
+        return redirect('teacher:dashboard')
+
     subjects = Subject.objects.filter(is_public=True)[:4]
     user_subjects_qs = UserSubject.objects.filter(user=user).prefetch_related(
         'user_chapters__chapter',

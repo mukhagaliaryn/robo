@@ -5,7 +5,7 @@
 {% block learner_layout %}
 <div class="max-w-7xl mx-auto px-4 py-8 grid gap-4">
     <div class="flex items-start gap-8 justify-center">
-        <div class="sticky top-20 max-w-sm w-full aspect-3/4 flex justify-center items-center rounded-2xl bg-secondary-100">
+        <div class="sticky top-20 max-w-sm w-full aspect-3/4 overflow-hidden flex justify-center items-center rounded-2xl bg-secondary-100">
             {% if book.poster %}
                 <img src="{{ book.poster.url }}" class="w-full object-cover">
             {% else %}
