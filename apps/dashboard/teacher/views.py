@@ -1,102 +1,273 @@
-from django.db.models import Q
-from django.db.models.aggregates import Avg
-from django.shortcuts import render
-from core.models import Subject, UserSubject, UserChapter, UserLesson, User
+from django.db.models import Avg, Q
+from django.shortcuts import render, get_object_or_404
+from core.models import Subject, UserSubject, UserChapter, UserLesson, User, Book, UserTask, Task, UserMatchingAnswer, \
+    UserAnswer, UserReading, UserVideo
 from core.utils.decorators import role_required
 
 
-@role_required('teacher')
+def _safe_round(value, digits=0):
+    if value is None:
+        return 0
+    try:
+        return round(float(value), digits)
+    except Exception:
+        return 0
+
+
+@role_required("teacher")
 def teacher_dashboard_view(request):
-    user = request.user
-    subjects_data = []
+    # ---------------------------
+    # 1) Жалпы көрсеткіштер (cards)
+    # ---------------------------
+    learners_total = User.objects.filter(user_type="student").count()
+    enrolled_learners = (
+        User.objects.filter(user_type="student", user_subjects__isnull=False)
+        .distinct()
+        .count()
+    )
+    courses_count = Subject.objects.count()
+    books_count = Book.objects.count()
 
-    for subject in Subject.objects.all():
-        user_subjects = UserSubject.objects.filter(subject=subject)
+    # ---------------------------
+    # 2) Жалпы орташа мәндер (барлық user_courses бойынша)
+    # ---------------------------
+    subject_avg = UserSubject.objects.aggregate(
+        avg_rating=Avg("rating"),
+        avg_percentage=Avg("percentage"),
+    )
+    chapter_avg = UserChapter.objects.aggregate(
+        avg_rating=Avg("rating"),
+        avg_percentage=Avg("percentage"),
+    )
+    lesson_avg = UserLesson.objects.aggregate(
+        avg_rating=Avg("rating"),
+        avg_percentage=Avg("percentage"),
+    )
 
-        student_count = user_subjects.count()
-        subject_avg = user_subjects.aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
-        chapter_stats = UserChapter.objects.filter(user_subject__subject=subject).aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
-        lesson_stats = UserLesson.objects.filter(user_subject__subject=subject).aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
+    overall = {
+        "subject_avg_rating": _safe_round(subject_avg["avg_rating"], 0),
+        "subject_avg_percentage": _safe_round(subject_avg["avg_percentage"], 2),
+        "chapter_avg_rating": _safe_round(chapter_avg["avg_rating"], 0),
+        "chapter_avg_percentage": _safe_round(chapter_avg["avg_percentage"], 2),
+        "lesson_avg_rating": _safe_round(lesson_avg["avg_rating"], 0),
+        "lesson_avg_percentage": _safe_round(lesson_avg["avg_percentage"], 2),
+    }
 
-        def safe_round(value, digits=0):
-            return round(value, digits) if value is not None else 0
+    # ---------------------------
+    # 3) Table: барлық қолданушы курстары + filter/search
+    # ---------------------------
+    q = (request.GET.get("q") or "").strip()
+    subject_id = (request.GET.get("subject") or "").strip()
+    user_id = (request.GET.get("user") or "").strip()
 
-        subjects_data.append({
-            'subject': subject,
-            'student_count': student_count,
+    user_courses_qs = (
+        UserSubject.objects.select_related("user", "subject")
+        .all()
+        .order_by("-created_at", "-id")
+    )
 
-            # UserSubject
-            'subject_avg_rating': safe_round(subject_avg['avg_rating']),
-            'subject_avg_percentage': safe_round(subject_avg['avg_percentage'], 2),
+    if subject_id:
+        user_courses_qs = user_courses_qs.filter(subject_id=subject_id)
 
-            'chapter_avg_rating': safe_round(chapter_stats['avg_rating']),
-            'chapter_avg_percentage': safe_round(chapter_stats['avg_percentage'], 2),
-
-            'lesson_avg_rating': safe_round(lesson_stats['avg_rating']),
-            'lesson_avg_percentage': safe_round(lesson_stats['avg_percentage'], 2),
-        })
-
-    # Барлық оқушылар
-    q = request.GET.get('q', '').strip()
-    classroom = request.GET.get('user_class', '').strip()
-
-    # Бастапқы users queryset
-    users = User.objects.filter(user_subjects__isnull=False).distinct()
+    if user_id:
+        user_courses_qs = user_courses_qs.filter(user_id=user_id)
 
     if q:
-        users = users.filter(
-            Q(first_name__icontains=q) |
-            Q(last_name__icontains=q) |
-            Q(username__icontains=q)
+        user_courses_qs = user_courses_qs.filter(
+            Q(user__first_name__icontains=q)
+            | Q(user__last_name__icontains=q)
+            | Q(user__username__icontains=q)
+            | Q(user__email__icontains=q)
+            | Q(subject__name__icontains=q)
         )
 
-    if classroom:
-        users = users.filter(user_class=classroom)
-
-    students_data = []
-    for user in users:
-        user_subject_qs = user.user_subjects.all()
-        subject_stats = user_subject_qs.aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
-        chapter_stats = user.user_chapters.all().aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
-        lesson_stats = user.user_lessons.all().aggregate(
-            avg_rating=Avg('rating'),
-            avg_percentage=Avg('percentage')
-        )
-
-        students_data.append({
-            'user': user,
-            'subject_avg_rating': round(subject_stats['avg_rating']) or 0,
-            'subject_avg_percentage': round(subject_stats['avg_percentage'], 2) or 0,
-
-            'chapter_avg_rating': round(chapter_stats['avg_rating']) or 0,
-            'chapter_avg_percentage': round(chapter_stats['avg_percentage'], 2) or 0,
-
-            'lesson_avg_rating': round(lesson_stats['avg_rating']) or 0,
-            'lesson_avg_percentage': round(lesson_stats['avg_percentage'], 2) or 0,
-        })
+    # Dropdown-тар үшін деректер
+    subjects = Subject.objects.all().order_by("name")
+    learners = (
+        User.objects.filter(user_type="student", user_subjects__isnull=False)
+        .distinct()
+        .order_by("first_name", "last_name", "username")
+    )
 
     context = {
-        'generics': {
-            'classes_count': 2,
-            'subjects_count': Subject.objects.all().count(),
-            'students_count': UserSubject.objects.all().count()
+        "generics": {
+            "learners_total": learners_total,
+            "enrolled_learners": enrolled_learners,
+            "courses_count": courses_count,
+            "books_count": books_count,
         },
-        'subjects_data': subjects_data,
-        'students_data': students_data,
+        "overall": overall,
+        "user_courses": user_courses_qs,
+        "subjects": subjects,
+        "learners": learners,
+        "filters": {
+            "q": q,
+            "subject": subject_id,
+            "user": user_id,
+        },
     }
-    return render(request, 'app/dashboard/teacher/page.html', context)
+    return render(request, "app/dashboard/teacher/page.html", context)
+
+
+# user_subject_detail page
+# ----------------------------------------------------------------------------------------------------------------------
+@role_required("teacher")
+def user_subject_detail_view(request, pk: int):
+    us = get_object_or_404(
+        UserSubject.objects.select_related("user", "subject"),
+        pk=pk,
+    )
+    chapters = (
+        UserChapter.objects
+        .filter(user_subject=us)
+        .select_related("chapter")
+        .order_by("id")
+    )
+    lessons = (
+        UserLesson.objects
+        .filter(user_subject=us)
+        .select_related("lesson")
+        .order_by("id")
+    )
+
+    chapter_to_user_chapter = {uc.chapter_id: uc.id for uc in chapters}
+    lessons_by_chapter = {}
+
+    for ul in lessons:
+        uc_id = getattr(ul, "user_chapter_id", None)
+        if not uc_id:
+            ch_id = getattr(ul, "chapter_id", None)
+            if ch_id:
+                uc_id = chapter_to_user_chapter.get(ch_id)
+
+        if not uc_id and getattr(ul, "lesson", None):
+            ch_id = getattr(ul.lesson, "chapter_id", None)
+            if ch_id:
+                uc_id = chapter_to_user_chapter.get(ch_id)
+
+        if not uc_id:
+            continue
+
+        lessons_by_chapter.setdefault(uc_id, []).append(ul)
+
+    ch_avg = UserChapter.objects.filter(user_subject=us).aggregate(
+        avg_rating=Avg("rating"),
+        avg_percentage=Avg("percentage"),
+    )
+    ls_avg = UserLesson.objects.filter(user_subject=us).aggregate(
+        avg_rating=Avg("rating"),
+        avg_percentage=Avg("percentage"),
+    )
+    overall = {
+        "course_rating": _safe_round(getattr(us, "rating", 0), 0),
+        "course_percentage": _safe_round(getattr(us, "percentage", 0), 0),
+
+        "chapter_avg_rating": _safe_round(ch_avg["avg_rating"], 0),
+        "chapter_avg_percentage": _safe_round(ch_avg["avg_percentage"], 0),
+
+        "lesson_avg_rating": _safe_round(ls_avg["avg_rating"], 0),
+        "lesson_avg_percentage": _safe_round(ls_avg["avg_percentage"], 0),
+    }
+
+    return render(
+        request,
+        "app/dashboard/teacher/user_subject/page.html",
+        {
+            "us": us,
+            "overall": overall,
+            "chapters": chapters,
+            "lessons_by_chapter": lessons_by_chapter,
+        },
+    )
+
+
+@role_required("teacher")
+def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
+    us = get_object_or_404(
+        UserSubject.objects.select_related("user", "subject"),
+        pk=user_subject_id
+    )
+    ul = get_object_or_404(
+        UserLesson.objects.select_related("lesson", "user"),
+        pk=user_lesson_id,
+        user_subject=us,
+    )
+
+    base_tasks = Task.objects.filter(lesson=ul.lesson).order_by("order", "id")
+    user_tasks = (
+        UserTask.objects
+        .filter(user_lesson=ul)
+        .select_related("task")
+    )
+    user_task_map = {ut.task_id: ut for ut in user_tasks}
+    user_task_ids = [ut.id for ut in user_tasks]
+    user_videos_by_user_task = {}
+    for uv in (
+        UserVideo.objects
+        .filter(user_task_id__in=user_task_ids)
+        .select_related("video")
+        .order_by("id")
+    ):
+        user_videos_by_user_task.setdefault(uv.user_task_id, []).append(uv)
+
+    user_reading_map = {
+        ur.user_task_id: ur
+        for ur in (
+            UserReading.objects
+            .filter(user_task_id__in=user_task_ids)
+            .select_related("reading")
+        )
+    }
+    answers_by_user_task = {}
+    for a in (
+        UserAnswer.objects
+        .filter(user_task_id__in=user_task_ids)
+        .select_related("question")
+        .prefetch_related("options")
+        .order_by("id")
+    ):
+        answers_by_user_task.setdefault(a.user_task_id, []).append(a)
+
+    matching_by_user_task = {}
+    for ma in (
+        UserMatchingAnswer.objects
+        .filter(user_task_id__in=user_task_ids)
+        .select_related("item", "selected_column", "item__correct_column")
+        .order_by("id")
+    ):
+        matching_by_user_task.setdefault(ma.user_task_id, []).append(ma)
+
+    task_rows = []
+    for t in base_tasks:
+        ut = user_task_map.get(t.id)
+
+        percent = 0
+        if ut:
+            if t.rating and t.rating > 0:
+                percent = round((ut.rating / t.rating) * 100)
+            else:
+                percent = 100 if ut.is_completed else 0
+
+        extra = {}
+        if ut:
+            extra["videos"] = user_videos_by_user_task.get(ut.id, [])
+            extra["reading"] = user_reading_map.get(ut.id)
+            extra["answers"] = answers_by_user_task.get(ut.id, [])
+            extra["matching"] = matching_by_user_task.get(ut.id, [])
+
+        task_rows.append({
+            "task": t,
+            "user_task": ut,
+            "percent": percent,
+            "extra": extra,
+        })
+
+    return render(
+        request,
+        "app/dashboard/teacher/user_subject/partials/_lesson_modal.html",
+        {
+            "us": us,
+            "ul": ul,
+            "task_rows": task_rows,
+        },
+    )

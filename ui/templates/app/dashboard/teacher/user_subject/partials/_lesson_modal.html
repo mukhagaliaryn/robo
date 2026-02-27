@@ -1,0 +1,285 @@
+<div class="grid gap-5">
+    <!-- Lesson header -->
+    <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-2">
+        <div class="text-sm text-muted">Сабақ</div>
+        <div class="text-xl font-black text-foreground">
+            {% if ul.lesson %}{{ ul.lesson.title }}{% else %}Сабақ{% endif %}
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-secondary-100 text-foreground">
+                Баға: {{ ul.rating }} балл
+            </span>
+            <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-secondary-100 text-foreground">
+                {{ ul.percentage|floatformat:0 }}%
+            </span>
+
+            {% if ul.is_completed %}
+                <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
+                    <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                    Аяқталды
+                </span>
+            {% else %}
+                <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-amber-blue text-blue-700">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    Болып жатыр
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Timing -->
+    <div class="rounded-2xl border border-border-200 p-4 text-sm text-muted grid gap-1">
+        <div>Сабақ статусы: <span class="text-foreground font-medium">{{ ul.get_status_display }}</span></div>
+        <div>
+            Жіберілген уақыты:
+            {% if ut %}
+                <span class="text-foreground font-medium">{{ ut.submitted_at|date:"d.m.Y - H:i" }}</span>
+            {% else %}
+                <span class="text-foreground font-medium">—</span>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if task_rows %}
+        <div class="rounded-2xl border border-border-200 bg-white overflow-hidden">
+
+            <!-- Tabs header -->
+            <div class="px-4 py-3 bg-secondary-50 border-b border-border-200 flex flex-wrap gap-2" id="lesson-tabs">
+                {% for row in task_rows %}
+                    <button
+                        type="button"
+                        class="tab-btn rounded-full px-3 py-2 font-medium border border-border-200 bg-white hover:bg-secondary-100"
+                        data-tab="tab-{{ row.task.id }}"
+                    >
+                        {{ row.task.get_task_type_display }}
+                    </button>
+                {% endfor %}
+            </div>
+
+            <!-- Tabs content -->
+            <div class="p-4 grid gap-4">
+                {% for row in task_rows %}
+                    {% with t=row.task ut=row.user_task %}
+                    <div class="tab-pane hidden" id="tab-{{ t.id }}">
+                        <div class="grid gap-3">
+
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="grid gap-1">
+                                    <div class="font-bold text-foreground">
+                                        Тапсырма: {{ t.get_task_type_display }}
+                                    </div>
+                                    <div class="text-xs text-muted">
+                                        max: {{ t.rating }} балл • params: {{ t.params }}
+                                    </div>
+                                </div>
+
+                                {% if ut %}
+                                    {% if ut.is_completed %}
+                                        <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
+                                            <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                                            Орындалды
+                                        </span>
+                                    {% else %}
+                                        <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-amber-blue text-blue-700">
+                                            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                                            Болып жатыр
+                                        </span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-secondary-100 text-foreground">
+                                        Басталмаған
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Score + progress -->
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="rounded-2xl border border-border-200 bg-white p-4">
+                                    <div class="text-xs text-muted">Баға</div>
+                                    <div class="text-2xl font-black text-foreground">
+                                        {% if ut %}
+                                            {{ ut.rating }} / {{ t.rating }} балл
+                                        {% else %}
+                                            0 / {{ t.rating }} балл
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-2">
+                                    <div class="text-xs text-muted">Пайыздық мөлшері</div>
+                                    <div class="w-full bg-secondary-200 rounded-full overflow-hidden">
+                                        <div
+                                            class="bg-primary-500 text-[11px] font-medium text-white pt-0.5 text-center h-full leading-none rounded-full"
+                                            style="width: {{ row.percent }}%"
+                                        >
+                                            {{ row.percent }}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Placeholder for type-specific results -->
+                            <div class="rounded-2xl border border-border-200 bg-white p-4">
+                                <div class="text-sm font-semibold text-foreground mb-2">Нәтижелер</div>
+
+                                {% if ut %}
+                                    {% if t.task_type == "video" %}
+                                        {% if row.extra.videos %}
+                                            <div class="grid gap-2">
+                                                {% for uv in row.extra.videos %}
+                                                    <div class="rounded-xl border border-border-200 p-3 text-sm">
+                                                        <div class="font-medium text-foreground">
+                                                            Видео #{{ forloop.counter }}
+                                                        </div>
+                                                        <div class="text-muted">
+                                                            Қараған уақыты: <span class="text-foreground font-medium">{{ uv.watched_seconds }} сек</span>
+                                                            • Статус:
+                                                            {% if uv.is_completed %}
+                                                                <span class="text-green-700 font-medium">Аяқталған</span>
+                                                            {% else %}
+                                                                <span class="text-blue-700 font-medium">Болып жатыр</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="text-sm text-muted">UserVideo табылмады.</div>
+                                        {% endif %}
+
+                                    {% elif t.task_type == "reading" %}
+                                        {% if row.extra.reading %}
+                                            <div class="rounded-xl border border-border-200 p-3 text-sm">
+                                                <div class="text-muted">
+                                                    Оқыды ма:
+                                                    {% if row.extra.reading.is_read %}
+                                                        <span class="text-green-700 font-medium">Иә</span>
+                                                    {% else %}
+                                                        <span class="text-blue-700 font-medium">Жоқ</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="text-muted">
+                                                    Оқыған уақыты: <span class="text-foreground font-medium">{{ row.extra.reading.read_seconds }} сек</span>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="text-sm text-muted">UserReading табылмады.</div>
+                                        {% endif %}
+
+                                    {% elif t.task_type == "test" %}
+                                        {% if row.extra.answers %}
+                                            <div class="grid gap-2">
+                                                {% for a in row.extra.answers %}
+                                                    <div class="rounded-xl border border-border-200 p-3">
+                                                        <div class="font-medium text-foreground mb-2">
+                                                            {{ forloop.counter }}. {{ a.question.text|safe }}
+                                                        </div>
+
+                                                        <div class="flex flex-wrap gap-2">
+                                                            {% for opt in a.options.all %}
+                                                                <span class="px-2 py-1 text-xs rounded-xl bg-secondary-100 text-foreground">
+                                                                    {{ opt.text|safe }}
+                                                                </span>
+                                                            {% empty %}
+                                                                <span class="text-sm text-muted">Жауап жоқ</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="text-sm text-muted">UserAnswer табылмады.</div>
+                                        {% endif %}
+
+                                    {% elif t.task_type == "matching" %}
+                                        {% if row.extra.matching %}
+                                            <div class="grid gap-2">
+                                                {% for ma in row.extra.matching %}
+                                                    <div class="rounded-xl border border-border-200 p-3 text-sm">
+                                                        <div class="text-muted">
+                                                            Элемент:
+                                                            <span class="text-foreground font-medium">{{ ma.item.text|safe }}</span>
+                                                        </div>
+                                                        <div class="text-muted">
+                                                            Таңдалған баған:
+                                                            <span class="text-foreground font-medium">
+                                                                {% if ma.selected_column %}{{ ma.selected_column.label|safe }}{% else %}—{% endif %}
+                                                            </span>
+                                                        </div>
+                                                        <div class="text-muted">
+                                                            Дұрыс баған:
+                                                            <span class="text-foreground font-medium">{{ ma.item.correct_column.label|safe }}</span>
+                                                        </div>
+
+                                                        {% if ma.is_correct %}
+                                                            <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
+                                                                <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                                                                Дұрыс
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-red-100 text-red-700">
+                                                                <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                                                                Қате
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="text-sm text-muted">UserMatchingAnswer табылмады.</div>
+                                        {% endif %}
+
+                                    {% else %}
+                                        <div class="text-sm text-muted">Белгісіз task_type: {{ t.task_type }}</div>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="text-sm text-muted">Бұл тапсырма басталмаған.</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <script>
+            (function() {
+                const root = document.getElementById("lesson-tabs");
+                if (!root) return;
+
+                const btns = root.querySelectorAll(".tab-btn");
+                const panes = document.querySelectorAll(".tab-pane");
+
+                function activate(tabId){
+                    panes.forEach(p => p.classList.add("hidden"));
+                    btns.forEach(b => {
+                        b.classList.remove("bg-primary-600", "text-white", "border-primary-600");
+                        b.classList.add("bg-white");
+                    });
+
+                    const pane = document.getElementById(tabId);
+                    if (pane) pane.classList.remove("hidden");
+
+                    const btn = [...btns].find(x => x.dataset.tab === tabId);
+                    if (btn){
+                        btn.classList.remove("bg-white");
+                        btn.classList.add("bg-primary-600", "text-white", "border-primary-600");
+                    }
+                }
+
+                if (btns.length){
+                    activate(btns[0].dataset.tab);
+                }
+
+                btns.forEach(b => b.addEventListener("click", () => activate(b.dataset.tab)));
+            })();
+        </script>
+    {% else %}
+        <div class="rounded-2xl border border-border-200 bg-white p-6 text-center text-muted">
+            Бұл сабақта тапсырмалар жоқ (Task модельінде жоқ).
+        </div>
+    {% endif %}
+
+</div>
