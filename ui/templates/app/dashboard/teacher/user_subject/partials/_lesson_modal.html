@@ -1,6 +1,6 @@
 <div class="grid gap-5">
     <!-- Lesson header -->
-    <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-2">
+    <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-1">
         <div class="text-sm text-muted">Сабақ</div>
         <div class="text-xl font-black text-foreground">
             {% if ul.lesson %}{{ ul.lesson.title }}{% else %}Сабақ{% endif %}
@@ -28,19 +28,6 @@
         </div>
     </div>
 
-    <!-- Timing -->
-    <div class="rounded-2xl border border-border-200 p-4 text-sm text-muted grid gap-1">
-        <div>Сабақ статусы: <span class="text-foreground font-medium">{{ ul.get_status_display }}</span></div>
-        <div>
-            Жіберілген уақыты:
-            {% if ut %}
-                <span class="text-foreground font-medium">{{ ut.submitted_at|date:"d.m.Y - H:i" }}</span>
-            {% else %}
-                <span class="text-foreground font-medium">—</span>
-            {% endif %}
-        </div>
-    </div>
-
     {% if task_rows %}
         <div class="rounded-2xl border border-border-200 bg-white overflow-hidden">
 
@@ -61,184 +48,211 @@
             <div class="p-4 grid gap-4">
                 {% for row in task_rows %}
                     {% with t=row.task ut=row.user_task %}
-                    <div class="tab-pane hidden" id="tab-{{ t.id }}">
-                        <div class="grid gap-3">
+                        <div class="tab-pane hidden" id="tab-{{ t.id }}">
+                            <div class="grid gap-3">
 
-                            <div class="flex items-start justify-between gap-4">
-                                <div class="grid gap-1">
-                                    <div class="font-bold text-foreground">
-                                        Тапсырма: {{ t.get_task_type_display }}
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="grid gap-1">
+                                        <div class="font-bold text-foreground">
+                                            Тапсырма: {{ t.get_task_type_display }}
+                                        </div>
+                                        <div class="text-xs text-muted">
+                                            Макс: {{ t.rating }} балл • Параметр: {{ t.get_params_display }}
+                                        </div>
                                     </div>
-                                    <div class="text-xs text-muted">
-                                        max: {{ t.rating }} балл • params: {{ t.params }}
-                                    </div>
-                                </div>
 
-                                {% if ut %}
-                                    {% if ut.is_completed %}
-                                        <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
-                                            <span class="w-2 h-2 rounded-full bg-green-600"></span>
-                                            Орындалды
-                                        </span>
+                                    {% if ut %}
+                                        {% if ut.is_completed %}
+                                            <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
+                                                <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                                                Орындалды
+                                            </span>
+                                        {% else %}
+                                            <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-amber-blue text-blue-700">
+                                                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                                                Болып жатыр
+                                            </span>
+                                        {% endif %}
                                     {% else %}
-                                        <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-amber-blue text-blue-700">
-                                            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                                            Болып жатыр
+                                        <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-secondary-100 text-foreground">
+                                            Басталмаған
                                         </span>
                                     {% endif %}
-                                {% else %}
-                                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-secondary-100 text-foreground">
-                                        Басталмаған
-                                    </span>
-                                {% endif %}
-                            </div>
-
-                            <!-- Score + progress -->
-                            <div class="grid sm:grid-cols-2 gap-3">
-                                <div class="rounded-2xl border border-border-200 bg-white p-4">
-                                    <div class="text-xs text-muted">Баға</div>
-                                    <div class="text-2xl font-black text-foreground">
-                                        {% if ut %}
-                                            {{ ut.rating }} / {{ t.rating }} балл
-                                        {% else %}
-                                            0 / {{ t.rating }} балл
-                                        {% endif %}
-                                    </div>
                                 </div>
 
-                                <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-2">
-                                    <div class="text-xs text-muted">Пайыздық мөлшері</div>
-                                    <div class="w-full bg-secondary-200 rounded-full overflow-hidden">
-                                        <div
-                                            class="bg-primary-500 text-[11px] font-medium text-white pt-0.5 text-center h-full leading-none rounded-full"
-                                            style="width: {{ row.percent }}%"
-                                        >
-                                            {{ row.percent }}%
+                                <!-- Score + progress -->
+                                <div class="grid sm:grid-cols-2 gap-3">
+                                    <div class="rounded-2xl border border-border-200 bg-white p-4">
+                                        <div class="text-xs text-muted">Баға</div>
+                                        <div class="text-2xl font-black text-foreground">
+                                            {% if ut %}
+                                                {{ ut.rating }} / {{ t.rating }} балл
+                                            {% else %}
+                                                0 / {{ t.rating }} балл
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="rounded-2xl border border-border-200 bg-white p-4 grid gap-2">
+                                        <div class="text-xs text-muted">Пайыздық мөлшері</div>
+                                        <div class="w-full bg-secondary-200 rounded-full overflow-hidden">
+                                            <div
+                                                class="bg-primary-500 text-[11px] font-medium text-white pt-0.5 text-center h-full leading-none rounded-full"
+                                                style="width: {{ row.percent }}%"
+                                            >
+                                                {{ row.percent }}%
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Placeholder for type-specific results -->
-                            <div class="rounded-2xl border border-border-200 bg-white p-4">
-                                <div class="text-sm font-semibold text-foreground mb-2">Нәтижелер</div>
+                                <!-- Placeholder for type-specific results -->
+                                <div class="relative">
+                                    <div class="text-sm font-semibold text-foreground mb-2">Нәтижелер</div>
 
-                                {% if ut %}
-                                    {% if t.task_type == "video" %}
-                                        {% if row.extra.videos %}
-                                            <div class="grid gap-2">
-                                                {% for uv in row.extra.videos %}
-                                                    <div class="rounded-xl border border-border-200 p-3 text-sm">
-                                                        <div class="font-medium text-foreground">
-                                                            Видео #{{ forloop.counter }}
-                                                        </div>
-                                                        <div class="text-muted">
-                                                            Қараған уақыты: <span class="text-foreground font-medium">{{ uv.watched_seconds }} сек</span>
-                                                            • Статус:
-                                                            {% if uv.is_completed %}
-                                                                <span class="text-green-700 font-medium">Аяқталған</span>
-                                                            {% else %}
-                                                                <span class="text-blue-700 font-medium">Болып жатыр</span>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            <div class="text-sm text-muted">UserVideo табылмады.</div>
-                                        {% endif %}
-
-                                    {% elif t.task_type == "reading" %}
-                                        {% if row.extra.reading %}
-                                            <div class="rounded-xl border border-border-200 p-3 text-sm">
-                                                <div class="text-muted">
-                                                    Оқыды ма:
-                                                    {% if row.extra.reading.is_read %}
-                                                        <span class="text-green-700 font-medium">Иә</span>
-                                                    {% else %}
-                                                        <span class="text-blue-700 font-medium">Жоқ</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="text-muted">
-                                                    Оқыған уақыты: <span class="text-foreground font-medium">{{ row.extra.reading.read_seconds }} сек</span>
-                                                </div>
-                                            </div>
-                                        {% else %}
-                                            <div class="text-sm text-muted">UserReading табылмады.</div>
-                                        {% endif %}
-
-                                    {% elif t.task_type == "test" %}
-                                        {% if row.extra.answers %}
-                                            <div class="grid gap-2">
-                                                {% for a in row.extra.answers %}
-                                                    <div class="rounded-xl border border-border-200 p-3">
-                                                        <div class="font-medium text-foreground mb-2">
-                                                            {{ forloop.counter }}. {{ a.question.text|safe }}
-                                                        </div>
-
-                                                        <div class="flex flex-wrap gap-2">
-                                                            {% for opt in a.options.all %}
-                                                                <span class="px-2 py-1 text-xs rounded-xl bg-secondary-100 text-foreground">
-                                                                    {{ opt.text|safe }}
-                                                                </span>
-                                                            {% empty %}
-                                                                <span class="text-sm text-muted">Жауап жоқ</span>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            <div class="text-sm text-muted">UserAnswer табылмады.</div>
-                                        {% endif %}
-
-                                    {% elif t.task_type == "matching" %}
-                                        {% if row.extra.matching %}
-                                            <div class="grid gap-2">
-                                                {% for ma in row.extra.matching %}
-                                                    <div class="rounded-xl border border-border-200 p-3 text-sm">
-                                                        <div class="text-muted">
-                                                            Элемент:
-                                                            <span class="text-foreground font-medium">{{ ma.item.text|safe }}</span>
-                                                        </div>
-                                                        <div class="text-muted">
-                                                            Таңдалған баған:
-                                                            <span class="text-foreground font-medium">
-                                                                {% if ma.selected_column %}{{ ma.selected_column.label|safe }}{% else %}—{% endif %}
-                                                            </span>
-                                                        </div>
-                                                        <div class="text-muted">
-                                                            Дұрыс баған:
-                                                            <span class="text-foreground font-medium">{{ ma.item.correct_column.label|safe }}</span>
-                                                        </div>
-
-                                                        {% if ma.is_correct %}
-                                                            <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
-                                                                <span class="w-2 h-2 rounded-full bg-green-600"></span>
-                                                                Дұрыс
+                                    {% if ut %}
+                                        {% if t.task_type == "video" %}
+                                            {% if row.extra.videos %}
+                                                <div class="grid gap-2">
+                                                    {% for uv in row.extra.videos %}
+                                                        <div class="rounded-xl border border-border-200 p-3 text-sm">
+                                                            <div class="font-medium text-foreground">
+                                                                Видео #{{ forloop.counter }}
                                                             </div>
+                                                            <div class="text-muted">
+                                                                Қараған уақыты: <span class="text-foreground font-medium">{{ uv.watched_seconds }} сек</span>
+                                                                • Статус:
+                                                                {% if uv.is_completed %}
+                                                                    <span class="text-green-700 font-medium">Аяқталған</span>
+                                                                {% else %}
+                                                                    <span class="text-blue-700 font-medium">Болып жатыр</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <div class="text-sm text-muted">UserVideo табылмады.</div>
+                                            {% endif %}
+
+                                        {% elif t.task_type == "reading" %}
+                                            {% if row.extra.reading %}
+                                                <div class="rounded-xl border border-border-200 p-3 text-sm">
+                                                    <div class="text-muted">
+                                                        Оқыды ма:
+                                                        {% if row.extra.reading.is_read %}
+                                                            <span class="text-green-700 font-medium">Иә</span>
                                                         {% else %}
-                                                            <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-red-100 text-red-700">
-                                                                <span class="w-2 h-2 rounded-full bg-red-600"></span>
-                                                                Қате
-                                                            </div>
+                                                            <span class="text-blue-700 font-medium">Жоқ</span>
                                                         {% endif %}
                                                     </div>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            <div class="text-sm text-muted">UserMatchingAnswer табылмады.</div>
-                                        {% endif %}
+                                                    <div class="text-muted">
+                                                        Оқыған уақыты: <span class="text-foreground font-medium">{{ row.extra.reading.read_seconds }} сек</span>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="text-sm text-muted">UserReading табылмады.</div>
+                                            {% endif %}
 
+                                        {% elif t.task_type == "test" %}
+                                            {% if row.extra.answers %}
+                                                <div class="grid gap-4">
+                                                    {% for a in row.extra.answers %}
+                                                        <div class="rounded-2xl border border-border-200 p-4">
+                                                            <div class="flex gap-1 items-start font-semibold text-foreground mb-3">
+                                                                {{ forloop.counter }}. {{ a.question_text|safe }}
+                                                                <span class="ml-2 text-xs font-semibold px-2 py-1 rounded-full bg-secondary-100 text-foreground">
+                                                                    {{ a.get_question_type_display }}
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="grid gap-2">
+                                                                {% for opt in a.options %}
+                                                                    {% if opt.is_selected and opt.is_correct %}
+                                                                        <div class="flex items-center justify-between gap-3 rounded-xl border border-green-200 bg-green-50 px-3 py-2">
+                                                                            <div class="text-sm text-foreground">{{ opt.text|safe }}</div>
+                                                                            <div class="text-xs font-bold text-green-700">✅</div>
+                                                                        </div>
+                                                                    {% elif opt.is_selected and not opt.is_correct %}
+                                                                        <div class="flex items-center justify-between gap-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2">
+                                                                            <div class="text-sm text-foreground">{{ opt.text|safe }}</div>
+                                                                            <div class="text-xs font-bold text-red-700">✖</div>
+                                                                        </div>
+                                                                    {% elif not opt.is_selected and opt.is_correct %}
+                                                                        <div class="flex items-center justify-between gap-3 rounded-xl border border-green-200 bg-white px-3 py-2">
+                                                                            <div class="text-sm text-foreground">{{ opt.text|safe }}</div>
+                                                                            <div class="text-xs font-semibold text-green-700">дұрыс</div>
+                                                                        </div>
+                                                                    {% else %}
+                                                                        <div class="flex items-center justify-between gap-3 rounded-xl border border-border-200 bg-white px-3 py-2">
+                                                                            <div class="text-sm text-foreground">{{ opt.text|safe }}</div>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <div class="text-sm text-muted">Жауаптар табылмады.</div>
+                                            {% endif %}
+
+                                        {% elif t.task_type == "matching" %}
+                                            {% if row.extra.matching %}
+                                                <div class="grid gap-3">
+                                                    {% for ma in row.extra.matching %}
+                                                        <div class="
+                                                            rounded-2xl border px-4 py-3
+                                                            {% if ma.is_correct %}
+                                                                border-green-200 bg-green-50
+                                                            {% else %}
+                                                                border-red-200 bg-red-50
+                                                            {% endif %}
+                                                        ">
+                                                            <div class="text-sm font-semibold text-foreground">
+                                                                {{ ma.item.text|safe }}
+                                                            </div>
+
+                                                            <div class="mt-2 text-sm text-muted grid gap-1">
+                                                                <div>
+                                                                    Таңдалған:
+                                                                    <span class="text-foreground font-medium">
+                                                                        {% if ma.selected_column %}{{ ma.selected_column.label|safe }}{% else %}—{% endif %}
+                                                                    </span>
+                                                                </div>
+                                                                <div>
+                                                                    Дұрыс:
+                                                                    <span class="text-foreground font-medium">{{ ma.item.correct_column.label|safe }}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            {% if ma.is_correct %}
+                                                                <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-green-100 text-green-700">
+                                                                    <span class="w-2 h-2 rounded-full bg-green-600"></span>
+                                                                    Дұрыс
+                                                                </div>
+                                                            {% else %}
+                                                                <div class="mt-2 inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-2xl bg-red-100 text-red-700">
+                                                                    <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                                                                    Қате
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <div class="text-sm text-muted">Matching жауаптары табылмады.</div>
+                                            {% endif %}
+
+                                        {% else %}
+                                            <div class="text-sm text-muted">Белгісіз task_type: {{ t.get_task_type_display }}</div>
+                                        {% endif %}
                                     {% else %}
-                                        <div class="text-sm text-muted">Белгісіз task_type: {{ t.task_type }}</div>
+                                        <div class="text-sm text-muted">Бұл тапсырма басталмаған.</div>
                                     {% endif %}
-                                {% else %}
-                                    <div class="text-sm text-muted">Бұл тапсырма басталмаған.</div>
-                                {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     {% endwith %}
                 {% endfor %}
             </div>

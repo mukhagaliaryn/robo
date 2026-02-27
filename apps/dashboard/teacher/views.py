@@ -1,5 +1,7 @@
 from django.db.models import Avg, Q
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+
 from core.models import Subject, UserSubject, UserChapter, UserLesson, User, Book, UserTask, Task, UserMatchingAnswer, \
     UserAnswer, UserReading, UserVideo
 from core.utils.decorators import role_required
@@ -194,6 +196,7 @@ def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
     )
 
     base_tasks = Task.objects.filter(lesson=ul.lesson).order_by("order", "id")
+
     user_tasks = (
         UserTask.objects
         .filter(user_lesson=ul)
@@ -201,16 +204,20 @@ def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
     )
     user_task_map = {ut.task_id: ut for ut in user_tasks}
     user_task_ids = [ut.id for ut in user_tasks]
-    user_videos_by_user_task = {}
+
+    # -----------------------
+    # Preload user content
+    # -----------------------
+    videos_by_ut = {}
     for uv in (
         UserVideo.objects
         .filter(user_task_id__in=user_task_ids)
         .select_related("video")
         .order_by("id")
     ):
-        user_videos_by_user_task.setdefault(uv.user_task_id, []).append(uv)
+        videos_by_ut.setdefault(uv.user_task_id, []).append(uv)
 
-    user_reading_map = {
+    reading_by_ut = {
         ur.user_task_id: ur
         for ur in (
             UserReading.objects
@@ -218,25 +225,43 @@ def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
             .select_related("reading")
         )
     }
-    answers_by_user_task = {}
+
+    answers_by_ut = {}
     for a in (
         UserAnswer.objects
         .filter(user_task_id__in=user_task_ids)
         .select_related("question")
-        .prefetch_related("options")
-        .order_by("id")
+        .prefetch_related("options", "question__options")
+        .order_by("question__order", "id")
     ):
-        answers_by_user_task.setdefault(a.user_task_id, []).append(a)
+        selected_ids = set(a.options.values_list("id", flat=True))
+        option_rows = []
+        for opt in a.question.options.all():
+            option_rows.append({
+                "id": opt.id,
+                "text": opt.text,
+                "is_correct": bool(opt.is_correct),
+                "is_selected": opt.id in selected_ids,
+            })
 
-    matching_by_user_task = {}
+        answers_by_ut.setdefault(a.user_task_id, []).append({
+            "question_text": a.question.text,
+            "question_type": a.question.question_type,
+            "options": option_rows,
+        })
+
+    matching_by_ut = {}
     for ma in (
         UserMatchingAnswer.objects
         .filter(user_task_id__in=user_task_ids)
         .select_related("item", "selected_column", "item__correct_column")
         .order_by("id")
     ):
-        matching_by_user_task.setdefault(ma.user_task_id, []).append(ma)
+        matching_by_ut.setdefault(ma.user_task_id, []).append(ma)
 
+    # -----------------------
+    # Build UI rows
+    # -----------------------
     task_rows = []
     for t in base_tasks:
         ut = user_task_map.get(t.id)
@@ -250,10 +275,10 @@ def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
 
         extra = {}
         if ut:
-            extra["videos"] = user_videos_by_user_task.get(ut.id, [])
-            extra["reading"] = user_reading_map.get(ut.id)
-            extra["answers"] = answers_by_user_task.get(ut.id, [])
-            extra["matching"] = matching_by_user_task.get(ut.id, [])
+            extra["videos"] = videos_by_ut.get(ut.id, [])
+            extra["reading"] = reading_by_ut.get(ut.id)
+            extra["answers"] = answers_by_ut.get(ut.id, [])
+            extra["matching"] = matching_by_ut.get(ut.id, [])
 
         task_rows.append({
             "task": t,
@@ -265,9 +290,77 @@ def user_lesson_modal_view(request, user_subject_id: int, user_lesson_id: int):
     return render(
         request,
         "app/dashboard/teacher/user_subject/partials/_lesson_modal.html",
+        {"us": us, "ul": ul, "task_rows": task_rows},
+    )
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+def admin_change_url(obj) -> str:
+    return reverse(
+        f"admin:{obj._meta.app_label}_{obj._meta.model_name}_change",
+        args=[obj.pk],
+    )
+
+
+@role_required("teacher")
+def teacher_courses_view(request):
+    courses = Subject.objects.all().order_by("name", "id")
+    course_cards = []
+    for s in courses:
+        course_cards.append({
+            "obj": s,
+            "admin_change_url": admin_change_url(s),
+            "detail_url": reverse("teacher:course_detail", args=[s.pk]),
+        })
+    return render(
+        request,
+        "app/dashboard/teacher/courses/page.html",
+        {"course_cards": course_cards},
+    )
+
+
+@role_required("teacher")
+def teacher_course_detail_view(request, pk: int):
+    subject = get_object_or_404(Subject, pk=pk)
+
+    return render(
+        request,
+        "app/dashboard/teacher/courses/detail/page.html",
         {
-            "us": us,
-            "ul": ul,
-            "task_rows": task_rows,
+            "subject": subject,
+            "admin_change_url": admin_change_url(subject),
+        },
+    )
+
+
+@role_required("teacher")
+def teacher_books_view(request):
+    books = Book.objects.all().order_by("title", "id")
+
+    book_cards = []
+    for b in books:
+        book_cards.append({
+            "obj": b,
+            "admin_change_url": admin_change_url(b),
+            "detail_url": reverse("teacher:book_detail", args=[b.pk]),
+        })
+
+    return render(
+        request,
+        "app/dashboard/teacher/books/page.html",
+        {"book_cards": book_cards},
+    )
+
+
+@role_required("teacher")
+def teacher_book_detail_view(request, pk: int):
+    book = get_object_or_404(Book, pk=pk)
+
+    return render(
+        request,
+        "app/dashboard/teacher/books/detail/page.html",
+        {
+            "book": book,
+            "admin_change_url": admin_change_url(book),
         },
     )

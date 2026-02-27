@@ -125,7 +125,7 @@
             </li>
             <li>
                 <a 
-                    href="{% url 'teacher:dashboard' %}"
+                    href="{% url 'teacher:courses' %}"
                     class="flex items-center py-2.5 px-4 rounded-2xl group {% if request.path == '/teacher/courses/' %}bg-primary-500 text-white hover:bg-primary-600{% else %}hover:bg-secondary-100{% endif %}"
                 >
                     <svg class="shrink-0 w-5 h-5 transition duration-75 {% if request.path == '/teacher/courses/' %}text-white group-hover:text-white{% else %}group-hover:text-primary-500{% endif %}"
@@ -137,7 +137,7 @@
             </li>
             <li>
                 <a 
-                    href="{% url 'teacher:dashboard' %}"
+                    href="{% url 'teacher:books' %}"
                     class="flex items-center py-2.5 px-4 rounded-2xl group {% if request.path == '/teacher/books/' %}bg-primary-500 text-white hover:bg-primary-600{% else %}hover:bg-secondary-100{% endif %}"
                 >
                     <svg 

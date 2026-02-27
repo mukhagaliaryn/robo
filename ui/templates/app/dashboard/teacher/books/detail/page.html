@@ -1,0 +1,40 @@
+{% extends "layouts/teacher_layout.html" %}
+
+{% block title %}Кітап detail{% endblock %}
+
+{% block teacher_layout %}
+<div class="max-w-screen-xl mx-auto py-8 px-4 grid gap-6">
+
+    <div class="flex items-center justify-between gap-3">
+        <div class="grid gap-1">
+            <div class="text-sm text-muted">Кітап</div>
+            <h1 class="text-2xl font-black">{{ book.title }}</h1>
+            {% if book.author %}
+            <div class="text-sm text-muted">Автор: {{ book.author }}</div>
+            {% endif %}
+        </div>
+
+        <div class="flex gap-2">
+            <a href="{% url 'teacher:books' %}"
+                class="rounded-xl px-4 py-2 text-sm font-medium border border-border-200 bg-white hover:bg-secondary-50">
+                ← Кітаптар
+            </a>
+            <a href="{{ admin_change_url }}" target="_blank"
+                class="rounded-xl px-4 py-2 text-sm font-semibold bg-white border border-border-200 hover:bg-secondary-50">
+                Admin edit
+            </a>
+        </div>
+    </div>
+
+    <div class="rounded-2xl border border-border-200 bg-white p-6 grid gap-3">
+        {% if book.description %}
+        <div class="text-sm text-foreground">{{ book.description }}</div>
+        {% else %}
+        <div class="text-sm text-muted">Сипаттама жоқ.</div>
+        {% endif %}
+
+        {# Егер book-та pdf/file өрісі бар болса, кейін осында “Оқу” батырмасын қосамыз #}
+    </div>
+
+</div>
+{% endblock %}
