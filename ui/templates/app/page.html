@@ -394,31 +394,33 @@
         <div class="swiper bookSwiper">
             <div class="swiper-wrapper">
                 {% for book in books %}
-                    <div class="swiper-slide rounded-2xl border border-border-200 bg-white overflow-hidden transition hover:shadow-lg active:scale-95 active:shadow-none">
-                        <a href="{% url 'student:book_detail' book.id %}" class="block">
-                            <div class="w-full flex justify-center items-center aspect-3/4 overflow-hidden border-b border-border-200 bg-secondary-100">
-                                {% if book.poster %}
-                                    <img src="{{ book.poster.url }}" class="w-full object-cover">
-                                {% else %}
-                                    <div class="w-full flex items-center justify-center text-muted">
-                                        <span class="text-4xl font-black">PDF</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-
-                            <div class="p-4">
-                                <div class="flex items-start justify-between gap-2">
-                                    <h2 class="text-base font-semibold leading-snug line-clamp-2">{{ book.title }}</h2>
+                    <div class="swiper-slide">
+                        <div class="rounded-2xl border border-border-200 bg-white overflow-hidden transition-all hover:shadow-lg active:scale-95 active:shadow-none">
+                            <a href="{% url 'student:book_detail' book.id %}" class="block">
+                                <div class="w-full flex justify-center items-center aspect-3/4 overflow-hidden border-b border-border-200 bg-secondary-100">
+                                    {% if book.poster %}
+                                        <img src="{{ book.poster.url }}" class="w-full object-cover">
+                                    {% else %}
+                                        <div class="w-full flex items-center justify-center text-muted">
+                                            <span class="text-4xl font-black">PDF</span>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                        </a>
-                        <div class="px-4 pb-4">
-                            <a 
-                                href="{% url 'student:book_detail' book.id %}"
-                                class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"    
-                            >
-                                Толығырақ
+
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between gap-2">
+                                        <h2 class="text-base font-semibold leading-snug line-clamp-2">{{ book.title }}</h2>
+                                    </div>
+                                </div>
                             </a>
+                            <div class="px-4 pb-4">
+                                <a 
+                                    href="{% url 'student:book_detail' book.id %}"
+                                    class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"    
+                                >
+                                    Толығырақ
+                                </a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
