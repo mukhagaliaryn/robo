@@ -1,25 +1,36 @@
 {% extends "layouts/learner_layout.html" %}
 {% load static %}
 
-{% block title %}Онлайн симулятор{% endblock title %}
+{% block title %}{{ simulator.name }} - онлайн симулятор{% endblock title %}
 
 {% block learner_layout %}
-<div class="w-full flex justify-center items-center" style="height: calc(100vh - 64px);">
-    <div class="grid gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal mx-auto">
-            <path d="M10 5H3" />
-            <path d="M12 19H3" />
-            <path d="M14 3v4" />
-            <path d="M16 17v4" />
-            <path d="M21 12h-9" />
-            <path d="M21 19h-5" />
-            <path d="M21 5h-7" />
-            <path d="M8 10v4" />
-            <path d="M8 12H3" />
-        </svg>
-        <h1 class="text-4xl font-black">Онлайн симулятор</h1>
+<div class="w-full flex justify-center items-start" style="height: calc(100vh - 64px);">
+    <div class="max-w-xs w-full border-r border-border-200 h-full overflow-y-auto">
+        <ul class="grid gap-1 px-4 pt-4">
+            {% for item in simulators %}
+                <li>
+                    {% url 'student:simulator' item.slug as s_detail %}
+                    <a 
+                        href="{{ s_detail }}"
+                        class="
+                            flex px-4 py-2.5 rounded-2xl
+                            {% if request.path == s_detail %}font-medium bg-primary-500 text-white{% else %}hover:bg-secondary-100 text-subtle{% endif %}
+                        "    
+                    >
+                        <div class="line-clamp-1">{{ item.name }}</div>
+                        
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="flex-1 h-full">
+        <iframe
+            src="{{ simulator.url }}"
+            style="width:100%; height: 100%; border:0;"
+            allowfullscreen
+        ></iframe>
     </div>
 </div>
 {% endblock learner_layout %}

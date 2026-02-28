@@ -36,5 +36,5 @@ urlpatterns = [
     path("library/user-book/<int:user_book_id>/", books.user_book_detail_view, name="user_book_detail"),
     path("library/<int:book_id>/toggle/", books.user_book_toggle_view, name="book_toggle"),
 
-    path('simulator/', books.simulator_view, name='simulator'),
+    path('simulator/<slug>/', books.simulator_view, name='simulator'),
 ]

@@ -48,3 +48,19 @@ class UserBook(models.Model):
 
     def __str__(self):
         return f"{self.user_id} -> {self.book_id}"
+
+
+# Simulator
+# ----------------------------------------------------------------------------------------------------------------------
+class Simulator(models.Model):
+    name = models.CharField(_('Тақырыбы'), max_length=255)
+    slug = models.SlugField(_('Кіллтік сөзі'), max_length=255)
+    url = models.URLField(_('URL'), max_length=255)
+    order = models.PositiveSmallIntegerField(_('Реті'), default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Симулятор')
+        verbose_name_plural = _('Симуляторлар')

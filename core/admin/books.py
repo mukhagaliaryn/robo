@@ -1,6 +1,6 @@
 from django.contrib import admin
 from core.forms.books import BookAdminForm
-from core.models.books import Book, UserBook
+from core.models.books import Book, UserBook, Simulator
 
 
 @admin.register(Book)
@@ -17,3 +17,9 @@ class UserBookAdmin(admin.ModelAdmin):
     list_display = ("user", "book", "is_saved", "progress", "last_page", "updated_at")
     list_filter = ("is_saved",)
     search_fields = ("user__username", "user__email", "book__title")
+
+
+@admin.register(Simulator)
+class SimulatorAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "url", "order")
+    ordering = ("order",)
