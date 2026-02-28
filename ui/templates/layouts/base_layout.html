@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block base %}
 <div class="min-h-screen flex flex-col">
@@ -16,14 +17,53 @@
                                 href="{% url 'account:login' %}"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Жүйеге кіру
+                                {% translate 'Sign in' %}
                             </a>
                             <a
                                 href="{% url 'account:register' %}"
                                 class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
-                                Тіркелу
+                                {% translate 'Sign up' %}
                             </a>
+
+                            <div class="relative inline-block text-left">
+                                <button
+                                    id="lang-button"
+                                    type="button"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-border-200 bg-white hover:bg-secondary-50 text-sm font-medium transition"
+                                    onclick="toggleLangMenu()"
+                                >
+                                    🌐 {{ LANGUAGE_CODE|upper }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </button>
+
+                                <div
+                                    id="lang-menu"
+                                    class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-white border border-border-200 shadow-lg z-50 overflow-hidden"
+                                >
+                                    <form action="{% url 'set_language' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ request.path }}">
+
+                                        <button type="submit" name="language" value="kk"
+                                            class="w-full text-left px-4 py-2 hover:bg-secondary-100 transition">
+                                            🇰🇿 Қазақша
+                                        </button>
+
+                                        <!-- <button type="submit" name="language" value="ru"
+                                            class="w-full text-left px-4 py-2 hover:bg-secondary-100 transition">
+                                            🇷🇺 Русский
+                                        </button> -->
+
+                                        <button type="submit" name="language" value="en"
+                                            class="w-full text-left px-4 py-2 hover:bg-secondary-100 transition">
+                                            🇬🇧 English
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         
                         <button 
@@ -78,17 +118,17 @@
                                     <li>
                                         <a href="{% url 'student:dashboard' %}"
                                             class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
-                                            role="menuitem">Платформа</a>
+                                            role="menuitem">{% translate 'Platform' %}</a>
                                     </li>
                                     <li>
                                         <a href="{% url 'account:account' %}"
                                             class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
-                                            role="menuitem">Аккаунт</a>
+                                            role="menuitem">{% translate 'Account' %}</a>
                                     </li>
                                     <li>
                                         <a href="{% url 'account:settings' %}"
                                             class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
-                                            role="menuitem">Баптаулар</a>
+                                            role="menuitem">{% translate 'Settings' %}</a>
                                     </li>
                                     <li>
                                         <form action="{% url 'account:logout' %}" method="post">
@@ -98,7 +138,7 @@
                                                 class="inline-flex items-center w-full py-2 px-4 hover:bg-secondary-50 hover:text-foreground rounded-lg"
                                                 role="menuitem"
                                             >
-                                                Жүйеден шығу
+                                                {% translate 'Sign out' %}
                                             </button>
                                         </form>
                                         
@@ -115,14 +155,14 @@
                             <li>
                                 <a href="#main"
                                     class="block py-2 px-4 text-white bg-primary-500 rounded-2xl lg:bg-transparent lg:text-primary-500 lg:p-0"
-                                    aria-current="page">Басты бет</a>
+                                    aria-current="page">{% translate 'Home' %}</a>
                             </li>
                             <li>
                                 <a  
                                     href="#courses"
                                     class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
                                 >
-                                    Курстар
+                                    {% translate 'Courses' %}
                                 </a>
                             </li>
                             <li>
@@ -130,7 +170,7 @@
                                     href="#simulator"
                                     class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
                                 >
-                                    Онлайн симулятор
+                                    {% translate 'Online simulator' %}
                                 </a>
                             </li>
                             <li>
@@ -138,7 +178,7 @@
                                     href="#books"
                                     class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
                                 >
-                                    Кітаптар
+                                    {% translate 'Books' %}
                                 </a>
                             </li>
                             <li>
@@ -146,7 +186,7 @@
                                     href="#about"
                                     class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
                                 >
-                                    Біз жайлы
+                                    {% translate 'About us' %}
                                 </a>
                             </li>
                             <li>
@@ -154,7 +194,7 @@
                                     href="#contact"
                                     class="block py-2 px-4 rounded-2xl hover:bg-secondary-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-500 lg:p-0 lg:dark:hover:bg-transparent"
                                 >
-                                    Байланыс
+                                    {% translate 'Contacts' %}
                                 </a>
                             </li>
                         </ul>
@@ -163,13 +203,13 @@
                                 href="#"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Жүйеге кіру
+                                {% translate 'Sign in' %}
                             </a>
                             <a
                                 href="#"
                                 class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
-                                Тіркелу
+                                {% translate 'Sign up' %}
                             </a>
                         </div>
                     </div>
@@ -191,23 +231,37 @@
                 </a>
                 <ul class="flex flex-wrap items-center mb-6 text-muted sm:mb-0">
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Біз жайлы</a>
+                        <a href="#" class="hover:underline me-4 md:me-6">{% translate 'About us' %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Құпиялылық саясаты</a>
+                        <a href="#" class="hover:underline me-4 md:me-6">{% translate 'Privacy policy' %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Лицензия</a>
+                        <a href="#" class="hover:underline me-4 md:me-6">{% translate 'Lisence' %}</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline">Байланыс</a>
+                        <a href="#contact" class="hover:underline">{% translate 'Contacts' %}</a>
                     </li>
                 </ul>
             </div>
             <hr class="my-6 border-border-200 sm:mx-auto lg:my-8" />
             <span class="block text-sm text-muted text-center">© 2026 <a href="{% url 'main:index' %}"
-                    class="hover:underline">Robo-Baldyrgan™</a>. Барлық құқықтар қорғалған.</span>
+                    class="hover:underline">Robo-Baldyrgan™</a>. {% translate 'All rights reserved.' %}</span>
         </div>
     </footer>
 </div>
+
+<script>
+    function toggleLangMenu() {
+        document.getElementById("lang-menu").classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", function (e) {
+        const btn = document.getElementById("lang-button");
+        const menu = document.getElementById("lang-menu");
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.add("hidden");
+        }
+    });
+</script>
 {% endblock base %}

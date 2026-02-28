@@ -1,7 +1,8 @@
 {% extends "layouts/base_layout.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}ROBO baldyrgan — робототехникаға арналған онлайн платформа.{% endblock %}
+{% block title %}{% trans 'ROBO baldyrgan is an online platform for robotics.' %}{% endblock %}
 
 
 {% block base_layout %}
@@ -14,11 +15,13 @@
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
                         <img src="{% static 'images/vertical-logo.svg' %}" class="w-64 mx-auto lg:mx-0" alt="">
-                        <h1 class="text-2xl font-black">Өз туындыңды іске қос!</h1>
+                        <h1 class="text-2xl font-black">{% trans 'Launch your creation!' %}</h1>
                         <span class="text-muted">
-                            Robo-Baldyrgan — робототехникаға арналған онлайн платформа. 
-                            Мұнда сен робот жасауды, код жазуды және өз жобаңа дейін жетуді үйренесің. 
-                            Оқу ойын сияқты өтеді, ал нәтиже — нағыз жұмыс істейтін робот идеясы.
+                            {% blocktrans %}
+                                Robo-Baldyrgan is an online platform for robotics. 
+                                Here you will learn how to make a robot, write code and get to your project. 
+                                Learning goes like a game, and the result is the idea of a real working robot.
+                            {% endblocktrans %}
                         </span>
 
                         <div class="flex justify-center lg:justify-start gap-2">
@@ -26,13 +29,13 @@
                                 href="{% url 'account:login' %}"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Бастап көру
+                                {% trans 'Get started' %}
                             </a>
                             <a 
                                 href="{% url 'account:register' %}"
                                 class="text-muted bg-white border border-border-200 hover:bg-secondary-50 hover:text-foreground active:scale-95 focus:ring-4 focus:ring-secondary-200 shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
                             >
-                                Тіркелу
+                                {% trans 'Sign in' %}
                             </a>
                         </div>
                     </div>
@@ -48,19 +51,21 @@
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black">Онлайн курстар</h1>
-                        <h1 class="text-2xl font-black">Қадам-қадаммен робот жасауды үйрен!</h1>
+                        <h1 class="text-5xl lg:text-6xl font-black">{% trans 'Online courses' %}</h1>
+                        <h1 class="text-2xl font-black">{% trans 'Learn how to make a robot step by step!' %}</h1>
                         <span class="text-muted">
-                            Онлайн курстарда сен LEGO және Arduino негіздерін меңгеріп, программалауды түсініп, 
-                            әр сабақтан кейін өз қолыңмен шағын жоба жасап үйренесің. Теорияны қарап қана қоймай, 
-                            оны бірден практикада қолданып көресің.
+                            {% blocktrans %}
+                                In online courses, you will learn the basics of LEGO and Arduino and understand programming, 
+                                after each lesson, you learn to make a small project with your own hands. Not only to look at the theory, 
+                                you will immediately try it in practice.
+                            {% endblocktrans %}
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#courses"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Курстарды қарап шығу
+                                {% trans 'Review courses' %}
                             </a>
                         </div>
                     </div>
@@ -76,19 +81,21 @@
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-2xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black">Онлайн симулятор</h1>
-                        <h1 class="text-2xl font-black">Құрастыр. Жаз. Іске қос!</h1>
+                        <h1 class="text-5xl lg:text-6xl font-black">{% trans 'Online simulator' %}</h1>
+                        <h1 class="text-2xl font-black">{% trans 'Build. Summer. Run!' %}</h1>
                         <span class="text-muted">
-                            Онлайн симуляторда сен роботтың бөлшектерін қосып, код жазып, 
-                            оның қалай жұмыс істейтінін бірден көресің. Қателессең — түзетіп қайта сынайсың, 
-                            ал дұрыс істесе — нәтижесін бірден байқап қуанасың.
+                            {% blocktrans %}
+                                In an online simulator, you can add robot parts and write code, 
+                                you will immediately see how it works. If you are wrong — you will correct and retest, 
+                                and if you do it right, you will immediately notice the result.
+                            {% endblocktrans %}
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#simulator"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Симуляторды көру
+                                {% trans 'View simulator' %}
                             </a>
                         </div>
                     </div>
@@ -104,18 +111,20 @@
             <div class="swiper-slide">
                 <div class="flex justify-center items-center h-full">
                     <div class="max-w-xl w-full mx-auto lg:mx-0 text-center lg:text-left grid gap-4 p-4">
-                        <h1 class="text-5xl lg:text-6xl font-black">Кітаптар</h1>
-                        <h1 class="text-2xl font-black">Оқы да бірден жасап көр!</h1>
+                        <h1 class="text-5xl lg:text-6xl font-black">{% trans 'Books' %}</h1>
+                        <h1 class="text-2xl font-black">{% trans 'Read it and try it right away!' %}</h1>
                         <span class="text-muted">
-                            Электронды кітаптар саған робототехника мен электрониканы қарапайым әрі түсінікті тілмен түсіндіреді. 
-                            Суреттер мен схемалар арқылы сен теорияны жеңіл меңгеріп, оны өз жобаңа қолдана аласың.
+                            {% blocktrans %}
+                                E-books explain robotics and electronics to you in simple and understandable language. 
+                                With drawings and diagrams, you can easily master the theory and apply it to your project.
+                            {% endblocktrans %}
                         </span>
                         <div class="flex justify-center lg:justify-start gap-2">
                             <a 
                                 href="#books"
                                 class="text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                             >
-                                Кітаптарды ашу
+                                {% trans 'Opening books' %}
                             </a>
                         </div>
                     </div>
@@ -136,8 +145,10 @@
 <section id="features" class="scroll-mt-16">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Негізгі мүмкіндіктер</h1>
-            <span class="text-muted">Платформаның негізгі артықшылықтары және неліктен Robo-Baldyrgan платформасын таңдайды?</span>
+            <h1 class="text-4xl font-black">{% trans "Main features" %}</h1>
+            <span class="text-muted">
+                {% trans 'The main advantages of the platform and why choose the Robo-Baldyrgan platform?' %}
+            </span>
         </div>
 
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
@@ -153,10 +164,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Интерактивті онлайн курстар</h1>
+                <h1 class="text-xl font-black">{% trans 'Interactive online courses' %}</h1>
                 <span class="text-muted">
-                    Сабақтар видео, түсіндірме және тапсырмалар арқылы өтеді. 
-                    Әр тақырыптан кейін білім алушы алған білімін практикада қолданып көреді, сондықтан оқу процесі белсенді әрі түсінікті болады.
+                    {% blocktrans %}
+                        Classes take place through video, explanations and tasks. 
+                        After each topic, the student tries on the acquired knowledge in practice, so the learning process becomes more active and understandable.
+                    {% endblocktrans %}
                 </span>
             </div>
             <!-- 2 -->
@@ -171,10 +184,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Нәтижені бірден көру мүмкіндігі</h1>
+                <h1 class="text-xl font-black">{% trans 'Ability to see the result instantly' %}</h1>
                 <span class="text-muted">
-                    Жазылған код немесе қосылған компонент бірден тексеріледі. 
-                    Бұл оқу процесін түсінікті етіп, әр әрекеттің нәтижесін көруге көмектеседі.
+                    {% blocktrans %}
+                        The written code or added component is checked immediately. 
+                        This will make the learning process clearer and help you see the results of each activity.
+                    {% endblocktrans %}
                 </span>
             </div>
             <!-- 3 -->
@@ -189,10 +204,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Робототехникаға нақты бағыт</h1>
+                <h1 class="text-xl font-black">{% trans 'Real direction to robotics' %}</h1>
                 <span class="text-muted">
-                    Платформа LEGO, Arduino және STEM жүйесіне негізделген. 
-                    Бұл білім алушыға техникалық және инженерлік ойлауды жүйелі түрде дамытуға мүмкіндік береді.
+                    {% blocktrans %}
+                        The platform is based on the LEGO, Arduino and STEM system. 
+                        This allows the student to systematically develop technical and engineering thinking.
+                    {% endblocktrans %}
                 </span>
             </div>
             <!-- 4 -->
@@ -207,10 +224,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Қауіпсіз және қолжетімді орта</h1>
+                <h1 class="text-xl font-black">{% trans 'Safe and accessible environment' %}</h1>
                 <span class="text-muted">
-                    Барлық оқу процесі онлайн форматта ұйымдастырылған. Білім алушы кез келген жерде, 
-                    кез келген уақытта платформаға кіріп, тәжірибе жасай алады.
+                    {% blocktrans %}
+                        The entire educational process is organized in an online format. Student anywhere, 
+                        at any time, you can log in to the platform and experiment.
+                    {% endblocktrans %}
                 </span>
             </div>
             <!-- 5 -->
@@ -225,10 +244,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Онлайн симулятор</h1>
+                <h1 class="text-xl font-black">{% trans 'Online simulator' %}</h1>
                 <span class="text-muted">
-                    Арнайы виртуалды тренажер арқылы робот бөлшектерін қосып, код жазып және нәтижесін 
-                    бірден тексеруге болады. Бұл шынайы зертханаға ұқсас тәжірибе жасауға мүмкіндік береді.
+                    {% blocktrans %}
+                        Using a special virtual simulator, you can connect parts of the robot, write code and perform the result 
+                        you can check right away. This allows you to create an experiment similar to a real laboratory.
+                    {% endblocktrans %}
                 </span>
             </div>
             <!-- 6 -->
@@ -243,10 +264,12 @@
                     style="width:96px; height:96px"
                     class="mx-auto"
                 ></lord-icon>
-                <h1 class="text-xl font-black">Кітаптарды онлайн оқу</h1>
+                <h1 class="text-xl font-black">{% trans 'Reading books online' %}</h1>
                 <span class="text-muted">
-                    Платформада робототехника мен электроникаға арналған электронды кітаптар бар. 
-                    Білім алушы материалды тікелей сайт ішінде оқып, схемалар мен түсіндірмелер арқылы теорияны оңай меңгереді.
+                    {% blocktrans %}
+                        The platform has e-books on robotics and electronics. 
+                        The student reads the material directly within the site and easily learns the theory through schemes and explanations.
+                    {% endblocktrans %}
                 </span>
             </div>
         </div>
@@ -257,8 +280,10 @@
 <section id="courses" class="scroll-mt-16 bg-secondary-50 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Қол жетімді курстар</h1>
-            <span class="text-muted">Қазір курстар саны шектеулі болуы мүмкін. Жақын уақытта пәндер мен сыныптар кеңейеді.</span>
+            <h1 class="text-4xl font-black">{% translate 'Available courses' %}</h1>
+            <span class="text-muted">
+                {% translate 'Now the number of courses may be limited. In the near future, subjects and classes will expand.' %}
+            </span>
         </div>
 
         <div class="swiper courseSwiper">
@@ -302,7 +327,7 @@
                                                 <path
                                                     d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
                                             </svg>
-                                            <span class="block">{{ course.chapters.count }} бөлім</span>
+                                            <span class="block">{{ course.chapters.count }} {% translate 'chapter' %}</span>
                                         </div>
                                         <div class="flex gap-2 items-center text-muted">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -311,7 +336,7 @@
                                                 <path
                                                     d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
                                             </svg>
-                                            <span class="block">{{ course.lessons.count }} сабақ</span>
+                                            <span class="block">{{ course.lessons.count }} {% translate 'lesson' %}</span>
                                         </div>
                                     </div>
                                 </a>
@@ -320,7 +345,7 @@
                                     href="{% url 'student:subject_detail' course.id %}"
                                     class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"
                                 >
-                                    Толығырақ
+                                    {% translate 'View detail' %}
                                 </a>
                             </div>
                         </div>
@@ -339,43 +364,48 @@
 <section id="simulator" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Онлайн симулятор</h1>
+            <h1 class="text-4xl font-black">{% translate 'Online simulator' %}</h1>
             <span class="text-muted">
-                Онлайн симулятор — бұл сенің виртуалды зертханаң. Мұнда роботтың бөлшектерін қосып,
-                код жазып және оның қалай жұмыс істейтінін бірден тексеруге болады.
+                {% blocktranslate %}
+                    The online simulator is your virtual laboratory. Here we add the details of the robot,
+                    you can write code and immediately check how it works.
+                {% endblocktranslate %}
             </span>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-2 items-center">
             <!-- Preview / mockup -->
-            <div class="rounded-3xl border border-border-200">
+            <div class="rounded-3xl border border-border-200 overflow-hidden">
                 <div class="aspect-video rounded-2xl bg-secondary-200 flex items-center justify-center text-heading font-bold">
-                    Симулятор preview (workspace скриншот)
+                    <img src="{% static 'images/simulator.png' %}" class="w-full h-full" alt="">
                 </div>
             </div>
 
             <!-- Description -->
             <div class="space-y-4">
                 <h2 class="text-2xl font-black">
-                    Құрастыр. Жаз. Іске қос.
+                    {% translate 'Build. Summer. Run it.' %}
                 </h2>
 
                 <p class="text-muted">
-                    LED, мотор және сенсорларды қосып, код жазып және оның нәтижесін сол сәтте көр.
-                    Қателессең — түзетіп қайта сынауға болады. Әр әрекет бірден нәтиже береді.
+                    {% blocktranslate %}
+                        Turn on the LED, motor and sensors, write the code and see the result at that moment.
+                        If you are wrong, you can correct and retest. Each action brings immediate results.
+                    {% endblocktranslate %}
                 </p>
                 <p class="text-muted">
-                    Бұл бөлім робототехниканы түсінуді жеңілдетіп,
-                    инженерлік ойлауды тәжірибе арқылы қалыптастырады.
+                    {% blocktranslate %}
+                        This section makes it easier to understand robotics,
+                        forms engineering thinking through experience.
+                    {% endblocktranslate %}
                 </p>
                 <a 
                     href="{% url 'student:simulator' 'robot_' %}"
                     class="inline-flex text-white bg-primary-500 hover:bg-primary-600 active:scale-95 rounded-full px-6 py-3 font-medium"
                 >
-                    Симуляторды ашу
+                    {% translate 'Opening the simulator' %}
                 </a>
             </div>
-
         </div>
     </div>
 </section>
@@ -384,10 +414,12 @@
 <section id="books" class="scroll-mt-16 border-t border-border-200 bg-secondary-50">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Электронды кітаптар</h1>
+            <h1 class="text-4xl font-black">{% translate 'Electronic books' %}</h1>
             <span class="text-muted">
-                Электронды кітаптар робототехника мен электроника негіздерін
-                қарапайым әрі түсінікті тілмен түсіндіреді.
+                {% blocktranslate %}
+                    E-books on the basics of robotics and electronics
+                    explains in simple and understandable language.
+                {% endblocktranslate %}
             </span>
         </div>
 
@@ -418,7 +450,7 @@
                                     href="{% url 'student:book_detail' book.id %}"
                                     class="flex justify-center text-white bg-primary-500 hover:bg-primary-600 box-border border border-transparent active:scale-95 focus:ring-4 focus:ring-primary-300 shadow-xs font-medium leading-5 rounded-full px-4 py-2.5 focus:outline-none"    
                                 >
-                                    Толығырақ
+                                    {% translate 'View detail' %}
                                 </a>
                             </div>
                         </div>
@@ -437,8 +469,8 @@
 <section id="about" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Біз жайлы</h1>
-            <span class="text-muted">Біз туралы ақпарат</span>
+            <h1 class="text-4xl font-black">{% trans 'About us' %}</h1>
+            <span class="text-muted">{% trans 'Information about us' %}</span>
         </div>
         
         <!-- Автор жайлы -->
@@ -454,8 +486,8 @@
                         <img src="{% static 'images/author.png' %}" alt="Автор"
                             class="h-48 w-48 mx-auto rounded-full object-cover border-4 border-primary-500" />
                         <div>
-                            <p class="text-lg font-black">Каратаев Нурлан Сагынбекович</p>
-                            <p class="text-sm font-semibold text-subtle">Жоба авторы</p>
+                            <p class="text-lg font-black">{% trans 'Karataev Nurlan Sagynbekovich' %}</p>
+                            <p class="text-sm font-semibold text-subtle">{% trans 'Author' %}</p>
                         </div>
                     </div>
 
@@ -534,13 +566,15 @@
                 data-reveal-delay="160" 
                 class="max-w-lg w-full"
             >
-                <h2 class="font-black tracking-tight text-xl sm:text-2xl">Автор туралы</h2>
+                <h2 class="font-black tracking-tight text-xl sm:text-2xl">{% trans 'About the author' %}</h2>
                 <p class="mt-2 leading-relaxed text-muted">
-                    <span class="font-semibold text-foreground">Каратаев Нурлан Сагынбекович</span> — Robobaldyrgan жобасының авторы.
-                    Жобаның идеясы қарапайым: оқушы тек “көріп қоймай”, міндетті түрде “орындап” бекітсін.
-                    Сондықтан әр сабақта видео мен практика бірге жүреді.
+                    <span class="font-semibold text-foreground">{% trans 'Karataev Nurlan Sagynbekovich' %}</span> 
+                   {% blocktrans %}
+                        - Author of the Robobaldyrgan project.
+                        The idea of the project is simple: let the student not only “see”, but also necessarily “do”.
+                        Therefore, in each lesson, the video and practice are accompanied.
+                    {% endblocktrans %}
                 </p>
-
                 <div class="mt-4 grid gap-4">
                     <div class="flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" class="text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
@@ -548,7 +582,7 @@
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="font-medium">«Robo-Baldyrgan» балалар робототехника мектебінің негізін салушы</span>
+                        <span class="font-medium">{% trans 'Founder of the childrens robotics school Robo-Baldyrgan' %}</span>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -557,7 +591,7 @@
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="font-medium">Ө.Жәнібеков атындағы ОҚПУ докторанты</span>
+                        <span class="font-medium">{% trans 'Doctoral student of skpu named after O. Zhanibekov' %}</span>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -566,7 +600,7 @@
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="font-medium">Информатика мұғалімі</span>
+                        <span class="font-medium">{% trans 'Computer science teacher' %}</span>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -575,7 +609,7 @@
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="font-medium">STEM - маманы</span>
+                        <span class="font-medium">{% trans 'STEM specialist' %}</span>
                     </div>
                 </div>
             </div>
@@ -644,8 +678,8 @@
 <section id="contact" class="scroll-mt-16 border-t border-border-200 bg-secondary-50">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-lg w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black text-heading">Байланыс</h1>
-            <span class="text-muted">Сұрақтарыңыз болса немесе баланы оқуға жазу қажет болса — бізбен хабарласыңыз.</span>
+            <h1 class="text-4xl font-black text-heading">{% trans 'Contacts' %}</h1>
+            <span class="text-muted">{% trans 'If you have any questions or need to write a child to read — contact us.' %}</span>
         </div>
 
         <div class="grid gap-6 lg:grid-cols-12 lg:gap-8">
@@ -661,9 +695,9 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div class="flex-1">
-                                <h4 class="font-black text-base">Мекенжай</h4>
+                                <h4 class="font-black text-base">{% trans 'Address' %}</h4>
                                 <span class="text-muted">
-                                    Шымкент қ., А.Байтұрсынов 13
+                                    {% trans 'Shymkent, A. Baitursynov 13' %}
                                 </span>
                             </div>
                         </div>
@@ -677,7 +711,7 @@
                                 style="width:64px; height:64px">
                             </lord-icon>
                             <div>
-                                <h4 class="font-black text-base">Телефон</h4>
+                                <h4 class="font-black text-base">{% trans 'Phone' %}</h4>
                                 <a 
                                     href="tel:+77781308431"
                                     class="mt-1 block font-semibold hover:underline"
@@ -685,7 +719,7 @@
                                     +7 (778)-130-84-31
                                 </a>
                                 <p class="mt-1 text-xs text-muted">
-                                    Жұмыс уақыты: Дс–Жм, 09:00–18:00
+                                    {% trans 'Opening hours: Mon-Fri, 09: 00-18: 00' %}
                                 </p>
                             </div>
                         </div>
@@ -707,7 +741,7 @@
                                     robo-baldyrganl@gmail.com
                                 </a>
                                 <p class="mt-1 text-xs text-muted">
-                                    Серіктестік және ресми сұрақтар үшін.
+                                    {% trans 'For partnership and official questions.' %}
                                 </p>
                             </div>
                         </div>
@@ -727,7 +761,7 @@
                                     +7 (778)-130-84-31
                                 </a>
                                 <p class="mt-1 text-xs text-muted">
-                                    Ең ыңғайлы арна: жазсаңыз — тез жауап береміз.
+                                    {% trans 'The most convenient channel: if you write — we will respond quickly.' %}
                                 </p>
                             </div>
                         </div>
@@ -758,8 +792,8 @@
 <section id="faq" class="scroll-mt-16 border-t border-border-200">
     <div class="max-w-7xl mx-auto py-8 lg:py-16 px-4 space-y-8">
         <div class="max-w-xl w-full mx-auto text-center space-y-4">
-            <h1 class="text-4xl font-black">Жиі қойылатын сұрақтар (FAQ)</h1>
-            <span class="text-muted">Нақты сұрақтарың болса — тіркеліп, платформаны көріп шық.</span>
+            <h1 class="text-4xl font-black">{% trans 'Frequently asked questions (FAQ)' %}</h1>
+            <span class="text-muted">{% trans 'If you have specific questions — register and see the platform.' %}</span>
         </div>
 
         <div class="max-w-4xl mx-auto">
@@ -778,7 +812,7 @@
                         aria-expanded="true"
                         aria-controls="accordion-flush-body-1"
                     >
-                        <span>Robo-Baldyrgan деген не?</span>
+                        <span>{% trans 'Robo-Baldyrgan is not degenerate?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -792,9 +826,11 @@
                 </h2>
                 <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Robo-Baldyrgan — балаларға арналған робототехника онлайн платформасы. 
-                        Мұнда онлайн курстар, электронды кітаптар және интерактивті симулятор 
-                        арқылы робот құрастыру мен программалау негіздері үйретіледі.
+                        {% blocktrans %}
+                            Robo — Baldyrgan is an online robotics platform for children. 
+                            Here are online courses, e-books and an interactive simulator 
+                            the basics of robot assembly and programming are taught.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -807,7 +843,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-2"
                     >
-                        <span>Платформа қай жас аралығына арналған?</span>
+                        <span>{% trans 'What age range is the platform for?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -821,8 +857,10 @@
                 </h2>
                 <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Платформа 5–16 жас аралығындағы балаларға арналған. Материалдар деңгейге сәйкес ұйымдастырылған, 
-                        сондықтан әр бала өз мүмкіндігіне қарай үйрене алады.
+                        {% blocktrans %}
+                            The platform is designed for children aged 5-16 years. Materials are organized according to the level, 
+                            therefore, each child can learn to the best of his ability.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -835,7 +873,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-3"
                     >
-                        <span>Оқу үшін арнайы құрылғылар қажет пе?</span>
+                        <span>{% trans 'Do you need special devices for reading?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -849,7 +887,7 @@
                 </h2>
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Жоқ. Платформа толық онлайн жұмыс істейді. Компьютер немесе планшет және интернет жеткілікті.
+                        {% trans 'No. The platform works fully online. A computer or tablet and the internet are enough.' %}
                     </div>
                 </div>
 
@@ -862,7 +900,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-4"
                     >
-                        <span>Онлайн симулятор қалай жұмыс істейді?</span>
+                        <span>{% trans 'How does the online simulator work?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -876,8 +914,10 @@
                 </h2>
                 <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Онлайн симуляторда роботтың виртуалды бөлшектері қосылып, код жазылады және нәтижесі бірден тексеріледі. 
-                        Бұл шынайы зертханаға ұқсас тәжірибе жасауға мүмкіндік береді.
+                        {% blocktrans %}
+                            In the online simulator, the virtual parts of the robot are turned on, the code is written and the result is immediately checked. 
+                            This allows you to create an experiment similar to a real laboratory.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -890,7 +930,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-5"
                     >
-                        <span>Электронды кітаптарды қалай оқуға болады?</span>
+                        <span>{% trans 'How to read e-books?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -904,8 +944,10 @@
                 </h2>
                 <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Барлық электронды кітаптар платформа ішінде ашылады. Материалдарды онлайн оқып, 
-                        схемалар мен түсіндірмелер арқылы теорияны меңгеруге болады.
+                        {% blocktrans %}
+                            All e-books open within the platform. Read the materials online, 
+                            you can master the theory through schemes and explanations.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -918,7 +960,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-6"
                     >
-                        <span>Курстарды аяқтағаннан кейін не болады?</span>
+                        <span>{% trans 'What will happen after completing the courses?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -932,8 +974,10 @@
                 </h2>
                 <div id="accordion-flush-body-6" class="hidden" aria-labelledby="accordion-flush-heading-6">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Әр курс белгілі бір тақырып бойынша білім мен дағды қалыптастырады. 
-                        Білім алушы өз прогресін көріп, келесі деңгейге өте алады.
+                        {% blocktrans %}
+                            Each course builds knowledge and skills on a specific topic. 
+                            The student can see their progress and move on to the next level.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -946,7 +990,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-7"
                     >
-                        <span>Платформада тіркелу ақылы ма?</span>
+                        <span>{% trans 'Is registration on the platform paid?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -960,8 +1004,10 @@
                 </h2>
                 <div id="accordion-flush-body-7" class="hidden" aria-labelledby="accordion-flush-heading-7">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Тіркелу тәртібі мен тарифтік жоспарлар туралы ақпарат платформада көрсетіледі. 
-                        Кейбір мүмкіндіктер тегін танысу режимінде қолжетімді болуы мүмкін.
+                        {% blocktrans %}
+                            Information about the registration procedure and tariff plans will be displayed on the platform. 
+                            Some features may be available in free dating mode.
+                        {% endblocktrans %}
                     </div>
                 </div>
 
@@ -974,7 +1020,7 @@
                         aria-expanded="false"
                         aria-controls="accordion-flush-body-8"
                     >
-                        <span>Ата-ана оқу процесін бақылай ала ма?</span>
+                        <span>{% trans 'Can parents control the learning process?' %}</span>
                         <svg 
                             data-accordion-icon
                             aria-hidden="true"
@@ -988,7 +1034,7 @@
                 </h2>
                 <div id="accordion-flush-body-8" class="hidden" aria-labelledby="accordion-flush-heading-8">
                     <div class="py-4 bg-secondary-50 text-subtle">
-                        Егер басқару панелі қосылған болса, ата-ана немесе мұғалім білім алушының прогресін бақылау мүмкіндігіне ие болады.
+                        {% trans 'If the control panel is enabled, the parent or teacher will have the opportunity to monitor the student`s progress.' %}
                     </div>
                 </div>
             </div>
@@ -1042,7 +1088,7 @@
             <div class="w-full overflow-hidden rounded-3xl bg-white shadow-sm border border-border-200">
                 <div class="flex items-center justify-between border-b border-border-200 px-5 py-4">
                     <h4 id="videoModalTitle" class="font-black text-xl">
-                        Robo-Baldyrgan — таныстыру видеосы
+                        {% trans 'Robo-Baldyrgan-presentation video' %}
                     </h4>
 
                     <button 

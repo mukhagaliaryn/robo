@@ -1,0 +1,1122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-28 22:12+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: apps/account/views/account.py:19
+msgid "Профиль сәтті жаңартылды"
+msgstr ""
+
+#: apps/account/views/account.py:41
+msgid "Құпиясөз сәтті өзгертілді"
+msgstr ""
+
+#: apps/account/views/account.py:44
+msgid "Қате! Құпиясөз өзгертілмеді"
+msgstr ""
+
+#: apps/account/views/account.py:48
+msgid "Аккаунт жойылды"
+msgstr ""
+
+#: apps/account/views/auth.py:22
+msgid "Пайдаланушының аты немесе пароль қате кетті!"
+msgstr ""
+
+#: apps/account/views/auth.py:42
+msgid "Тіркеу сәтсіз аяқталды. Деректерді тексеріңіз!"
+msgstr ""
+
+#: apps/dashboard/student/views/home.py:187
+msgid "Бұл курста бөлімдер мен сабақтар әлі қосылмаған"
+msgstr ""
+
+#: apps/dashboard/student/views/home.py:198
+msgid "Курс басталды!"
+msgstr ""
+
+#: config/settings.py:102
+msgid "Kazakh"
+msgstr ""
+
+#: config/settings.py:103
+msgid "Russian"
+msgstr ""
+
+#: config/settings.py:104
+msgid "English"
+msgstr ""
+
+#: core/admin/subjects.py:26
+msgid "Модуль сілтемесі"
+msgstr ""
+
+#: core/admin/subjects.py:42
+msgid "Сабақ сілтемесі"
+msgstr ""
+
+#: core/admin/subjects.py:105
+msgid "Тапсырма сілтемесі"
+msgstr ""
+
+#: core/admin/user_subjects.py:30 core/models/user_subjects.py:86
+#: core/models/user_subjects.py:118 core/models/user_tasks.py:11
+msgid "Қолданушының сабағы"
+msgstr ""
+
+#: core/admin/user_subjects.py:57 core/models/user_tasks.py:22
+#: core/models/user_tasks.py:34 core/models/user_tasks.py:88
+msgid "Қолданушының тапсырмасы"
+msgstr ""
+
+#: core/apps.py:8
+msgid "Модельдер | Регистраторлар"
+msgstr ""
+
+#: core/models/accounts.py:9
+msgid "Студент"
+msgstr ""
+
+#: core/models/accounts.py:10
+msgid "Оқытушы"
+msgstr ""
+
+#: core/models/accounts.py:11
+msgid "Администрация"
+msgstr ""
+
+#: core/models/accounts.py:13
+msgid "Сурет"
+msgstr ""
+
+#: core/models/accounts.py:14
+msgid "Қолданушы типі"
+msgstr ""
+
+#: core/models/accounts.py:20 core/models/books.py:30
+#: core/models/user_subjects.py:12 core/models/user_subjects.py:36
+#: core/models/user_subjects.py:69
+msgid "Қолданушы"
+msgstr ""
+
+#: core/models/accounts.py:21
+msgid "Қолданушылар"
+msgstr ""
+
+#: core/models/books.py:8 core/models/books.py:56 core/models/subjects.py:57
+#: core/models/subjects.py:79
+msgid "Тақырыбы"
+msgstr ""
+
+#: core/models/books.py:9
+msgid "Сипаттамасы"
+msgstr ""
+
+#: core/models/books.py:10
+msgid "Мұқабасы"
+msgstr ""
+
+#: core/models/books.py:11 core/models/subjects.py:80
+msgid "Файл"
+msgstr ""
+
+#: core/models/books.py:13
+msgid "Жарияланған"
+msgstr ""
+
+#: core/models/books.py:14 core/models/books.py:59
+msgid "Реті"
+msgstr ""
+
+#: core/models/books.py:19 core/models/books.py:34
+msgid "Кітап"
+msgstr ""
+
+#: core/models/books.py:20
+msgid "Кітаптар"
+msgstr ""
+
+#: core/models/books.py:36
+msgid "Сақталды"
+msgstr ""
+
+#: core/models/books.py:37
+msgid "Соңғы оқылған бет"
+msgstr ""
+
+#: core/models/books.py:38
+msgid "Прогресс"
+msgstr ""
+
+#: core/models/books.py:40
+msgid "Сақталған уақыты"
+msgstr ""
+
+#: core/models/books.py:41
+msgid "Өзгертілген уақыты"
+msgstr ""
+
+#: core/models/books.py:44
+msgid "Қолданушы кітабы"
+msgstr ""
+
+#: core/models/books.py:45
+msgid "Қолданушы кітаптары"
+msgstr ""
+
+#: core/models/books.py:57
+msgid "Кіллтік сөзі"
+msgstr ""
+
+#: core/models/books.py:58
+msgid "URL"
+msgstr ""
+
+#: core/models/books.py:65
+msgid "Симулятор"
+msgstr ""
+
+#: core/models/books.py:66
+msgid "Симуляторлар"
+msgstr ""
+
+#: core/models/subjects.py:9 core/models/subjects.py:34
+#: core/models/tasks.py:132
+msgid "Атауы"
+msgstr ""
+
+#: core/models/subjects.py:10
+msgid "Постер"
+msgstr ""
+
+#: core/models/subjects.py:11 core/models/subjects.py:58
+#: core/models/tasks.py:35
+msgid "Анықтамасы"
+msgstr ""
+
+#: core/models/subjects.py:12
+msgid "Уақыты"
+msgstr ""
+
+#: core/models/subjects.py:13
+msgid "Соңғы өзгеріс"
+msgstr ""
+
+#: core/models/subjects.py:14
+msgid "Қаралым"
+msgstr ""
+
+#: core/models/subjects.py:15
+msgid "Сертификат"
+msgstr ""
+
+#: core/models/subjects.py:16
+msgid "Ашық курс"
+msgstr ""
+
+#: core/models/subjects.py:22 core/models/subjects.py:32
+#: core/models/subjects.py:51 core/models/user_subjects.py:15
+msgid "Курс"
+msgstr ""
+
+#: core/models/subjects.py:23
+msgid "Курстар"
+msgstr ""
+
+#: core/models/subjects.py:35 core/models/subjects.py:61
+#: core/models/tasks.py:37 core/models/tasks.py:56 core/models/tasks.py:95
+msgid "Реттілік нөмері"
+msgstr ""
+
+#: core/models/subjects.py:41 core/models/subjects.py:55
+msgid "Модуль"
+msgstr ""
+
+#: core/models/subjects.py:42
+msgid "Модульдер"
+msgstr ""
+
+#: core/models/subjects.py:59
+msgid "Жасалған уақыты"
+msgstr ""
+
+#: core/models/subjects.py:60
+msgid "Соңғы жаңарту"
+msgstr ""
+
+#: core/models/subjects.py:67 core/models/subjects.py:77
+#: core/models/tasks.py:30 core/models/user_subjects.py:76
+msgid "Сабақ"
+msgstr ""
+
+#: core/models/subjects.py:68
+msgid "Сабақтар"
+msgstr ""
+
+#: core/models/subjects.py:86
+msgid "Сабақ құжаты"
+msgstr ""
+
+#: core/models/subjects.py:87
+msgid "Сабақ құжаттары"
+msgstr ""
+
+#: core/models/tasks.py:10 core/models/tasks.py:62 core/models/user_tasks.py:38
+msgid "Видеосабақ"
+msgstr ""
+
+#: core/models/tasks.py:11 core/models/tasks.py:77 core/models/user_tasks.py:54
+msgid "Оқу мәтіні"
+msgstr ""
+
+#: core/models/tasks.py:12 core/models/tasks.py:18
+msgid "Тест"
+msgstr ""
+
+#: core/models/tasks.py:13 core/models/tasks.py:22
+msgid "Сәйкестендіру"
+msgstr ""
+
+#: core/models/tasks.py:17
+msgid "Таңдалмаған"
+msgstr ""
+
+#: core/models/tasks.py:19
+msgid "Тестілтеу"
+msgstr ""
+
+#: core/models/tasks.py:20
+msgid "Ақиқат/жалған"
+msgstr ""
+
+#: core/models/tasks.py:23
+msgid "Қатар"
+msgstr ""
+
+#: core/models/tasks.py:24 core/models/user_tasks.py:95
+msgid "Баған"
+msgstr ""
+
+#: core/models/tasks.py:32
+msgid "Тапсырма түрі"
+msgstr ""
+
+#: core/models/tasks.py:33
+msgid "Параметрлер"
+msgstr ""
+
+#: core/models/tasks.py:34 core/models/user_subjects.py:17
+#: core/models/user_subjects.py:46 core/models/user_subjects.py:78
+#: core/models/user_tasks.py:18
+msgid "Жалпы бағасы"
+msgstr ""
+
+#: core/models/tasks.py:36
+msgid "Тапсырма уақыты (мин)"
+msgstr ""
+
+#: core/models/tasks.py:43 core/models/tasks.py:91 core/models/tasks.py:130
+#: core/models/tasks.py:147 core/models/user_tasks.py:15
+msgid "Тапсырма"
+msgstr ""
+
+#: core/models/tasks.py:44
+msgid "Тапсырмалар"
+msgstr ""
+
+#: core/models/tasks.py:53
+msgid "Контент"
+msgstr ""
+
+#: core/models/tasks.py:55
+msgid "URL сілтеме"
+msgstr ""
+
+#: core/models/tasks.py:63
+msgid "Видеосабақтар"
+msgstr ""
+
+#: core/models/tasks.py:71
+msgid "Мәтін"
+msgstr ""
+
+#: core/models/tasks.py:78
+msgid "Оқу мәтіндері"
+msgstr ""
+
+#: core/models/tasks.py:86
+msgid "Бір жауапты"
+msgstr ""
+
+#: core/models/tasks.py:87
+msgid "Көп жауапты"
+msgstr ""
+
+#: core/models/tasks.py:93 core/models/tasks.py:110
+msgid "Сұрақ"
+msgstr ""
+
+#: core/models/tasks.py:94
+msgid "Сұрақтың түрі"
+msgstr ""
+
+#: core/models/tasks.py:101
+msgid "Тест сұрағы"
+msgstr ""
+
+#: core/models/tasks.py:102
+msgid "Тест сұрақтары"
+msgstr ""
+
+#: core/models/tasks.py:112 core/models/tasks.py:120
+#: core/models/user_tasks.py:74 core/models/user_tasks.py:91
+msgid "Жауап"
+msgstr ""
+
+#: core/models/tasks.py:113 core/models/user_tasks.py:97
+msgid "Дұрыс жауап"
+msgstr ""
+
+#: core/models/tasks.py:114
+msgid "Балл"
+msgstr ""
+
+#: core/models/tasks.py:121
+msgid "Жауаптар"
+msgstr ""
+
+#: core/models/tasks.py:133
+msgid "Реттілігі"
+msgstr ""
+
+#: core/models/tasks.py:139
+msgid "Сәйкес баған"
+msgstr ""
+
+#: core/models/tasks.py:140
+msgid "Сәйкес бағандар"
+msgstr ""
+
+#: core/models/tasks.py:149
+msgid "Жауабы"
+msgstr ""
+
+#: core/models/tasks.py:155
+msgid "Сәйкес элемент"
+msgstr ""
+
+#: core/models/tasks.py:156
+msgid "Сәйкес элементтер"
+msgstr ""
+
+#: core/models/user_subjects.py:18 core/models/user_subjects.py:47
+#: core/models/user_subjects.py:79
+msgid "Пайыздық мөлшері"
+msgstr ""
+
+#: core/models/user_subjects.py:19 core/models/user_subjects.py:48
+#: core/models/user_subjects.py:83 core/models/user_tasks.py:19
+msgid "Орындалды"
+msgstr ""
+
+#: core/models/user_subjects.py:20 core/models/user_subjects.py:81
+msgid "Басталған уақыты"
+msgstr ""
+
+#: core/models/user_subjects.py:21 core/models/user_subjects.py:82
+msgid "Орындалған уақыты"
+msgstr ""
+
+#: core/models/user_subjects.py:24 core/models/user_subjects.py:44
+#: core/models/user_subjects.py:73
+msgid "Қолданушының курсы"
+msgstr ""
+
+#: core/models/user_subjects.py:25
+msgid "Қолданушының курстары"
+msgstr ""
+
+#: core/models/user_subjects.py:40
+msgid "Бөлім"
+msgstr ""
+
+#: core/models/user_subjects.py:54
+msgid "Қолданушының курс бөлімі"
+msgstr ""
+
+#: core/models/user_subjects.py:55
+msgid "Қолданушының курс бөлімдері"
+msgstr ""
+
+#: core/models/user_subjects.py:62
+msgid "Сабақ басталмады"
+msgstr ""
+
+#: core/models/user_subjects.py:63
+msgid "Сабақ өтілуде"
+msgstr ""
+
+#: core/models/user_subjects.py:64
+msgid "Сабақ аяқталды"
+msgstr ""
+
+#: core/models/user_subjects.py:80
+msgid "Статус"
+msgstr ""
+
+#: core/models/user_subjects.py:87
+msgid "Қолданушының сабақтары"
+msgstr ""
+
+#: core/models/user_subjects.py:120
+msgid "Бағасы"
+msgstr ""
+
+#: core/models/user_subjects.py:121
+msgid "Пікір"
+msgstr ""
+
+#: core/models/user_subjects.py:122
+msgid "Жазылған уақыты"
+msgstr ""
+
+#: core/models/user_subjects.py:128
+msgid "Кері байланыс"
+msgstr ""
+
+#: core/models/user_subjects.py:129
+msgid "Кері байланыстар"
+msgstr ""
+
+#: core/models/user_tasks.py:17
+msgid "Жіберілген уақыты"
+msgstr ""
+
+#: core/models/user_tasks.py:23
+msgid "Қолданушының тапсырмалары"
+msgstr ""
+
+#: core/models/user_tasks.py:40
+msgid "Қараған уақыт (сек)"
+msgstr ""
+
+#: core/models/user_tasks.py:41
+msgid "Аяқталған"
+msgstr ""
+
+#: core/models/user_tasks.py:44
+msgid "Қолданушының видеосабағы"
+msgstr ""
+
+#: core/models/user_tasks.py:45
+msgid "Қолданушының видеосабақтары"
+msgstr ""
+
+#: core/models/user_tasks.py:60
+msgid "Қолданушының оқу мәтіні"
+msgstr ""
+
+#: core/models/user_tasks.py:61
+msgid "Қолданушының оқу мәтіндері"
+msgstr ""
+
+#: core/models/user_tasks.py:70
+msgid "Қолданушы тапсырмасы"
+msgstr ""
+
+#: core/models/user_tasks.py:76 core/models/user_tasks.py:80
+msgid "Таңдалған жауаптар"
+msgstr ""
+
+#: core/models/user_tasks.py:79
+msgid "Таңдалған жауап"
+msgstr ""
+
+#: core/models/user_tasks.py:104
+msgid "Қолданушының сәйкестендіруі"
+msgstr ""
+
+#: core/models/user_tasks.py:105
+msgid "Қолданушының сәйкестендірулері"
+msgstr ""
+
+#: ui/templates/app/page.html:5
+msgid "ROBO baldyrgan is an online platform for robotics."
+msgstr "ROBO baldyrgan - робототехникаға арналған онлайн платформа."
+
+#: ui/templates/app/page.html:18
+msgid "Launch your creation!"
+msgstr "Өз туындыңды жаса!"
+
+
+msgid ""
+"\n"
+"                                Robo-Baldyrgan is an online platform for "
+"robotics. \n"
+"                                Here you will learn how to make a robot, "
+"write code and get to your project. \n"
+"                                Learning goes like a game, and the result is "
+"the idea of a real working robot.\n"
+"                            "
+msgstr ""
+"Robo-Baldyrgan — робототехникаға арналған онлайн платформа. Мұнда сен робот "
+"жасауды, код жазуды және өз жобаңа дейін жетуді үйренесің. Оқу ойын сияқты "
+"өтеді, ал нәтиже — нағыз жұмыс істейтін робот идеясы."
+
+#: ui/templates/app/page.html:32
+msgid "Get started"
+msgstr "Бастап көру"
+
+#: ui/templates/app/page.html:38 ui/templates/layouts/base_layout.html:20
+#: ui/templates/layouts/base_layout.html:206
+msgid "Sign in"
+msgstr "Тіркелу"
+
+#: ui/templates/app/page.html:54
+msgid "Online courses"
+msgstr "Онлайн курстар"
+
+#: ui/templates/app/page.html:55
+msgid "Learn how to make a robot step by step!"
+msgstr "Қадам-қадаммен робот жасауды үйрен!"
+
+#: ui/templates/app/page.html:57
+msgid ""
+"\n"
+"                                In online courses, you will learn the basics "
+"of LEGO and Arduino and understand programming, \n"
+"                                after each lesson, you learn to make a small "
+"project with your own hands. Not only to look at the theory, \n"
+"                                you will immediately try it in practice.\n"
+"                            "
+msgstr ""
+"Онлайн курстарда сен LEGO және Arduino негіздерін меңгеріп, программалауды "
+"түсініп, әр сабақтан кейін өз қолыңмен шағын жоба жасап үйренесің. Теорияны "
+"қарап қана қоймай, оны бірден практикада қолданып көресің."
+
+#: ui/templates/app/page.html:68
+msgid "Review courses"
+msgstr "Курстарды қарап шығу"
+
+#: ui/templates/app/page.html:84 ui/templates/app/page.html:247
+#: ui/templates/app/page.html:367 ui/templates/layouts/base_layout.html:173
+msgid "Online simulator"
+msgstr "Онлайн симулятор"
+
+#: ui/templates/app/page.html:85
+msgid "Build. Summer. Run!"
+msgstr "Құрастыр. Жаз. Іске қос!"
+
+#: ui/templates/app/page.html:87
+msgid ""
+"\n"
+"                                In an online simulator, you can add robot "
+"parts and write code, \n"
+"                                you will immediately see how it works. If "
+"you are wrong — you will correct and retest, \n"
+"                                and if you do it right, you will immediately "
+"notice the result.\n"
+"                            "
+msgstr ""
+"Онлайн симуляторда сен роботтың бөлшектерін қосып, код жазып, оның қалай "
+"жұмыс істейтінін бірден көресің. Қателессең — түзетіп қайта сынайсың, ал "
+"дұрыс істесе — нәтижесін бірден байқап қуанасың."
+
+#: ui/templates/app/page.html:98
+msgid "View simulator"
+msgstr "Симуляторды қарау"
+
+#: ui/templates/app/page.html:114 ui/templates/layouts/base_layout.html:181
+msgid "Books"
+msgstr "Кітаптар"
+
+#: ui/templates/app/page.html:115
+msgid "Read it and try it right away!"
+msgstr "Оны оқып, бірден байқап көріңіз!"
+
+#: ui/templates/app/page.html:117
+msgid ""
+"\n"
+"                                E-books explain robotics and electronics to "
+"you in simple and understandable language. \n"
+"                                With drawings and diagrams, you can easily "
+"master the theory and apply it to your project.\n"
+"                            "
+msgstr ""
+"Электронды кітаптар саған робототехника мен электрониканы қарапайым әрі "
+"түсінікті тілмен түсіндіреді. Суреттер мен схемалар арқылы сен теорияны "
+"жеңіл меңгеріп, оны өз жобаңа қолдана аласың."
+
+#: ui/templates/app/page.html:127
+msgid "Opening books"
+msgstr "Кітаптарды ашу"
+
+#: ui/templates/app/page.html:148
+msgid "Main features"
+msgstr "Негізгі мүмкіндіктер"
+
+#: ui/templates/app/page.html:150
+msgid ""
+"The main advantages of the platform and why choose the Robo-Baldyrgan "
+"platform?"
+msgstr ""
+"Платформаның негізгі артықшылықтары және неліктен Robo-Baldyrgan "
+"платформасын таңдайды?"
+
+#: ui/templates/app/page.html:167
+msgid "Interactive online courses"
+msgstr "Интерактивті онлайн курстар"
+
+#: ui/templates/app/page.html:169
+msgid ""
+"\n"
+"                        Classes take place through video, explanations and "
+"tasks. \n"
+"                        After each topic, the student tries on the acquired "
+"knowledge in practice, so the learning process becomes more active and "
+"understandable.\n"
+"                    "
+msgstr ""
+"Сабақтар видео, түсіндірме және тапсырмалар арқылы өтеді. Әр тақырыптан "
+"кейін білім алушы алған білімін практикада қолданып көреді, сондықтан оқу "
+"процесі белсенді әрі түсінікті болады."
+
+#: ui/templates/app/page.html:187
+msgid "Ability to see the result instantly"
+msgstr "Нәтижені бірден көру мүмкіндігі"
+
+#: ui/templates/app/page.html:189
+msgid ""
+"\n"
+"                        The written code or added component is checked "
+"immediately. \n"
+"                        This will make the learning process clearer and help "
+"you see the results of each activity.\n"
+"                    "
+msgstr ""
+"Жазылған код немесе қосылған компонент бірден тексеріледі. Бұл оқу процесін "
+"түсінікті етіп, әр әрекеттің нәтижесін көруге көмектеседі."
+
+#: ui/templates/app/page.html:207
+msgid "Real direction to robotics"
+msgstr "Робототехникаға нақты бағыт"
+
+#: ui/templates/app/page.html:209
+msgid ""
+"\n"
+"                        The platform is based on the LEGO, Arduino and STEM "
+"system. \n"
+"                        This allows the student to systematically develop "
+"technical and engineering thinking.\n"
+"                    "
+msgstr ""
+"Платформа LEGO, Arduino және STEM жүйесіне негізделген. Бұл білім алушыға "
+"техникалық және инженерлік ойлауды жүйелі түрде дамытуға мүмкіндік береді."
+
+#: ui/templates/app/page.html:227
+msgid "Safe and accessible environment"
+msgstr "Қауіпсіз және қолжетімді орта"
+
+#: ui/templates/app/page.html:229
+msgid ""
+"\n"
+"                        The entire educational process is organized in an "
+"online format. Student anywhere, \n"
+"                        at any time, you can log in to the platform and "
+"experiment.\n"
+"                    "
+msgstr ""
+"Барлық оқу процесі онлайн форматта ұйымдастырылған. Білім алушы кез келген "
+"жерде, кез келген уақытта платформаға кіріп, тәжірибе жасай алады."
+
+#: ui/templates/app/page.html:249
+msgid ""
+"\n"
+"                        Using a special virtual simulator, you can connect "
+"parts of the robot, write code and perform the result \n"
+"                        you can check right away. This allows you to create "
+"an experiment similar to a real laboratory.\n"
+"                    "
+msgstr ""
+"Арнайы виртуалды тренажер арқылы робот бөлшектерін қосып, код жазып және "
+"нәтижесін бірден тексеруге болады. Бұл шынайы зертханаға ұқсас тәжірибе "
+"жасауға мүмкіндік береді."
+
+#: ui/templates/app/page.html:267
+msgid "Reading books online"
+msgstr "Кітаптарды онлайн оқу"
+
+#: ui/templates/app/page.html:269
+msgid ""
+"\n"
+"                        The platform has e-books on robotics and "
+"electronics. \n"
+"                        The student reads the material directly within the "
+"site and easily learns the theory through schemes and explanations.\n"
+"                    "
+msgstr ""
+"Платформада робототехника мен электроникаға арналған электронды кітаптар "
+"бар. Білім алушы материалды тікелей сайт ішінде оқып, схемалар мен "
+"түсіндірмелер арқылы теорияны оңай меңгереді."
+
+#: ui/templates/app/page.html:283
+msgid "Available courses"
+msgstr "Қол жетімді курстар"
+
+#: ui/templates/app/page.html:285
+msgid ""
+"Now the number of courses may be limited. In the near future, subjects and "
+"classes will expand."
+msgstr ""
+"Қазір курстар саны шектеулі болуы мүмкін. Жақын уақытта пәндер мен сыныптар "
+"кеңейеді."
+
+#: ui/templates/app/page.html:330
+msgid "chapter"
+msgstr "бөлім"
+
+#: ui/templates/app/page.html:339
+msgid "lesson"
+msgstr "сабақ"
+
+#: ui/templates/app/page.html:348 ui/templates/app/page.html:453
+msgid "View detail"
+msgstr "Толығырақ"
+
+#: ui/templates/app/page.html:369
+msgid ""
+"\n"
+"                    The online simulator is your virtual laboratory. Here we "
+"add the details of the robot,\n"
+"                    you can write code and immediately check how it works.\n"
+"                "
+msgstr ""
+"Онлайн симулятор — бұл сенің виртуалды зертханаң. Мұнда роботтың бөлшектерін "
+"қосып, код жазып және оның қалай жұмыс істейтінін бірден тексеруге болады."
+
+#: ui/templates/app/page.html:387
+msgid "Build. Summer. Run it."
+msgstr "Құрастыр. Жаз. Іске қос."
+
+#: ui/templates/app/page.html:391
+msgid ""
+"\n"
+"                        Turn on the LED, motor and sensors, write the code "
+"and see the result at that moment.\n"
+"                        If you are wrong, you can correct and retest. Each "
+"action brings immediate results.\n"
+"                    "
+msgstr ""
+"LED, мотор және сенсорларды қосып, код жазып және оның нәтижесін сол сәтте "
+"көр. Қателессең — түзетіп қайта сынауға болады. Әр әрекет бірден нәтиже "
+"береді."
+
+#: ui/templates/app/page.html:397
+msgid ""
+"\n"
+"                        This section makes it easier to understand "
+"robotics,\n"
+"                        forms engineering thinking through experience.\n"
+"                    "
+msgstr ""
+"Бұл бөлім робототехниканы түсінуді жеңілдетіп, инженерлік ойлауды тәжірибе "
+"арқылы қалыптастырады."
+
+#: ui/templates/app/page.html:406
+msgid "Opening the simulator"
+msgstr "Симуляторды ашу"
+
+#: ui/templates/app/page.html:417
+msgid "Electronic books"
+msgstr "Электронды кітаптар"
+
+#: ui/templates/app/page.html:419
+msgid ""
+"\n"
+"                    E-books on the basics of robotics and electronics\n"
+"                    explains in simple and understandable language.\n"
+"                "
+msgstr ""
+"Электронды кітаптар робототехника мен электроника негіздерін қарапайым әрі "
+"түсінікті тілмен түсіндіреді."
+
+#: ui/templates/app/page.html:472 ui/templates/layouts/base_layout.html:189
+#: ui/templates/layouts/base_layout.html:234
+msgid "About us"
+msgstr "Біз жайлы"
+
+#: ui/templates/app/page.html:473
+msgid "Information about us"
+msgstr "Біз туралы ақпарат"
+
+#: ui/templates/app/page.html:489 ui/templates/app/page.html:571
+msgid "Karataev Nurlan Sagynbekovich"
+msgstr "Каратаев Нурлан Сагынбекович"
+
+#: ui/templates/app/page.html:490
+msgid "Author"
+msgstr "Жоба авторы"
+
+#: ui/templates/app/page.html:569
+msgid "About the author"
+msgstr "Автор туралы"
+
+#: ui/templates/app/page.html:572
+msgid ""
+"\n"
+"                        - Author of the Robobaldyrgan project.\n"
+"                        The idea of the project is simple: let the student "
+"not only “see”, but also necessarily “do”.\n"
+"                        Therefore, in each lesson, the video and practice "
+"are accompanied.\n"
+"                    "
+msgstr ""
+"Каратаев Нурлан Сагынбекович — Robobaldyrgan жобасының авторы. Жобаның "
+"идеясы қарапайым: оқушы тек “көріп қоймай”, міндетті түрде “орындап” "
+"бекітсін. Сондықтан әр сабақта видео мен практика бірге жүреді."
+
+#: ui/templates/app/page.html:585
+msgid "Founder of the childrens robotics school Robo-Baldyrgan"
+msgstr "«Robo-Baldyrgan» балалар робототехника мектебінің негізін салушы"
+
+#: ui/templates/app/page.html:594
+msgid "Doctoral student of skpu named after O. Zhanibekov"
+msgstr "Ө.Жәнібеков атындағы ОҚПУ докторанты"
+
+#: ui/templates/app/page.html:603
+msgid "Computer science teacher"
+msgstr "Информатика мұғалімі"
+
+#: ui/templates/app/page.html:612
+msgid "STEM specialist"
+msgstr "STEM - маманы"
+
+#: ui/templates/app/page.html:681 ui/templates/layouts/base_layout.html:197
+#: ui/templates/layouts/base_layout.html:243
+msgid "Contacts"
+msgstr "Байланыс"
+
+#: ui/templates/app/page.html:682
+msgid ""
+"If you have any questions or need to write a child to read — contact us."
+msgstr ""
+"Сұрақтарыңыз болса немесе баланы оқуға жазу қажет болса — бізбен "
+"хабарласыңыз."
+
+#: ui/templates/app/page.html:698
+msgid "Address"
+msgstr "Мекенжай"
+
+#: ui/templates/app/page.html:700
+msgid "Shymkent, A. Baitursynov 13"
+msgstr "Шымкент қ., А.Байтұрсынов 13"
+
+#: ui/templates/app/page.html:714
+msgid "Phone"
+msgstr "Телефон"
+
+#: ui/templates/app/page.html:722
+msgid "Opening hours: Mon-Fri, 09: 00-18: 00"
+msgstr "Жұмыс уақыты: Дс–Жм, 09:00–18:00"
+
+#: ui/templates/app/page.html:744
+msgid "For partnership and official questions."
+msgstr "Серіктестік және ресми сұрақтар үшін."
+
+#: ui/templates/app/page.html:764
+msgid "The most convenient channel: if you write — we will respond quickly."
+msgstr "Ең ыңғайлы арна: жазсаңыз — тез жауап береміз."
+
+#: ui/templates/app/page.html:795
+msgid "Frequently asked questions (FAQ)"
+msgstr "Жиі қойылатын сұрақтар (FAQ)"
+
+#: ui/templates/app/page.html:796
+msgid "If you have specific questions — register and see the platform."
+msgstr "Нақты сұрақтарың болса — тіркеліп, платформаны көріп шық."
+
+#: ui/templates/app/page.html:815
+msgid "Robo-Baldyrgan is not degenerate?"
+msgstr "Robo-Baldyrgan деген не?"
+
+#: ui/templates/app/page.html:829
+msgid ""
+"\n"
+"                            Robo — Baldyrgan is an online robotics platform "
+"for children. \n"
+"                            Here are online courses, e-books and an "
+"interactive simulator \n"
+"                            the basics of robot assembly and programming are "
+"taught.\n"
+"                        "
+msgstr ""
+"Robo-Baldyrgan — балаларға арналған робототехника онлайн платформасы. Мұнда "
+"онлайн курстар, электронды кітаптар және интерактивті симулятор арқылы робот "
+"құрастыру мен программалау негіздері үйретіледі."
+
+#: ui/templates/app/page.html:846
+msgid "What age range is the platform for?"
+msgstr "Платформа қай жас аралығына арналған?"
+
+#: ui/templates/app/page.html:860
+msgid ""
+"\n"
+"                            The platform is designed for children aged 5-16 "
+"years. Materials are organized according to the level, \n"
+"                            therefore, each child can learn to the best of "
+"his ability.\n"
+"                        "
+msgstr ""
+"Платформа 5–16 жас аралығындағы балаларға арналған. Материалдар деңгейге "
+"сәйкес ұйымдастырылған, сондықтан әр бала өз мүмкіндігіне қарай үйрене алады."
+
+#: ui/templates/app/page.html:876
+msgid "Do you need special devices for reading?"
+msgstr "Оқу үшін арнайы құрылғылар қажет пе?"
+
+#: ui/templates/app/page.html:890
+msgid ""
+"No. The platform works fully online. A computer or tablet and the internet "
+"are enough."
+msgstr ""
+"Жоқ. Платформа толық онлайн жұмыс істейді. Компьютер немесе планшет және "
+"интернет жеткілікті."
+
+#: ui/templates/app/page.html:903
+msgid "How does the online simulator work?"
+msgstr "Онлайн симулятор қалай жұмыс істейді?"
+
+#: ui/templates/app/page.html:917
+msgid ""
+"\n"
+"                            In the online simulator, the virtual parts of "
+"the robot are turned on, the code is written and the result is immediately "
+"checked. \n"
+"                            This allows you to create an experiment similar "
+"to a real laboratory.\n"
+"                        "
+msgstr ""
+"Онлайн симуляторда роботтың виртуалды бөлшектері қосылып, код жазылады және "
+"нәтижесі бірден тексеріледі. Бұл шынайы зертханаға ұқсас тәжірибе жасауға "
+"мүмкіндік береді."
+
+#: ui/templates/app/page.html:933
+msgid "How to read e-books?"
+msgstr "Электронды кітаптарды қалай оқуға болады?"
+
+#: ui/templates/app/page.html:947
+msgid ""
+"\n"
+"                            All e-books open within the platform. Read the "
+"materials online, \n"
+"                            you can master the theory through schemes and "
+"explanations.\n"
+"                        "
+msgstr ""
+"Барлық электронды кітаптар платформа ішінде ашылады. Материалдарды онлайн "
+"оқып, схемалар мен түсіндірмелер арқылы теорияны меңгеруге болады."
+
+#: ui/templates/app/page.html:963
+msgid "What will happen after completing the courses?"
+msgstr "Курстарды аяқтағаннан кейін не болады?"
+
+#: ui/templates/app/page.html:977
+msgid ""
+"\n"
+"                            Each course builds knowledge and skills on a "
+"specific topic. \n"
+"                            The student can see their progress and move on "
+"to the next level.\n"
+"                        "
+msgstr ""
+"Әр курс белгілі бір тақырып бойынша білім мен дағды қалыптастырады. Білім "
+"алушы өз прогресін көріп, келесі деңгейге өте алады."
+
+#: ui/templates/app/page.html:993
+msgid "Is registration on the platform paid?"
+msgstr "Платформада тіркелу ақылы ма?"
+
+#: ui/templates/app/page.html:1007
+msgid ""
+"\n"
+"                            Information about the registration procedure and "
+"tariff plans will be displayed on the platform. \n"
+"                            Some features may be available in free dating "
+"mode.\n"
+"                        "
+msgstr ""
+"Тіркелу тәртібі мен тарифтік жоспарлар туралы ақпарат платформада "
+"көрсетіледі. Кейбір мүмкіндіктер тегін танысу режимінде қолжетімді болуы "
+"мүмкін."
+
+#: ui/templates/app/page.html:1023
+msgid "Can parents control the learning process?"
+msgstr "Ата-ана оқу процесін бақылай ала ма?"
+
+#: ui/templates/app/page.html:1037
+msgid ""
+"If the control panel is enabled, the parent or teacher will have the "
+"opportunity to monitor the student`s progress."
+msgstr ""
+"Егер басқару панелі қосылған болса, ата-ана немесе мұғалім білім алушының "
+"прогресін бақылау мүмкіндігіне ие болады."
+
+#: ui/templates/app/page.html:1091
+msgid "Robo-Baldyrgan-presentation video"
+msgstr "Robo-Baldyrgan — таныстыру видеосы"
+
+#: ui/templates/layouts/base_layout.html:26
+#: ui/templates/layouts/base_layout.html:212
+msgid "Sign up"
+msgstr "Жүйеге кіру"
+
+#: ui/templates/layouts/base_layout.html:121
+msgid "Platform"
+msgstr "Платформа"
+
+#: ui/templates/layouts/base_layout.html:126
+msgid "Account"
+msgstr "Аккаунт"
+
+#: ui/templates/layouts/base_layout.html:131
+msgid "Settings"
+msgstr "Баптаулар"
+
+#: ui/templates/layouts/base_layout.html:141
+msgid "Sign out"
+msgstr "Жүйеден шығу"
+
+#: ui/templates/layouts/base_layout.html:158
+msgid "Home"
+msgstr "Негізгі"
+
+#: ui/templates/layouts/base_layout.html:165
+msgid "Courses"
+msgstr "Курстар"
+
+#: ui/templates/layouts/base_layout.html:237
+msgid "Privacy policy"
+msgstr "Құпиялылық саясаты"
+
+#: ui/templates/layouts/base_layout.html:240
+msgid "Lisence"
+msgstr "Лицензия"
+
+#: ui/templates/layouts/base_layout.html:249
+msgid "All rights reserved."
+msgstr "Барлық құқықтар қорғалған."
