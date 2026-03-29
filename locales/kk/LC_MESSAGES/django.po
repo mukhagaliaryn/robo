@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-28 22:12+0500\n"
+"POT-Creation-Date: 2026-03-29 13:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -563,7 +563,7 @@ msgstr "ROBO baldyrgan - робототехникаға арналған онл�
 msgid "Launch your creation!"
 msgstr "Өз туындыңды жаса!"
 
-
+#: ui/templates/app/page.html:20
 msgid ""
 "\n"
 "                                Robo-Baldyrgan is an online platform for "
@@ -585,7 +585,7 @@ msgstr "Бастап көру"
 #: ui/templates/app/page.html:38 ui/templates/layouts/base_layout.html:20
 #: ui/templates/layouts/base_layout.html:206
 msgid "Sign in"
-msgstr "Тіркелу"
+msgstr "Жүйеге кіру"
 
 #: ui/templates/app/page.html:54
 msgid "Online courses"
@@ -1083,7 +1083,7 @@ msgstr "Robo-Baldyrgan — таныстыру видеосы"
 #: ui/templates/layouts/base_layout.html:26
 #: ui/templates/layouts/base_layout.html:212
 msgid "Sign up"
-msgstr "Жүйеге кіру"
+msgstr "Тіркелу"
 
 #: ui/templates/layouts/base_layout.html:121
 msgid "Platform"
