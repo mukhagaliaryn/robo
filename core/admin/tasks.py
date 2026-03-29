@@ -15,10 +15,9 @@ class VideoTab(SummernoteModelAdminMixin, admin.TabularInline):
 
 
 # Reading Tab
-class ReadingTab(admin.TabularInline):
+class ReadingTab(SummernoteModelAdminMixin, admin.TabularInline):
     model = Reading
     extra = 0
-    form = ReadingAdminForm
 
 
 # Question Tab
