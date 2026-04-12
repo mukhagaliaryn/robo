@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from core.models import Book, UserBook, Simulator
+from core.models import Book, UserBook, Simulator, Project
 from core.utils.decorators import role_required
 
 
@@ -89,3 +89,14 @@ def simulator_view(request, slug):
         'simulators': simulators,
     }
     return render(request, "app/dashboard/student/simulator/page.html", context)
+
+
+@role_required("student")
+def project_view(request, slug):
+    project = get_object_or_404(Project, slug=slug)
+    projects = Project.objects.all().order_by('order')
+    context = {
+        'project': project,
+        'projects': projects,
+    }
+    return render(request, "app/dashboard/student/project/page.html", context)

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from core.forms.books import BookAdminForm
+from core.models import Project
 from core.models.books import Book, UserBook, Simulator
 
 
@@ -21,5 +22,11 @@ class UserBookAdmin(admin.ModelAdmin):
 
 @admin.register(Simulator)
 class SimulatorAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "url", "order")
+    ordering = ("order",)
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
     list_display = ("name", "slug", "url", "order")
     ordering = ("order",)

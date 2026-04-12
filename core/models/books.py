@@ -64,3 +64,20 @@ class Simulator(models.Model):
     class Meta:
         verbose_name = _('Симулятор')
         verbose_name_plural = _('Симуляторлар')
+
+
+
+# Projects
+# ----------------------------------------------------------------------------------------------------------------------
+class Project(models.Model):
+    name = models.CharField(_('Тақырыбы'), max_length=255)
+    slug = models.SlugField(_('Кіллтік сөзі'), max_length=255)
+    url = models.URLField(_('URL'), max_length=255)
+    order = models.PositiveSmallIntegerField(_('Реті'), default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Жоба')
+        verbose_name_plural = _('Жобалар')

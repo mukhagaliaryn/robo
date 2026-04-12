@@ -1,0 +1,36 @@
+{% extends "layouts/learner_layout.html" %}
+{% load static %}
+
+{% block title %}{{ project.name }} - ұлттық жобалар{% endblock title %}
+
+{% block learner_layout %}
+<div class="w-full flex justify-center items-start" style="height: calc(100vh - 64px);">
+    <div class="max-w-xs w-full border-r border-border-200 h-full overflow-y-auto">
+        <ul class="grid gap-1 px-4 pt-4">
+            {% for item in projects %}
+                <li>
+                    {% url 'student:project' item.slug as p_detail %}
+                    <a 
+                        href="{{ p_detail }}"
+                        class="
+                            flex px-4 py-2.5 rounded-2xl
+                            {% if request.path == p_detail %}font-medium bg-primary-500 text-white{% else %}hover:bg-secondary-100 text-subtle{% endif %}
+                        "    
+                    >
+                        <div class="line-clamp-1">{{ item.name }}</div>
+                        
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="flex-1 h-full">
+        <iframe
+            src="{{ project.url }}"
+            style="width:100%; height: 100%; border:0;"
+            allowfullscreen
+        ></iframe>
+    </div>
+</div>
+{% endblock learner_layout %}

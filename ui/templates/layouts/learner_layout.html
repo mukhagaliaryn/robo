@@ -40,6 +40,15 @@
                 >
                     Онлайн симулятор
                 </a>
+                <a 
+                    href="{% url 'student:project' 'lego-robot' %}" 
+                    class="
+                        px-4 py-2.5 font-medium transition rounded-2xl hover:text-foreground hover:bg-secondary-100 active:scale-95
+                        {% if request.path == '/student/project/lego-robot/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
+                    "
+                >
+                    Ұлттық жобалар
+                </a>
             </nav>
         </div>
 
