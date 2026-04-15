@@ -32,10 +32,10 @@
                     Кітапхана
                 </a>
                 <a 
-                    href="{% url 'student:simulator' 'lego-ev3' %}" 
+                    href="{% url 'student:simulator' 'robot_' %}" 
                     class="
                         px-4 py-2.5 font-medium transition rounded-2xl hover:text-foreground hover:bg-secondary-100 active:scale-95
-                        {% if request.path == '/student/simulator/lego-ev3/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
+                        {% if request.path == '/student/simulator/robot_/' %}bg-secondary-100 text-foreground{% else %}text-subtle{% endif %}    
                     "
                 >
                     Онлайн симулятор
